@@ -19,4 +19,14 @@ Run migration command anytime you make changes to a file **_php artisan migrate_
 ### Create seeder commands for registrar module
 `php artisan make:seeder UserSeeder`
 
+# Installation Guide
+    
+    Execute the Following Command
+        php artisan generate:key
+        php artisan migrate
+        php artisan serve
+        php artisan db:seed
+
+When done, check here -> http://localhost:8000/hms
+
  
