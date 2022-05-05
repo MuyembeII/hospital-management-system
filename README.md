@@ -16,4 +16,7 @@ Run the following command in your root folder **_php artisan serve_**
 ##NOTE 
 Run migration command anytime you make changes to a file **_php artisan migrate_**
 
+### Create seeder commands for registrar module
+`php artisan make:seeder UserSeeder`
+
  
