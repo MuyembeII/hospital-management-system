@@ -14,8 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('patients', function (Blueprint $table) {
-            $table->id();
-            $table->primary('id');
+            $table->bigInteger('id');
             $table->string('first_name');
             $table->string('last_name');
             $table->mediumText('address');
@@ -24,11 +23,11 @@ return new class extends Migration
             $table->date('dob');
             $table->string('birth_place')->nullable();
             $table->string('nationality')->nullable();
-            $table->string('religion')->nullable
+            $table->string('religion')->nullable();
             $table->string('guardian')->nullable();
             $table->string('guardian_address')->nullable();
-            $table->string('occupation');
-            $table->string('nrc',15)->nullable()->unique();();
+            $table->string('occupation')->nullable();
+            $table->string('nrc',15)->nullable()->unique();
             $table->string('image')->default('dist/img/avatar.png');
             $table->timestamps();
             $table->softDeletes();
