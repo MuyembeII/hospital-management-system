@@ -28,6 +28,6 @@ class Patient extends Model
         'nrc',
         'image',
         'created_at',
-    ]
+    ];
 
 }

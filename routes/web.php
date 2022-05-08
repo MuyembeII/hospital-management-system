@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\PatientController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,11 +20,9 @@ Route::get('/', function () {
     return view('main');
 })->name('main');
 
-Route::get('/patients', function () {
-    return view('patient.patients');
-})->name('patients');
 
-Route::resource('/patients', PatientController::class);
+
+Route::resource('patients', PatientController::class);
 
 Route::middleware([
     'auth:sanctum',

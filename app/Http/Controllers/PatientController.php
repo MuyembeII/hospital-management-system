@@ -14,7 +14,7 @@ class PatientController extends Controller
      */
     public function index()
     {
-       $patients = Patients::orderBy(id)->get();
+       $patients = Patient::orderBy('id')->get();
 
        return view('patient.patients', compact('patients'));
     }
@@ -46,7 +46,7 @@ class PatientController extends Controller
             'dob' => 'required'
         ]);
 
-        Patients::create($request->all());
+        Patient::create($request->all());
 
         return redirect()->route('patient.patients')
             ->with('success', 'Patient created successfully.');
