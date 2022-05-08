@@ -1,0 +1,139 @@
+#sectioncontainer {
+  margin-top: 20px;
+}
+
+/* Keep from sticking to sides */
+.cards-container {
+  max-width: 95%;
+}
+
+.board-item {
+  margin: 5px 0;
+  will-change: transform;
+}
+
+.board-item-content {
+  word-break: break-all;
+  position: relative;
+  padding: 20px;
+  background: #fff;
+  border-radius: 4px;
+  font-size: 17px;
+  text-align: center;
+  cursor: pointer;
+  -webkit-box-shadow: 0px 1px 3px 0 rgba(0,0,0,0.2);
+  box-shadow: 0px 1px 3px 0 rgba(0,0,0,0.2);
+  margin: 5px;
+}
+
+.delete {
+  pointer-events: auto;
+}
+
+footer {
+  margin-top: 2rem;
+}
+
+.topNav {
+  border-top: 5px solid #3498DB;
+}
+.topNav .container {
+  border-bottom: 1px solid #E6EAEE;
+}
+#p-list-container .columns {
+  margin: 3rem 0;
+}
+.navbar-menu .navbar-item {
+  padding: 0 2rem;
+}
+aside.menu {
+  padding-top: 3rem;
+}
+aside.menu .menu-list {
+  line-height: 1.5;
+}
+aside.menu .menu-label {
+  padding-left: 10px;
+  font-weight: 700;
+}
+.button.is-primary.is-alt {
+  background: #00c6ff;
+  background: -webkit-linear-gradient(to bottom, #0072ff, #00c6ff);
+  background: linear-gradient(to bottom, #0072ff, #00c6ff);
+  font-weight: 700;
+  font-size: 14px;
+  height: 3rem;
+  line-height: 2.8;
+}
+.media-left img {
+  border-radius: 50%;
+}
+.media-content p {
+  font-size: 14px;
+  line-height: 2.3;
+  font-weight: 700;
+  color: #8F99A3;
+}
+article.post {
+  margin: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #E6EAEE;
+}
+article.post:last-child {
+  padding-bottom: 0;
+  border-bottom: none;
+}
+.menu-list li{
+  padding: 5px;
+}
+
+/*Action Buttons */
+.messages .action-buttons {
+  padding: 0;
+  margin-top: -20px;
+}
+.message .action-buttons {
+  padding: 0;
+  margin-top: -5px;
+}
+.action-buttons .control.is-grouped {
+  display: inline-block;
+  margin-right: 30px;
+}
+.action-buttons .control.is-grouped:last-child {
+  margin-right: 0;
+}
+.action-buttons .control.is-grouped .button:first-child {
+  border-radius: 5px 0 0 5px;
+}
+.action-buttons .control.is-grouped .button:last-child {
+  border-radius: 0 5px 5px 0;
+}
+.action-buttons .control.is-grouped .button {
+  margin-right: -5px;
+  border-radius: 0;
+}
+.pg {
+  display: inline-block;
+  top:10px;
+}
+.action-buttons .pg .title {
+  display: block;
+  margin-top: 0;
+  padding-top: 0;
+  margin-bottom: 3px;
+  font-size:12px;
+  color: #AAAA;
+}
+.action-buttons .pg a{
+  font-size:12px;
+  color: #AAAAAA;
+  text-decoration: none;
+}
+.is-grouped .button {
+  background-image: linear-gradient(#F8F8F8, #F1F1F1);
+}
+.is-grouped .button .fa {
+  font-size: 15px;
+  color: #AAAAAA;
+}

@@ -1,6 +1,8 @@
 <?php
 
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,9 +15,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/hms', function () {
-    return view('welcome');
-});
+Route::get('/', function () {
+    return view('main');
+})->name('main');
+
+Route::get('/patients', function () {
+    return view('patient.patients');
+})->name('patients');
 
 Route::middleware([
     'auth:sanctum',

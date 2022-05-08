@@ -1,4 +1,4 @@
-require('./bootstrap');
+require('./bulma');
 
 import Alpine from 'alpinejs';
 
