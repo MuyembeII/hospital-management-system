@@ -1,5 +1,5 @@
 @extends('template')
-
+@section('content')
 <section class="hero is-info">
 <div class="hero-body">
     <div class="container">
@@ -54,100 +54,29 @@
                             </tr>
                           </thead>
                           <tbody>
-                            <tr>
-                              <th>1</th>
-                              <td>Martian Manhunter</td>
-                              <td>Mars</td>
-                              <td>0978123321</td>
-                              <td>Male</td>
-                              <td>23 Feb 1900</td>
-                              <td>
-                                <div class="action-buttons">
-                                    <div class="control is-grouped">
-                                        <a class="button is-small"><i class="fa fa-eye"></i></a>
-                                        <a class="button is-small"><i class="fa fa-pen-to-square"></i></a>
-                                        <a class="button is-small"><i class="fa fa-trash"></i></a>
-                                    </div>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <th>2</th>
-                              <td>John Constatine</td>
-                              <td>London</td>
-                              <td>0955999321</td>
-                              <td>Male</td>
-                              <td>23 Mar 1901</td>
-                              <td>
-                                <div class="action-buttons">
-                                    <div class="control is-grouped">
-                                        <a class="button is-small"><i class="fa fa-eye"></i></a>
-                                        <a class="button is-small"><i class="fa fa-pen-to-square"></i></a>
-                                        <a class="button is-small"><i class="fa fa-trash"></i></a>
-                                    </div>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <th>3</th>
-                              <td>Felix Frost</td>
-                              <td>Hogwarts</td>
-                              <td>0965956301</td>
-                              <td>Male</td>
-                              <td>05 Dec 1902</td>
-                              <td>
-                                 <div class="action-buttons">
-                                    <div class="control is-grouped">
-                                        <a class="button is-small"><i class="fa fa-eye"></i></a>
-                                        <a class="button is-small"><i class="fa fa-pen-to-square"></i></a>
-                                        <a class="button is-small"><i class="fa fa-trash"></i></a>
-                                    </div>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr class="is-selected">
-                              <th>4</th>
-                              <td>Zatanna Zatarra</td>
-                              <td>House of Fate</td>
-                              <td>0977006301</td>
-                              <td>Female</td>
-                              <td>07 Sep 1906</td>
-                              <td>Options</td>
-                            </tr>
-                            <tr>
-                              <th>5</th>
-                              <td>Harry Potter</td>
-                              <td>Hogwarts</td>
-                              <td>Female</td>
-                              <td>0965956301</td>
-                              <td>05 Dec 1902</td>
-                              <td>
+                            @forelse ($patients as $patient)
+                                <tr>
+                                  <th>{{ $loop->index + 1 }}</th>
+                                  <td><p>{{ $patient->first_name }}</p><p>{{ $patiennt->last_name }}</p></td>
+                                  <td>{{ $patient->address }}</td>
+                                  <td>{{ $patient->contactnumber }}</td>
+                                  <td>{{ $patient->sex}}</td>
+                                  <td>{{ $patient->dob }}</td>
+                                  <td>
                                     <div class="action-buttons">
-                                    <div class="control is-grouped">
-                                        <a class="button is-small"><i class="fa fa-eye"></i></a>
-                                        <a class="button is-small"><i class="fa fa-pen-to-square"></i></a>
-                                        <a class="button is-small"><i class="fa fa-trash"></i></a>
+                                        <div class="control is-grouped">
+                                            <a class="button is-small"><i class="fa fa-eye"></i></a>
+                                            <a class="button is-small"><i class="fa fa-pen-to-square"></i></a>
+                                            <a class="button is-small"><i class="fa fa-trash"></i></a>
+                                        </div>
                                     </div>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <th>6</th>
-                              <td>India Westbrooks</td>
-                              <td>California</td>
-                              <td>Female</td>
-                              <td>0965956301</td>
-                              <td>30 May 1999</td>
-                              <td>
-                                    <div class="action-buttons">
-                                    <div class="control is-grouped">
-                                        <a class="button is-small"><i class="fa fa-eye"></i></a>
-                                        <a class="button is-small"><i class="fa fa-pen-to-square"></i></a>
-                                        <a class="button is-small"><i class="fa fa-trash"></i></a>
-                                    </div>
-                                </div>
-                              </td>
-                            </tr>
+                                  </td>
+                                </tr>
+                                @empty
+                                    <tr>
+                                        <td colspan="4" class="text-center">No patients found.</td>
+                                    </tr>
+                                @endforelse
                           </tbody>
                         </table>
 					</div>

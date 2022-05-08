@@ -23,6 +23,8 @@ Route::get('/patients', function () {
     return view('patient.patients');
 })->name('patients');
 
+Route::resource('/patients', PatientController::class);
+
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
