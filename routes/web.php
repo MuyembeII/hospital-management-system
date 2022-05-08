@@ -20,7 +20,9 @@ Route::get('/', function () {
     return view('main');
 })->name('main');
 
-
+Route::get('/create', function () {
+    return view('patient.register_patient');
+})->name('create_patient');
 
 Route::resource('patients', PatientController::class);
 
