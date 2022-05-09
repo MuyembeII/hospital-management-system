@@ -12,7 +12,20 @@
                 </h1>
             </div>
             <div class="column is-8 is-offset-2">
+
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <strong class="text-danger">Error!</strong>
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li></li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
                 <form action="" method="POST">
+                    @csrf
+
                     <div class="columns">
                         <div class="column is-half">
                             <!-- Input:  First Name -->
@@ -71,6 +84,24 @@
                                     <label class="label" for="address">Address Details</label>
                                     <textarea name="address" id="address" class="textarea"></textarea>
                                 </div>
+                            </div>
+                        </div>
+                        <div class="column is-12">
+                            <div class="field">
+                              <div class="control ">
+                                <button class="button is-primary submit-button">
+                                  Save&nbsp;&nbsp;
+                                  <i class="fas fa-paper-plane"></i>
+                                </button>
+                              </div>
+                            </div>
+                            <div class="field">
+                              <div class="control ">
+                                <button class="button is-warning">
+                                  Cancel&nbsp;&nbsp;
+                                  <i class="fas fa-paper-plane"></i>
+                                </button>
+                              </div>
                             </div>
                         </div>
                     </div>
