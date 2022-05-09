@@ -81,16 +81,9 @@
                         <h2 class="subtitle is-4">Additional Details</h2>
                         <div class="columns">
                             <div class="column is-half">
-                                <!-- Input:  Birth Place -->
-                                <div class="field">
-                                    <div class="control">
-                                        <label class="label" for="birth_place">Birth Place</label>
-                                        <input class="input" type="text" name="birth_place" id="birth_place">
-                                    </div>
-                                </div>
+
                             </div>
                             <div class="column">
-                                Some dummy data
                             </div>
                         </div>
                     </div>
