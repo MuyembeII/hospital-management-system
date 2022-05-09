@@ -86,7 +86,8 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="column is-12">
+                    </div>
+                    <div class="card">
                             <div class="field">
                               <div class="control ">
                                 <button class="button is-primary submit-button" type="submit">
@@ -104,7 +105,6 @@
                               </div>
                             </div>
                         </div>
-                    </div>
                 </form>
             </div>
         </div>
