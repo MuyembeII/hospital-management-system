@@ -89,7 +89,7 @@
                         <div class="column is-12">
                             <div class="field">
                               <div class="control ">
-                                <button class="button is-primary submit-button">
+                                <button class="button is-primary submit-button" type="submit">
                                   Save&nbsp;&nbsp;
                                   <i class="fas fa-paper-plane"></i>
                                 </button>
