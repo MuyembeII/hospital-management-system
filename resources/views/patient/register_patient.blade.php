@@ -3,18 +3,17 @@
 @extends('template')
 
 @section('content')
-<section class="hero is-info">
-    <div class="hero-body">
+<div class="section-light contact" id="contact">
         <div class="container">
-            <div class="columns is-multiline">
-                <h1 class="title is-size-4">Patient Management</h1>
-                <p class="is-size-5 subtitle">
-                    Register a new patient for clinical care.
-                </p>
-                <!-- Patient Registration Form -->
-                <form method="post" action="#">
-                    <div class="column is-8 is-offset-2 register">
-                        <div class="columns">
+          <div class="columns is-multiline" data-aos="fade-in-up" data-aos-easing="linear">
+            <div class="column is-12 about-me">
+              <h1 class="title has-text-centered section-title">
+                Get in touch
+              </h1>
+            </div>
+            <div class="column is-8 is-offset-2">
+              <form action="" method="POST">
+                <div class="columns">
                             <div class="column is-half">
                                 <!-- Input:  First Name -->
                                 <div class="field">
@@ -75,20 +74,8 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <!-- Additional Patient Details -->
-                    <div class="column is-8 is-offset-2 register">
-                        <h2 class="subtitle is-4">Additional Details</h2>
-                        <div class="columns">
-                            <div class="column is-half">
-
-                            </div>
-                            <div class="column">
-                            </div>
-                        </div>
-                    </div>
-                </form>
+              </form>
             </div>
+          </div>
         </div>
-    </div>
-</section>
+      </div>

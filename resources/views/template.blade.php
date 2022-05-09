@@ -8,6 +8,7 @@
         <title>Hospital Management System | | @yield('title')</title>
         <link rel="stylesheet" href="{{asset('fontawesome-free-6.1.1-web/css/all.css')}}">
         <link rel="stylesheet" href="{{asset('css/patient_search.css')}}">
+        <link rel="stylesheet" href="{{asset('css/patient_create.css')}}">
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
