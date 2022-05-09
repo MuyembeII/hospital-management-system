@@ -24,7 +24,7 @@
 <section class="container" id="p-list-container">
     <div class="columns">
         <div class="column is-3">
-            <a class="button is-primary is-block is-alt is-large" href="#">Create New Patient</a>
+            <a class="button is-primary is-block is-alt is-large" href="{{ route('create_patient') }}">Create New Patient</a>
             <br />
             <a class="button is-primary is-block is-alt is-large" href="{{ route('main') }}">Back To Main</a>
             <aside class="menu">
