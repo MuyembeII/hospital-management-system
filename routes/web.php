@@ -28,7 +28,7 @@ Route::get('/patients', function () {
 
 Route::get('/create', function () {
     return view('patient.register_patient');
-})->name('create_patient');
+})->name('create_patient_view');
 
 Route::resource('patients', PatientController::class);
 
