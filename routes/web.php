@@ -20,6 +20,7 @@ Route::get('/', function () {
     return view('main');
 })->name('main');
 
+<<<<<<< HEAD
 // Patient Management Routes
 Route::get('/patients', function () {
     return view('patient.patients');
@@ -28,6 +29,9 @@ Route::get('/patients', function () {
 Route::get('/create', function () {
     return view('patient.register_patient');
 })->name('create_patient');
+=======
+
+>>>>>>> parent of 9469476 (#2 create patient view)
 
 
 Route::middleware([
