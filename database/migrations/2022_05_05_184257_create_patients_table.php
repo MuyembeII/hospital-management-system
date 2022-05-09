@@ -14,21 +14,24 @@ return new class extends Migration
     public function up()
     {
         Schema::create('patients', function (Blueprint $table) {
-            $table->bigInteger('id');
-            $table->string('first_name');
-            $table->string('last_name');
+            $table->bigIncrements('id')->index('patient_id');
+            $table->string('first_name' 32)->index('patient_first_name');
+            $table->string('last_name', 32)->index('patient_last_name');
+            $table->string('email', 32)->unique();
+            $table->string('contactnumber', 16)->index('patient_contactnumber')->unique();
             $table->mediumText('address');
-            $table->string('contactnumber');
-            $table->string('sex');
+            $table->char('sex', 1)->index('patient_sex');//Mapping Guide ([sex(F) F -> Female, sex(M) M -> Male, sex(U) U -> Unknown])
             $table->date('dob');
-            $table->string('birth_place')->nullable();
-            $table->string('nationality')->nullable();
-            $table->string('religion')->nullable();
-            $table->string('guardian')->nullable();
-            $table->string('guardian_address')->nullable();
-            $table->string('occupation')->nullable();
-            $table->string('nrc',15)->nullable()->unique();
+            $table->string('birth_place', 32)->nullable();
+            $table->string('nationality', 24)->nullable();
+            $table->string('religion', 16)->nullable();
+            $table->string('guardian', 32)->nullable();
+            $table->string('guardian_contact', 32)->nullable();
+            $table->mediumText('guardian_address')->nullable();
+            $table->string('occupation', 16)->nullable();
+            $table->string('nrc',11)->nullable()->index('patient_nrc')->unique();
             $table->string('image')->default('dist/img/avatar.png');
+
             $table->timestamps();
             $table->softDeletes();
         });

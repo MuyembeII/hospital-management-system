@@ -15,6 +15,11 @@
         <!-- Bulma -->
         <link rel="stylesheet" href="{{asset('bulma/bulma.sass')}}">
         <link rel="stylesheet" href="{{asset('bulma/css/bulma.css')}}">
+        <link rel="stylesheet" href="{{asset('bulma-calendar/dist/css/bulma-calendar.min.css')}}">
+        {{-- bulma scripts start --}}
+        <script src="{{asset('js/bulma.js')}}"></script>
+        <script src="{{asset('bulma-calendar/dist/js/bulma-calendar.min.js')}}"></script>
+        {{-- bulma scripts end --}}
 
         <!-- Scripts -->
         <script src="{{asset('js/jquery-3.6.0.min.js')}}"></script>

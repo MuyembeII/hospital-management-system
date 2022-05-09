@@ -20,11 +20,15 @@ Route::get('/', function () {
     return view('main');
 })->name('main');
 
+// Patient Management Routes
+Route::get('/patients', function () {
+    return view('patient.patients');
+})->name('patients');
+
 Route::get('/create', function () {
     return view('patient.register_patient');
 })->name('create_patient');
 
-Route::resource('patients', PatientController::class);
 
 Route::middleware([
     'auth:sanctum',
