@@ -50,7 +50,7 @@
                     <a class="navbar-item" href="{{ route('main') }}">
                         Home
                     </a>
-                    <a class="navbar-item" href="{{ route('patients') }}">
+                    <a class="navbar-item" href="{{ route('patients_list') }}">
                         Patients
                     </a>
                     <a class="navbar-item" href="admin.html">
@@ -76,7 +76,7 @@
                     </p>
                     <ul class="menu-list">
                         <li><a class="is-active">Dashboard</a></li>
-                        <li><a href="{{ route('patients') }}">Patients</a></li>
+                        <li><a href="{{ route('patients_list') }}">Patients</a></li>
                         <li><a>Other</a></li>
                     </ul>
                     <p class="menu-label">
@@ -101,7 +101,7 @@
                 <nav class="breadcrumb" aria-label="breadcrumbs">
                     <ul>
                         <li><a href="{{ route('main') }}">Home</a></li>
-                        <li class="is-active"><a href="{{ route('patients') }}" aria-current="page">Patients</a></li>
+                        <li class="is-active"><a href="{{ route('patients_list') }}" aria-current="page">Patients</a></li>
                     </ul>
                 </nav>
                 <section class="hero is-info welcome is-small">
