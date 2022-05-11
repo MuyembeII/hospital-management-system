@@ -24,7 +24,7 @@ Route::get('/', function () {
 // Patient Management Routes
 Route::get('/patients', function () {
     return view('patient.patients');
-})->name('patients_list');
+})->name('patients');
 
 Route::get('/create', function () {
     return view('patient.register_patient');
