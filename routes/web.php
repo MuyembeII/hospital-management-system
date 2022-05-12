@@ -20,23 +20,20 @@ Route::get('/', function () {
     return view('main');
 })->name('main');
 
-
 // Patient Management Routes
 /*
 Route::get('/patients', function () {
     return view('patient.patients');
 })->name('patients_list');
 
-
-
 Route::get('/create', function () {
     return view('patient.register_patient');
 })->name('create_patient_view');
 */
 
-Route::get('/patients', ['as' => 'patients', 'uses' => 'App\Http\Controllers\PatientController@index']);
-Route::post('/create', ['as' => 'create_patient_view', 'uses' => 'App\Http\Controllers\PatientController@store']);
-//Route::resource('patients', PatientController::class);
+//Route::get('/patients', ['as' => 'patients', 'uses' => 'App\Http\Controllers\PatientController@index']);
+//Route::post('/create', ['as' => 'create_patient_view', 'uses' => 'App\Http\Controllers\PatientController@store']);
+Route::resource('patients', PatientController::class);
 
 Route::middleware([
     'auth:sanctum',

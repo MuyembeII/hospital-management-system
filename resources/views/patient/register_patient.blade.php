@@ -18,12 +18,12 @@
                         <strong class="text-danger">Error!</strong>
                         <ul>
                             @foreach ($errors->all() as $error)
-                                <li></li>
+                                <li>{{ $error }}</li>
                             @endforeach
                         </ul>
                     </div>
                 @endif
-                <form action="" method="POST">
+                <form action="{{ route('patients.store') }}" method="POST">
                     @csrf
                     <div class="columns">
                         <div class="column is-half">
@@ -73,8 +73,8 @@
                             <!-- Input:  Contact Details -->
                             <div class="field">
                                 <div class="control">
-                                    <label class="label" for="last_name">Contact Number</label>
-                                    <input class="input" type="text" name="last_name" id="last_name">
+                                    <label class="label" for="contactnumber">Contact Number</label>
+                                    <input class="input" type="text" name="contactnumber" id="contactnumber">
                                 </div>
                             </div>
                             <!-- Input:  Contact Details -->

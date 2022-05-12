@@ -16,7 +16,7 @@ class PatientController extends Controller
     {
        $patients = Patient::orderBy('id')->get();
 
-       return view('patient.patients', compact('patients'));
+       return view('patient.patients_list', compact('patients'));
     }
 
     /**
@@ -26,7 +26,7 @@ class PatientController extends Controller
      */
     public function create()
     {
-        return view('patients.create_patient');
+        return view('patient.register_patient');
     }
 
     /**
@@ -47,10 +47,18 @@ class PatientController extends Controller
             'dob' => 'required'
         ]);
 
-        Patient::create($request->all());
+         $patient = new Patient([
+            'first_name' => $request->get('first_name'),
+            'last_name' => $request->get('last_name'),
+            'email' => $request->get('email'),
+            'contactnumber' => $request->get('contactnumber'),
+            'address' => $request->get('address'),
+            'sex' => $request->get('sex'),
+            'dob' => $request->get('dob')
+        ]);
 
-        return redirect()->route('patient.patients')
-            ->with('success', 'Patient created successfully.');
+        $patient->save();
+        return redirect('/patients')->with('success', 'Patient created successfully.');
     }
 
     /**
