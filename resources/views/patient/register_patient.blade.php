@@ -25,7 +25,6 @@
                 @endif
                 <form action="" method="POST">
                     @csrf
-
                     <div class="columns">
                         <div class="column is-half">
                             <!-- Input:  First Name -->
@@ -87,22 +86,90 @@
                             </div>
                         </div>
                     </div>
-                    <div class="card">
+
+                    <hr/>
+                    <!-- Capture additional client details -->
+                    <h3 class="title is-6">Additional Client Details</h1>
+                    <div class="columns">
+                        <div class="column is-half">
+                            <!-- Input:  Birth Place -->
                             <div class="field">
-                              <div class="control ">
-                                <button class="button is-primary submit-button" type="submit">
-                                  Save&nbsp;&nbsp;
-                                  <i class="fas fa-paper-plane"></i>
-                                </button>
-                              </div>
+                                <div class="control">
+                                    <label class="label" for="birth_place">Birth Place</label>
+                                    <input class="input" type="text" name="birth_place" id="birth_place">
+                                </div>
                             </div>
+                            <!-- Input:  Nationality -->
                             <div class="field">
-                              <div class="control ">
-                                <button class="button is-warning">
-                                  Cancel&nbsp;&nbsp;
-                                  <i class="fas fa-paper-plane"></i>
-                                </button>
-                              </div>
+                                <label class="label" for="nationality">Nationality</label>
+                                <div class="control">
+                                    <div class="select">
+                                        <select name="nationality" id="nationality" class="regular-text">
+                                            <option value="Zambian">Zambia</option>
+                                            <option value="Malawian">Malawi</option>
+                                            <option value="Rwandanese">Rwanda</option>
+                                            <option value="Angolan">Angola</option>
+                                            <option value="Spannish">Spain</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Choice Select One:  Religion -->
+                            <div class="field">
+                                <div class="control">
+                                    <label class="label" for="religion">Religion</label>
+                                    <div class="select">
+                                        <select name="religion" id="religion" class="regular-text">
+                                            <option value="Christian">Christian</option>
+                                            <option value="Islam">Islam</option>
+                                            <option value="Buddist">Buddist</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="column">
+                            <!-- Input:  Guardian -->
+                            <div class="field">
+                                <div class="control">
+                                    <label class="label" for="guardian">Guardian</label>
+                                    <input class="input" type="text" name="guardian" id="guardian">
+                                </div>
+                            </div>
+                            <!-- Input:  National Registration Card -->
+                            <div class="field">
+                                <div class="control">
+                                    <label class="label" for="nrc">Guardian Address</label>
+                                    <input class="input" type="text" name="nrc" id="nrc">
+                                </div>
+                            </div>
+                            <!-- Input:  Guardian Address -->
+                            <div class="field">
+                                <div class="control">
+                                    <label class="label" for="guardian_address">Guardian Address</label>
+                                    <textarea name="guardian_address" id="guardian_address" class="textarea"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="card">
+                            <div class="columns">
+                                <div class="column is-4">
+                                    <div class="field">
+                                      <div class="control has-text-centered">
+                                        <button class="button is-primary submit-button" type="submit">
+                                          Save&nbsp;&nbsp;
+                                          <i class="fas fa-paper-plane"></i>
+                                        </button>
+                                        <button class="button is-warning">
+                                          Cancel&nbsp;&nbsp;
+                                          <i class="fas fa-paper-plane"></i>
+                                        </button>
+                                      </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                 </form>

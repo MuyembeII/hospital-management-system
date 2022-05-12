@@ -58,8 +58,7 @@
                         <tr>
                             <th>{{ $loop->index + 1 }}</th>
                             <td>
-                                <p>{{ $patient->first_name }}</p>
-                                <p>{{ $patient->last_name }}</p>
+                                <p>{{ $patient->first_name }}&nbsp;{{ $patient->last_name }}</p>
                             </td>
                             <td>{{ $patient->address }}</td>
                             <td>{{ $patient->contactnumber }}</td>
