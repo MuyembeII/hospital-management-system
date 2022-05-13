@@ -3,19 +3,18 @@
 @extends('template')
 
 @section('content')
+<section class="hero is-info is-small">
+    <div class="hero-body">
+        <div class="container has-text-centered">
+            <p class="title">Patient Registration</p>
+          <p class="subtitle">Create a new patient for clinical services</p>
+        </div>
+      </div>
+</section>
 <div class="section-light contact" id="contact">
-    <hr class="content-divider">
+    <br/>
     <div class="container">
         <div class="columns is-multiline" data-aos="fade-in-up" data-aos-easing="linear">
-
-            <div class="container">
-                <div class="column is-12 about-me">
-                <h1 class="title has-text-centered section-title">
-                    Patient Registration
-                </h1>
-                </div>
-            </div>
-            </div>
             <div class="column is-8 is-offset-2">
 
                 @if ($errors->any())
@@ -82,7 +81,7 @@
                                     <input class="input" type="text" name="contactnumber" id="contactnumber">
                                 </div>
                             </div>
-                            <!-- Input:  Contact Details -->
+                            <!-- Text:  Address Details -->
                             <div class="field">
                                 <div class="control">
                                     <label class="label" for="address">Address Details</label>
@@ -125,11 +124,19 @@
                                     <label class="label" for="religion">Religion</label>
                                     <div class="select">
                                         <select name="religion" id="religion" class="regular-text">
+                                            <option value="Christian">...</option>
                                             <option value="Christian">Christian</option>
                                             <option value="Islam">Islam</option>
                                             <option value="Buddist">Buddist</option>
                                         </select>
                                     </div>
+                                </div>
+                            </div>
+                            <!-- Input:  Contact Details -->
+                            <div class="field">
+                                <div class="control">
+                                    <label class="label" for="contactnumber">Contact Number</label>
+                                    <input class="input" type="text" name="contactnumber" id="contactnumber">
                                 </div>
                             </div>
                         </div>

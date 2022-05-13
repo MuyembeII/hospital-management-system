@@ -43,8 +43,7 @@
                     </tr>
                   </table>
                 </div>
-                <br>
-                <hr/>
+                <hr class="content-divider">
                 <h3 class="title is-6">Patient Appointments</h1>
               </div>
             </div>
