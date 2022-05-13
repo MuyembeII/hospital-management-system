@@ -129,3 +129,31 @@
     padding: 60px 20px;
   }
 }
+
+/* Patient Registration Header */
+.va {
+  display: flex;
+  align-items: center;
+}
+
+.cta {
+  height: 500px;
+  border-top: 10px solid turquoise;
+}
+
+hr.content-divider {
+    border-top: 5px solid turquoise !important;
+  height: 2px !important;
+}
+
+#parallax-3 {
+  border-top: 10px solid hotpink;
+}
+
+#parallax-3 hr {
+  background: hotpink;
+}
+
+input, textarea, select {
+  border: 1px solid turquoise !important;
+}

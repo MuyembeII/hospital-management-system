@@ -65,13 +65,17 @@
                             <td>{{ $patient->sex}}</td>
                             <td>{{ $patient->dob }}</td>
                             <td>
-                                <div class="action-buttons">
-                                    <div class="control is-grouped">
-                                        <a class="button is-small"><i class="fa fa-eye"></i></a>
-                                        <a class="button is-small"><i class="fa fa-pen-to-square"></i></a>
-                                        <a class="button is-small"><i class="fa fa-trash"></i></a>
+                                <form action="{{ url($patient -> id) }}" method="POST">
+                                    <div class="action-buttons">
+                                        <div class="control is-grouped">
+                                            <a class="button is-small is-primary" href="{{ route('patients.show', $patient -> id) }}">
+                                                <i class="fa fa-eye"></i>
+                                            </a>
+                                            <a class="button is-small is-info"><i class="fa fa-pen-to-square"></i></a>
+                                            <a class="button is-small is-danger"><i class="fa fa-trash"></i></a>
+                                        </div>
                                     </div>
-                                </div>
+                                </form>
                             </td>
                         </tr>
                         @empty

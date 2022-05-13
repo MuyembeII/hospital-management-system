@@ -4,12 +4,17 @@
 
 @section('content')
 <div class="section-light contact" id="contact">
+    <hr class="content-divider">
     <div class="container">
         <div class="columns is-multiline" data-aos="fade-in-up" data-aos-easing="linear">
-            <div class="column is-12 about-me">
+
+            <div class="container">
+                <div class="column is-12 about-me">
                 <h1 class="title has-text-centered section-title">
                     Patient Registration
                 </h1>
+                </div>
+            </div>
             </div>
             <div class="column is-8 is-offset-2">
 
@@ -153,20 +158,20 @@
                         </div>
                     </div>
 
-
+                    <hr class="content-divider">
                     <div class="card">
                             <div class="columns">
                                 <div class="column is-4">
                                     <div class="field">
                                       <div class="control has-text-centered">
                                         <button class="button is-primary submit-button" type="submit">
-                                          Save&nbsp;&nbsp;
+                                          Save Patient&nbsp;&nbsp;
                                           <i class="fas fa-paper-plane"></i>
                                         </button>
-                                        <button class="button is-warning">
-                                          Cancel&nbsp;&nbsp;
-                                          <i class="fas fa-paper-plane"></i>
-                                        </button>
+                                        <a class="button is-warning" href="{{ url('patients') }}" aria-current="page">
+                                            Cancel&nbsp;&nbsp;
+                                            <i class="fas fa-circle-xmark"></i>
+                                        </a>
                                       </div>
                                     </div>
                                 </div>
