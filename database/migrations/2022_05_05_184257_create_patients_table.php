@@ -25,12 +25,13 @@ return new class extends Migration
             $table->string('birth_place', 32)->nullable();
             $table->string('nationality', 24)->nullable();
             $table->string('religion', 16)->nullable();
+            $table->string('language', 24)->nullable();
             $table->string('guardian', 32)->nullable();
             $table->string('guardian_contact', 32)->nullable();
             $table->mediumText('guardian_address')->nullable();
             $table->string('occupation', 16)->nullable();
             $table->string('nrc',11)->nullable()->unique();
-            $table->string('image')->default('dist/img/avatar.png');
+            $table->string('image')->default('dist/img/avatar.png')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

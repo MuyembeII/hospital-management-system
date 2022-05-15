@@ -1,13 +1,11 @@
-{{-- patient registration view: the component to capture patient details  --}}
-
 @extends('template')
 
 @section('content')
 <section class="hero is-info is-small">
 	<div class="hero-body">
 		<div class="container has-text-centered">
-			<p class="title">Patient Registration</p>
-			<p class="subtitle">Create a new patient for clinical services</p>
+			<p class="title">Patient Update</p>
+			<p class="subtitle">Edit patient details.</p>
 		</div>
 	</div>
 </section>
@@ -35,7 +33,7 @@
 				</div>
 				@endif
 
-				<form action="{{ route('patients.store') }}" method="POST">
+				<form action="{{ route('patients.update', $patient->id) }}" method="POST">
 					@csrf
 					<div class="columns">
 						<!-- Column 1 -->
@@ -44,14 +42,14 @@
 							<div class="field">
 								<div class="control">
 									<label class="label" for="first_name">First Name</label>
-									<input class="input" type="text" name="first_name" id="first_name">
+									<input class="input" type="text" name="first_name" id="first_name" value="{{ $patient ->first_name}}">
 								</div>
 							</div>
 							<!-- Input:  Last Name -->
 							<div class="field">
 								<div class="control">
 									<label class="label" for="last_name">Last Name</label>
-									<input class="input" type="text" name="last_name" id="last_name">
+									<input class="input" type="text" name="last_name" id="last_name" value="{{ $patient ->last_name}}">
 								</div>
 							</div>
 							<!-- Choice Select One:  Gender?.Sex -->
@@ -60,9 +58,9 @@
 									<label class="label" for="sex">Gender</label>
 									<div class="select is-fullwidth">
 										<select name="sex" id="sex" class="regular-text">
-											<option value="U">Other</option>
-											<option value="F">Female</option>
-											<option value="M">Male</option>
+											<option value="{{ $patient ->sex}}">Other</option>
+											<option value="{{ $patient ->sex}}">Female</option>
+											<option value="{{ $patient ->sex}}">Male</option>
 										</select>
 									</div>
 								</div>
@@ -75,21 +73,21 @@
 							<div class="field">
 								<div class="control">
 									<label class="label" for="email">Email Address</label>
-									<input class="input" type="email" name="email" id="email" placeholder="patient@info.com">
+									<input class="input" type="email" name="email" id="email" value="{{ $patient ->email}}" placeholder="patient@info.com">
 								</div>
 							</div>
 							<!-- Input:  Contact Details -->
 							<div class="field">
 								<div class="control">
 									<label class="label" for="contactnumber">Contact Number</label>
-									<input class="input" type="text" name="contactnumber" id="contactnumber">
+									<input class="input" type="text" name="contactnumber" id="contactnumber" value="{{ $patient ->contactnumber}}">
 								</div>
 							</div>
 							<!-- Input:  Date of Birth -->
 							<div class="field">
 								<div class="control">
 									<label class="label" for="dob">Date of Birth</label>
-									<input class="input bulmaCalendar" type="date" name="dob" id="dob" data-display-mode="dialog">
+									<input class="input bulmaCalendar" type="date" name="dob" id="dob" data-display-mode="dialog" value="{{ $patient ->dob}}">
 								</div>
 							</div>
 						</div>
@@ -100,14 +98,14 @@
 							<div class="field">
 								<div class="control mb-1">
 									<label class="label" for="address">Address Details</label>
-									<textarea name="address" id="address" class="textarea"></textarea>
+									<textarea name="address" id="address" class="textarea" value="{{ $patient ->address}}"></textarea>
 								</div>
 							</div>
 							<!-- Event:  Fast Registration -->
 							<div class="field pt-5">
 							    <div class="control mt-1">
 							        <button class="button is-primary submit-button is-fullwidth" type="submit">
-									    Quick Save &nbsp;&nbsp; <i class="fas fa-paper-plane"></i>
+									    Quick Edit &nbsp;&nbsp; <i class="fas fa-paper-plane"></i>
 								    </button>
 							    </div>
 							</div>
@@ -124,7 +122,7 @@
 								<div class="field">
 									<div class="control">
 										<label class="label" for="birth_place">Birth Place</label>
-										<input class="input" type="text" name="birth_place" id="birth_place">
+										<input class="input" type="text" name="birth_place" id="birth_place" value="{{ $patient ->birth_place}}">
 									</div>
 								</div>
 								<!-- Choice Select One:  Religion -->
@@ -182,14 +180,14 @@
 								<div class="field">
 									<div class="control">
 										<label class="label" for="contactnumber">National Registration Card ID</label>
-										<input class="input" type="text" name="nrc" id="nrc">
+										<input class="input" type="text" name="nrc" id="nrc" value="{{ $patient ->nrc}}">
 									</div>
 								</div>
 								<!-- Input:  Occupation -->
 								<div class="field">
 									<div class="control">
 										<label class="label" for="nrc">Occupation</label>
-										<input class="input" type="text" name="occupation" id="occupation">
+										<input class="input" type="text" name="occupation" id="occupation" value="{{ $patient ->occupation}}">
 									</div>
 								</div>
 							</div>
@@ -200,21 +198,21 @@
 								<div class="field">
 									<div class="control">
 										<label class="label" for="nrc">Guardian</label>
-										<input class="input" type="text" name="guardian" id="guardian">
+										<input class="input" type="text" name="guardian" id="guardian" value="{{ $patient ->guardian}}">
 									</div>
 								</div>
 							    <!-- Input:  Guardian Contact -->
 								<div class="field">
 									<div class="control">
 										<label class="label" for="birth_place">Guardian Contact</label>
-										<input class="input" type="text" name="guardian_contact" id="guardian_contact">
+										<input class="input" type="text" name="guardian_contact" id="guardian_contact" value="{{ $patient ->guardian_contact}}">
 									</div>
 								</div>
 								<!-- Input:  Guardian Address -->
 								<div class="field">
 									<div class="control">
 										<label class="label" for="guardian_address">Guardian Address</label>
-										<textarea name="guardian_address" id="guardian_address" class="textarea"></textarea>
+										<textarea name="guardian_address" id="guardian_address" class="textarea" value="{{ $patient ->guardian_address}}"></textarea>
 									</div>
 								</div>
 							</div>
@@ -228,7 +226,7 @@
 									<div class="field has-addons">
 										<p class="control">
 											<button class="button is-primary submit-button" type="submit">
-												Save Patient&nbsp;&nbsp; <i class="fas fa-paper-plane"></i>
+												Update Patient&nbsp;&nbsp; <i class="fas fa-paper-plane"></i>
 											</button>
 										</p>
 										<p class="control">
