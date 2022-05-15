@@ -20,6 +20,8 @@
     "dependencies": {
         "axios": "^0.25.0",
         "bulma": "^0.9.3",
+        "bulma-accordion": "^2.0.1",
+        "bulma-calendar": "^6.1.18",
         "cross-env": "^7.0.3",
         "font-awesome": "^4.7.0",
         "jquery": "^3.6.0",

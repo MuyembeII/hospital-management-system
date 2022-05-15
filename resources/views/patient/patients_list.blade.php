@@ -68,7 +68,7 @@
                                 <form action="{{ url($patient -> id) }}" method="POST">
                                     <div class="action-buttons">
                                         <div class="control is-grouped">
-                                            <a class="button is-small is-primary" href="{{ route('patients.show', $patient -> id) }}">
+                                            <a class="button is-small has-text-warning has-text-link" href="{{ route('patients.show', $patient -> id) }}">
                                                 <i class="fa fa-eye"></i>
                                             </a>
                                             <a class="button is-small is-info"><i class="fa fa-pen-to-square"></i></a>

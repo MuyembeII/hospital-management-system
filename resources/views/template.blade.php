@@ -17,10 +17,12 @@
         <!-- Bulma -->
         <link rel="stylesheet" href="{{asset('bulma/bulma.sass')}}">
         <link rel="stylesheet" href="{{asset('bulma/css/bulma.css')}}">
-        <link rel="stylesheet" href="{{asset('bulma-calendar/dist/css/bulma-calendar.min.css')}}">
+        <link rel="stylesheet" href="{{asset('bulma-calendar/dist/css/bulma-calendar.css')}}">
+        <link rel="stylesheet" href="{{asset('bulma-collapsible/css/bulma-collapsible.min.css')}}">
         {{-- bulma scripts start --}}
         <script src="{{asset('js/bulma.js')}}"></script>
-        <script src="{{asset('bulma-calendar/dist/js/bulma-calendar.min.js')}}"></script>
+        <script src="{{asset('bulma-calendar/dist/js/bulma-calendar.js')}}"></script>
+        <script src="{{asset('bulma-collapsible/js/bulma-collapsible.min.js')}}"></script>
         {{-- bulma scripts end --}}
 
         <!-- Scripts -->
