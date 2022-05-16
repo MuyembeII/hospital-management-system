@@ -17,6 +17,8 @@
 	    <div class="column is-3">
             <a class="button is-primary is-block is-alt is-large" href="{{ route('patients.edit', $patient->id) }}">Edit Patient</a>
             <br />
+            <a class="button is-primary is-block is-alt is-large" href="{{ route('patients.edit', $patient->id) }}"> Create Appointment</a>
+            <br />
             <a class="button is-primary is-block is-alt is-large" href="{{ url('patients') }}">Back To Patients List</a>
             <aside class="menu">
                 <p class="menu-label">
@@ -24,7 +26,10 @@
                 </p>
                 <ul class="menu-list has-text-centered">
                     <li class="is-right is-link">
-                        <a class="patient-service" href="{{ route('patients.create') }}">Appointments</a>
+                        <a class="patient-service" href="{{ route('patients.create') }}">Out patient/OPD</a>
+                    </li>
+                    <li class="is-right is-link">
+                        <a class="patient-service" href="{{ route('patients.create') }}">In patient/IPD</a>
                     </li>
                     <li class="is-right">
                         <a class="patient-service" href="{{ route('patients.create') }}">Pharmarcy</a>
