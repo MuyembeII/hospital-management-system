@@ -14,17 +14,21 @@ return new class extends Migration
     public function up()
     {
         Schema::create('outpatients', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id')->index('outpatient_id');
             $table->unsignedBigInteger('patient_id');
             $table->unsignedBigInteger('doctor_id')->nullable();
-            //$table->unsignedBigInteger('prescription_id');
+            $table->unsignedBigInteger('prescription_id');
+            $table->string('blood_pressure');
+            $table->string('weight');
+            $table->string('height');
+            $table->string('temperature');
             $table->string('diagnosis');
             $table->integer('reason_for_visit');
             $table->timestamps();
 
             $table->foreign('patient_id')->references('id')->on('patients')->onDelete('cascade');
             $table->foreign('doctor_id')->references('id')->on('users')->onDelete('cascade');
-            //$table->foreign('prescription_id')->references('id')->on('medicines')->onDelete('cascade');
+            $table->foreign('prescription_id')->references('id')->on('medicines')->onDelete('cascade');
         });
     }
 
