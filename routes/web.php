@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\PatientController;
+use App\Http\Controllers\AppointmentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,6 +22,7 @@ Route::get('/', function () {
 })->name('main');
 
 Route::resource('patients', PatientController::class);
+Route::resource('appointment', AppointmentController::class);
 
 Route::middleware([
     'auth:sanctum',

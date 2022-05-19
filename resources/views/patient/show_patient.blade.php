@@ -17,7 +17,7 @@
 	    <div class="column is-3">
             <a class="button is-primary is-block is-alt is-large" href="{{ route('patients.edit', $patient->id) }}">Edit Patient</a>
             <br />
-            <a class="button is-primary is-block is-alt is-large" href="{{ route('patients.edit', $patient->id) }}"> Create Appointment</a>
+            <a class="button is-primary is-block is-alt is-large" href="{{ route('appointment.create') }}"> Create Appointment</a>
             <br />
             <a class="button is-primary is-block is-alt is-large" href="{{ url('patients') }}">Back To Patients List</a>
             <aside class="menu">
