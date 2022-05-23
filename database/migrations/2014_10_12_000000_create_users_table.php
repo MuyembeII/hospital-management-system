@@ -23,7 +23,7 @@ return new class extends Migration
             $table->foreignId('current_team_id')->nullable();
             $table->string('profile_photo_path', 2048)->nullable()->default("dist/img/avatar5.png");
             $table->string('user_type')->nullable()->default("admin");
-            $table->integer('contactnumber');
+            $table->string('contactnumber')->nullable();
             $table->timestamps();
         });
     }
