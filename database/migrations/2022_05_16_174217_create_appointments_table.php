@@ -17,9 +17,10 @@ return new class extends Migration
             $table->bigIncrements('id')->index('appointment_id');
             $table->unsignedBigInteger('patient_id');
             $table->unsignedBigInteger('doctor_id')->nullable();
-            $table->enum('appointment_status', ['Pending', 'Attended', 'Values']);
+            $table->enum('appointment_status', ['Pending', 'Attended', 'Missed']);
             $table->date('appointment_date');
-            $table->enum('service_type', ['IPD', 'OPD', 'Pharmacy'])->nullable();
+            $table->enum('service_type', ['IPD', 'OPD', 'Pharmacy', 'TB', 'ART', 'Cancer', 'Counselling'])->nullable();
+            $table->string('appointment_details', 64)->nullable();
             $table->softDeletes();
             $table->timestamps();
 

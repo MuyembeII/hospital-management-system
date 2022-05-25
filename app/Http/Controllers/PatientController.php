@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Patient;
+use App\Models\Appointment;
 use Illuminate\Http\Request;
 
 class PatientController extends Controller
@@ -79,7 +80,11 @@ class PatientController extends Controller
      */
     public function show(Patient $patient)
     {
-        return view('patient.show_patient', compact('patient'));
+        $patient_id = $patient->id;
+        $appointment = Appointment::where('id', $patient_id)->get();
+
+        return view('patient.show_patient', ['patient' => $patient, 'appointments' => $appointment]);
+
     }
 
     public function edit($id)

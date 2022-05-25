@@ -40,15 +40,15 @@
 					<div class="columns">
 						<!-- Column 1 -->
 						<div class="column is-8">
-							<!-- Choice Select One:  Religion -->
+							<!-- Choice Select One:  Appointment Status -->
 								<div class="field">
 									<div class="control">
-										<label class="label" for="religion">Appointment Status</label>
+										<label class="label" for="appointment_status">Appointment Status</label>
 										<div class="select is-fullwidth">
-											<select name="religion" id="religion" class="regular-text">
+											<select name="appointment_status" id="appointment_status" class="regular-text">
 												<option value="Pending">Pending</option>
-												<option value="Christian">Attended</option>
-												<option value="Islam">Missed</option>
+												<option value="Attended">Attended</option>
+												<option value="Missed">Missed</option>
 											</select>
 										</div>
 									</div>
@@ -56,8 +56,8 @@
 							<!-- Input:  Appointment Date -->
 							<div class="field">
 								<div class="control">
-									<label class="label" for="dob">Date of Appointment</label>
-									<input class="input bulmaCalendar" type="date" name="dob" id="dob" data-display-mode="dialog">
+									<label class="label" for="appointment_date">Date of Appointment</label>
+									<input class="input bulmaCalendar" type="date" name="appointment_date" id="appointment_date" data-display-mode="dialog">
 								</div>
 							</div>
 							<!-- Choice Select One:  Service Type -->
@@ -66,43 +66,47 @@
 									<label class="label" for="sex">Service Type</label>
 									<div class="select is-fullwidth">
 										<select name="sex" id="sex" class="regular-text">
-											<option value="U">OPD</option>
-											<option value="F">IPD</option>
-											<option value="M">TB</option>
-											<option value="M">ART</option>
-											<option value="M">Cancer</option>
-											<option value="M">Counselling</option>
+											<option value="OPD">OPD</option>
+											<option value="IPD">IPD</option>
+											<option value="TB">TB</option>
+											<option value="ART">ART</option>
+											<option value="Cancer">Cancer</option>
+											<option value="Counselling">Counselling</option>
 										</select>
 									</div>
 								</div>
 							</div>
+							<!-- Input:  Appointment Details -->
+                            <div class="field">
+                                <div class="control">
+                            	    <label class="label" for="appointment_details">Notes</label>
+                            		<textarea name="appointment_details" id="appointment_details" class="textarea"></textarea>
+                            	</div>
+                            </div>
 						</div>
 					</div>
 
-
-
-
-						<hr class="content-divider">
-						<!-- Events:  Patient registration form action handlers -->
-						<div class="card has-background-white-ter">
-							<div class="columns">
-								<div class="column is-4 mx-2">
-									<div class="field has-addons">
-										<p class="control">
+					<hr class="content-divider">
+					<!-- Events:  Patient registration form action handlers -->
+					<div class="card has-background-white-ter">
+    					<div class="columns">
+    						<div class="column is-4 mx-2">
+								<div class="field has-addons">
+									<p class="control">
 											<button class="button is-primary submit-button" type="submit">
 												Save Appointment&nbsp;&nbsp; <i class="fas fa-paper-plane"></i>
 											</button>
-										</p>
-										<p class="control">
+									</p>
+									<p class="control">
 											<a class="button is-warning" href="{{ url('patients') }}" aria-current="page">
 												Cancel&nbsp;&nbsp; <i class="fas fa-circle-xmark"></i>
 											</a>
-										</p>
+									</p>
 
-									</div>
 								</div>
 							</div>
 						</div>
+					</div>
 				</form>
 			</div>
 		</div>

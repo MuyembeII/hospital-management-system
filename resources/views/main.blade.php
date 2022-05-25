@@ -31,12 +31,11 @@
             }
         </style>
     </head>
-    <nav class="navbar is-white">
+    <nav class="navbar is-white has-shadow">
         <div class="container">
             <div class="navbar-brand">
-                <a class="navbar-item brand-text" href="{{ route('main') }}">
-                  <img src="http://bulma.io/images/bulma-logo.png"/>
-                  <p>HMS</p>
+                <a class="navbar-item brand-text" href="{{ route('main') }}" onmousedown="request()->routeIs('main')" >
+                  <p>Hospice</p>
                 </a>
                 </a>
                 <div class="navbar-burger burger" data-target="navMenu">
@@ -62,6 +61,30 @@
                     <a class="navbar-item" href="admin.html">
                         Reports
                     </a>
+                </div>
+                <div class="navbar-end">
+                    <div class="navbar-item has-dropdown is-hoverable">
+                        <div class="container py-4">
+                            <p class="has-text-primary"> {{ Auth::user()->name }} ({{ Auth::user()->user_type }}) </p>
+                        </div>
+                        <a class="navbar-link">Account</a>
+						<div class="navbar-dropdown has-text-centered has-text-link">
+						    <a class="navbar-item" href="{{ route('dashboard') }}">Dashboard</a>
+						    <a class="navbar-item" href="{{ route('profile.show') }}">
+						        <span class="icon">
+                                    <i class="fa fa-user-doctor" aria-hidden="true"></i>
+                                </span>
+						        &nbsp; Profile
+						    </a>
+						    <hr class="navbar-divider" />
+						    <a class="navbar-item" href="{{ route('logout') }}">
+						        <span class="icon">
+                                    <i class="fa fa-right-from-bracket" aria-hidden="true"></i>
+                                </span>
+						        &nbsp;Logout
+						    </a>
+						</div>
+					</div>
                 </div>
             </div>
         </div>
