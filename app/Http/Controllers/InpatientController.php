@@ -6,13 +6,13 @@ use Illuminate\Http\Request;
 
 class InpatientController extends Controller
 {
-    /**
-         * Show the form for creating a new resource.
-         *
-         * @return \Illuminate\Http\Response
-         */
-         public function create()
-         {
-            return view('services.inpatient');
-         }
+   /**
+    * Show the form for creating a new resource.
+    *
+    * @return \Illuminate\Http\Response
+    */
+   public function create()
+   {
+      return view('services.inpatient');
+   }
 }

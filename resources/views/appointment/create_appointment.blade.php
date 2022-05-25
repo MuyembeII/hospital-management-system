@@ -16,22 +16,22 @@
 		<div class="columns is-multiline" data-aos="fade-in-up" data-aos-easing="linear">
 			<div class="column is-8 is-offset-2">
 
-                <!-- Form validation message box -->
+				<!-- Form validation message box -->
 				@if ($errors->any())
 				<div class="box">
-				    <p class="has-text-danger">Appointment create failed!</p>
-				    <article class="message is-danger">
-                        <span class="icon has-text-warning">
-                            <i class="fab fa-triangle-exclamation"></i>
-                        </span>
-                        <div class="message-body">
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    </article>
+					<p class="has-text-danger">Appointment create failed!</p>
+					<article class="message is-danger">
+						<span class="icon has-text-warning">
+							<i class="fab fa-triangle-exclamation"></i>
+						</span>
+						<div class="message-body">
+							<ul>
+								@foreach ($errors->all() as $error)
+								<li>{{ $error }}</li>
+								@endforeach
+							</ul>
+						</div>
+					</article>
 				</div>
 				@endif
 
@@ -41,18 +41,18 @@
 						<!-- Column 1 -->
 						<div class="column is-8">
 							<!-- Choice Select One:  Appointment Status -->
-								<div class="field">
-									<div class="control">
-										<label class="label" for="appointment_status">Appointment Status</label>
-										<div class="select is-fullwidth">
-											<select name="appointment_status" id="appointment_status" class="regular-text">
-												<option value="Pending">Pending</option>
-												<option value="Attended">Attended</option>
-												<option value="Missed">Missed</option>
-											</select>
-										</div>
+							<div class="field">
+								<div class="control">
+									<label class="label" for="appointment_status">Appointment Status</label>
+									<div class="select is-fullwidth">
+										<select name="appointment_status" id="appointment_status" class="regular-text">
+											<option value="Pending">Pending</option>
+											<option value="Attended">Attended</option>
+											<option value="Missed">Missed</option>
+										</select>
 									</div>
 								</div>
+							</div>
 							<!-- Input:  Appointment Date -->
 							<div class="field">
 								<div class="control">
@@ -77,30 +77,30 @@
 								</div>
 							</div>
 							<!-- Input:  Appointment Details -->
-                            <div class="field">
-                                <div class="control">
-                            	    <label class="label" for="appointment_details">Notes</label>
-                            		<textarea name="appointment_details" id="appointment_details" class="textarea"></textarea>
-                            	</div>
-                            </div>
+							<div class="field">
+								<div class="control">
+									<label class="label" for="appointment_details">Notes</label>
+									<textarea name="appointment_details" id="appointment_details" class="textarea"></textarea>
+								</div>
+							</div>
 						</div>
 					</div>
 
 					<hr class="content-divider">
 					<!-- Events:  Patient registration form action handlers -->
 					<div class="card has-background-white-ter">
-    					<div class="columns">
-    						<div class="column is-4 mx-2">
+						<div class="columns">
+							<div class="column is-4 mx-2">
 								<div class="field has-addons">
 									<p class="control">
-											<button class="button is-primary submit-button" type="submit">
-												Save Appointment&nbsp;&nbsp; <i class="fas fa-paper-plane"></i>
-											</button>
+										<button class="button is-primary submit-button" type="submit">
+											Save Appointment&nbsp;&nbsp; <i class="fas fa-paper-plane"></i>
+										</button>
 									</p>
 									<p class="control">
-											<a class="button is-warning" href="{{ url('patients') }}" aria-current="page">
-												Cancel&nbsp;&nbsp; <i class="fas fa-circle-xmark"></i>
-											</a>
+										<a class="button is-warning" href="{{ url('patients') }}" aria-current="page">
+											Cancel&nbsp;&nbsp; <i class="fas fa-circle-xmark"></i>
+										</a>
 									</p>
 
 								</div>
