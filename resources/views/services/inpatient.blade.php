@@ -37,6 +37,7 @@
 
 				<form action="{{ route('patients.store') }}" method="POST">
 					@csrf
+					<!-- Columns - Vitals, Physical Exam and Pharmacy -->
 					<div class="columns">
 						<!-- Column 1 -->
 						<div class="column is-4">
@@ -74,18 +75,6 @@
 									</div>
 								</div>
 							</div>
-
-							<!-- Input:  Date of Discharge -->
-							<div class="field">
-								<div class="control">
-									<label class="label" for="blood_pressure"> Discharged? </label>
-									<input type="checkbox" name="discharged" id="discharged">
-								</div>
-								<div class="control">
-									<label class="label" for="dob">Date of Discharge</label>
-									<input class="input bulmaCalendar" type="date" name="discharged_date" id="discharged_date" data-display-mode="dialog">
-								</div>
-							</div>
 						</div>
 
 						<!-- Column 2 -->
@@ -101,22 +90,14 @@
 							<div class="field">
 								<div class="control">
 									<label class="label" for="blood_pressure">BP <small>(mm Hg)</small></label>
-									<input class="input" type="text" name="blood_pressure" id="blood_pressure" placeholder="120/65">
+									<input class="input" type="text" name="blood_pressure" id="blood_pressure" placeholder="E.g 120/65">
 								</div>
 							</div>
-
-							<!-- Input:  Ward -->
+							<!-- Input:  Ward/Servicr Area -->
 							<div class="field">
 								<div class="control">
 									<label class="label" for="ward">Ward</label>
 									<input class="input" type="text" name="ward" id="ward">
-								</div>
-							</div>
-							<!-- Input:  Duration -->
-							<div class="field">
-								<div class="control">
-									<label class="label" for="duration">Duration <small>(days)</small></label>
-									<input class="input" type="number" name="duration" id="duration">
 								</div>
 							</div>
 
@@ -124,22 +105,50 @@
 
 						<!-- Column 3 -->
 						<div class="column is-4">
-							<!-- Text:  Diagnosis Details -->
-							<div class="field">
-								<div class="control mb-1">
-									<label class="label" for="diagnosis">Diagnosis Details</label>
-									<textarea name="diagnosis" id="diagnosis" class="textarea"></textarea>
-								</div>
-							</div>
-							<!-- Text:  Reason for Visit -->
-							<div class="field">
-								<div class="control mb-1">
-									<label class="label" for="diagnosis">Notes</label>
-									<textarea name="reason_for_visit" id="reason_for_visit" class="textarea"></textarea>
-								</div>
-							</div>
+						    <!-- Input:  Duration -->
+                            <div class="field">
+                            	<div class="control">
+                            		<label class="label" for="duration">Duration <small>(days)</small></label>
+                            		<input class="input" type="number" name="duration" id="duration">
+                            	</div>
+                            </div>
+							<!-- Input:  Date of Discharge -->
+                            <div class="field">
+                            	<div class="control">
+                            		<label class="label" for="blood_pressure"> Discharged? </label>
+                            		<input type="checkbox" name="discharged" id="discharged">
+                            	</div>
+                            	<div class="control">
+                            		<label class="label" for="dob">Date of Discharge</label>
+                            		<input class="input bulmaCalendar" type="date" name="discharged_date" id="discharged_date" data-display-mode="dialog">
+                            	</div>
+                            </div>
+
 						</div>
 					</div>
+
+					<div class="columns">
+                        <!-- Column 4 -->
+                        <div class="column is-6">
+                            <!-- Text:  Diagnosis Details -->
+                            <div class="field">
+                            	<div class="control mb-1">
+                            		<label class="label" for="diagnosis">Diagnosis Details</label>
+                            		<textarea name="diagnosis" id="diagnosis" class="textarea"></textarea>
+                            	</div>
+                            </div>
+                        </div>
+                        <!-- Column 5 -->
+                        <div class="column is-6">
+                            <!-- Text:  Reason for Visit -->
+                            <div class="field">
+                            	<div class="control mb-1">
+                            		<label class="label" for="diagnosis">Notes</label>
+                            		<textarea name="reason_for_visit" id="reason_for_visit" class="textarea"></textarea>
+                            	</div>
+                            </div>
+                        </div>
+                    </div>
 
 					<hr class="content-divider">
 					<!-- Events:  Patient registration form action handlers -->

@@ -1,4 +1,7 @@
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
-@import 'bulma/css/bulma';
+@import 'bulma/css/bulma.css';
+@import 'bulma-calendar/dist/css/bulma-calendar.css';
+@import 'bulma-checkradio/dist/css/bulma-checkradio.min.css';
+

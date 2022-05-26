@@ -32,7 +32,7 @@
                         <a class="patient-service" href="{{ route('inpatient.create') }}">In patient/IPD</a>
                     </li>
                     <li class="is-right">
-                        <a class="patient-service" href="{{ route('patients.create') }}">Pharmacy</a>
+                        <a class="patient-service" href="{{ route('pharmacy.create') }}">Pharmacy</a>
                     </li>
                 </ul>
             </aside>
