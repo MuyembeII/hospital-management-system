@@ -73,18 +73,17 @@ class PatientController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Product  $product
-     * @return \Illuminate\Http\Response
-     */
+    * Display the specified resource.
+    *
+    * @param  \App\Models\Patient  patient
+    * @return \Illuminate\Http\Response
+    */
     public function show(Patient $patient)
     {
         $patient_id = $patient->id;
         $appointment = Appointment::where('id', $patient_id)->get();
 
         return view('patient.show_patient', ['patient' => $patient, 'appointments' => $appointment]);
-
     }
 
     public function edit($id)

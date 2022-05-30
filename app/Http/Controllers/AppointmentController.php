@@ -39,8 +39,32 @@ class AppointmentController extends Controller
          try {
             $appointment->save();
             return redirect()->back()->with('success',"New Appointment created successfully.");
-        } catch (\Throwable $th) {
+        } catch (Throwable $th) {
             return redirect()->back()->with('fail',"Error Occured!");
         }
+    }
+
+    /**
+    * Display the specified resource.
+    *
+    * @param  \App\Models\Appointment  $appointment
+    * @return \Illuminate\Http\Response
+    */
+    public function show(Appointment $appointment)
+    {
+        $pid = $appointment->patient_id;
+        $did = $appointment->doctor_id;
+        $patient = Patient::find($pid);
+        $user = User::find($did);
+
+        return view(
+            'patient.show_appointment',
+             [
+                'appointment' => $appointment
+                'patient' => $patient,
+                'user' => $user
+             ]
+        );
+
     }
 }

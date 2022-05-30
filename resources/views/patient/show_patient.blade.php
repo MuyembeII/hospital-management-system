@@ -14,6 +14,7 @@
 
 <section class="container">
 	<div class="columns features">
+	    <!-- Patient Details Menu -->
 	    <div class="column is-3">
             <a class="button is-primary is-block is-alt is-large" href="{{ route('patients.edit', $patient->id) }}">Edit Patient</a>
             <br />
