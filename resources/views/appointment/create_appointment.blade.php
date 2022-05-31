@@ -66,10 +66,12 @@
 									<label class="label" for="sex">Service Type</label>
 									<div class="select is-fullwidth">
 										<select name="sex" id="sex" class="regular-text">
+											<option value=""></option>
 											<option value="OPD">OPD</option>
 											<option value="IPD">IPD</option>
 											<option value="TB">TB</option>
 											<option value="ART">ART</option>
+											<option value="ART">Pharmacy</option>
 											<option value="Cancer">Cancer</option>
 											<option value="Counselling">Counselling</option>
 										</select>

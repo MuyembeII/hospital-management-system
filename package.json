@@ -13,13 +13,14 @@
         "@tailwindcss/forms": "^0.4.0",
         "@tailwindcss/typography": "^0.5.0",
         "alpinejs": "^3.0.6",
-        "postcss": "^8.1.14",
+        "autoprefixer": "^10.4.7",
+        "bulma": "^0.9.4",
+        "postcss": "^8.4.14",
         "postcss-import": "^14.0.1",
         "tailwindcss": "^3.0.0"
     },
     "dependencies": {
         "axios": "^0.25.0",
-        "bulma": "^0.9.3",
         "bulma-accordion": "^2.0.1",
         "bulma-calendar": "^6.1.18",
         "bulma-checkradio": "^2.1.3",

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Patient;
 use App\Models\Appointment;
 use Illuminate\Http\Request;
 
@@ -31,11 +32,11 @@ class AppointmentController extends Controller
 
     public function store(Request $request){
         $appointment = new Appointment();
-        $appointment->patient_id=$request->patient;
-        $appointment->doctor_id=$request->doctor;
+
         $appointment->appointment_status=$request->appointment_status;
         $appointment->appointment_date=$request->appointment_date;
-        $appointment->service_type=$request->service_type;
+        $appointment->service_type=$request->appointment_date;
+        $appointment->appointment_details=$request->appointment_details;
          try {
             $appointment->save();
             return redirect()->back()->with('success',"New Appointment created successfully.");
@@ -60,7 +61,7 @@ class AppointmentController extends Controller
         return view(
             'patient.show_appointment',
              [
-                'appointment' => $appointment
+                'appointment' => $appointment,
                 'patient' => $patient,
                 'user' => $user
              ]
