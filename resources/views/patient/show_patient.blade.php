@@ -14,136 +14,14 @@
 
 @section('content')
 <section class="container">
-	<div x-data="{ show: false }">
+	<div>
 	    <div class="columns features">
         	    <!-- Patient Details Menu -->
         	    <div class="column is-3">
                     <a class="button is-primary is-block is-alt is-large" href="{{ route('patients.edit', $patient->id) }}">Edit Patient</a>
                     <br />
                     <a onclick="openModal();" class="button is-primary is-block is-alt is-large" data-target="create-appointment"> Create Appointment</a>
-                    <div id="create-appointment" class="modal">
-                        <div class="modal-background"></div>
-                        <div class="modal-card">
-                            <header class="modal-card-head">
-                            <div class="container has-text-centered">
-                            			<p class="title">Patient Appointment</p>
-                            			<p class="subtitle">Create a new appointment for clinical services</p>
-                            		</div>
-                            <button onclick="closeModal();" class="delete" aria-label="close"></button>
-                            </header>
-                            <section class="modal-card-body">
-                                <div class="section-light has-background-link-light">
-                                	<div class="container has-background-white-bis">
-                                		<div class="columns is-multiline" data-aos="fade-in-up" data-aos-easing="linear">
-                                			<div class="column is-8 is-offset-2">
 
-                                				<!-- Form validation message box -->
-                                				@if ($errors->any())
-                                				<div class="box">
-                                					<p class="has-text-danger">Appointment create failed!</p>
-                                					<article class="message is-danger">
-                                						<span class="icon has-text-warning">
-                                							<i class="fab fa-triangle-exclamation"></i>
-                                						</span>
-                                						<div class="message-body">
-                                							<ul>
-                                								@foreach ($errors->all() as $error)
-                                								<li>{{ $error }}</li>
-                                								@endforeach
-                                							</ul>
-                                						</div>
-                                					</article>
-                                				</div>
-                                				@endif
-
-                                				<form action="{{ route('appointment.store') }}" method="POST">
-                                					@csrf
-                                					<div class="columns">
-                                						<!-- Column 1 -->
-                                						<div class="column is-6">
-                                							<!-- Choice Select One:  Appointment Status -->
-                                							<div class="field">
-                                								<div class="control">
-                                									<label class="label" for="appointment_status">Appointment Status</label>
-                                									<div class="select is-fullwidth">
-                                										<select name="appointment_status" id="appointment_status" class="regular-text">
-                                											<option value="Pending">Pending</option>
-                                											<option value="Attended">Attended</option>
-                                											<option value="Missed">Missed</option>
-                                										</select>
-                                									</div>
-                                								</div>
-                                							</div>
-                                							<!-- Input:  Appointment Date -->
-                                							<div class="field">
-                                								<div class="control">
-                                									<label class="label" for="appointment_date">Date of Appointment</label>
-                                									<input class="input bulmaCalendar" type="date" name="appointment_date" id="appointment_date" data-display-mode="dialog">
-                                								</div>
-                                							</div>
-
-                                						</div>
-                                						<div class="column is-6">
-                                						    <!-- Choice Select One:  Service Type -->
-                                                                                            							<div class="field">
-                                                                                            								<div class="control">
-                                                                                            									<label class="label" for="sex">Service Type</label>
-                                                                                            									<div class="select is-fullwidth">
-                                                                                            										<select name="sex" id="sex" class="regular-text">
-                                                                                            											<option value=""></option>
-                                                                                            											<option value="OPD">OPD</option>
-                                                                                            											<option value="IPD">IPD</option>
-                                                                                            											<option value="TB">TB</option>
-                                                                                            											<option value="ART">ART</option>
-                                                                                            											<option value="ART">Pharmacy</option>
-                                                                                            											<option value="Cancer">Cancer</option>
-                                                                                            											<option value="Counselling">Counselling</option>
-                                                                                            										</select>
-                                                                                            									</div>
-                                                                                            								</div>
-                                                                                            							</div>
-                                                                                            							<!-- Input:  Appointment Details -->
-                                                                                            							<div class="field">
-                                                                                            								<div class="control">
-                                                                                            									<label class="label" for="appointment_details">Notes</label>
-                                                                                            									<textarea name="appointment_details" id="appointment_details" class="textarea"></textarea>
-                                                                                            								</div>
-                                                                                            							</div>
-                                						</div>
-                                					</div>
-
-                                					<hr class="content-divider">
-                                					<!-- Events:  Patient registration form action handlers -->
-                                					<div class="card has-background-white-ter">
-                                						<div class="columns">
-                                							<div class="column is-4 mx-2">
-                                								<div class="field has-addons">
-                                									<p class="control">
-                                										<button class="button is-primary submit-button" type="submit">
-                                											Save Appointment&nbsp;&nbsp; <i class="fas fa-paper-plane"></i>
-                                										</button>
-                                									</p>
-                                									<p class="control">
-                                										<a class="button is-warning" href="{{ url('patients') }}" aria-current="page">
-                                											Cancel&nbsp;&nbsp; <i class="fas fa-circle-xmark"></i>
-                                										</a>
-                                									</p>
-
-                                								</div>
-                                							</div>
-                                						</div>
-                                					</div>
-                                				</form>
-                                			</div>
-                                		</div>
-                                	</div>
-                                </div>
-                            </section>
-                            <button class="button is-success">Save changes</button>
-                            <button onclick="closeModal();" class="button">Cancel</button>
-                            </footer>
-                        </div>
-                    </div>
                     <br />
                     <a class="button is-primary is-block is-alt is-large" href="{{ url('patients') }}">Back To Patients List</a>
                     <aside class="menu">
@@ -301,6 +179,132 @@
         	</div>
 	</div>
 </section>
+
+@section('content')
+{{-- create appointment modal  --}}
+<div id="create-appointment" class="modal">
+                        <div class="modal-background"></div>
+                        <div class="modal-card">
+                            <header class="modal-card-head">
+                            <div class="container has-text-centered">
+                            			<p class="title">Patient Appointment</p>
+                            			<p class="subtitle">Create a new appointment for clinical services</p>
+                            		</div>
+                            <button onclick="closeModal();" class="delete" aria-label="close"></button>
+                            </header>
+                            <section class="modal-card-body">
+                                <div class="section-light has-background-link-light">
+                                	<div class="container has-background-white-bis">
+                                		<div class="columns is-multiline" data-aos="fade-in-up" data-aos-easing="linear">
+                                			<div class="column is-8 is-offset-2">
+
+                                				<!-- Form validation message box -->
+                                				@if ($errors->any())
+                                				<div class="box">
+                                					<p class="has-text-danger">Appointment create failed!</p>
+                                					<article class="message is-danger">
+                                						<span class="icon has-text-warning">
+                                							<i class="fab fa-triangle-exclamation"></i>
+                                						</span>
+                                						<div class="message-body">
+                                							<ul>
+                                								@foreach ($errors->all() as $error)
+                                								<li>{{ $error }}</li>
+                                								@endforeach
+                                							</ul>
+                                						</div>
+                                					</article>
+                                				</div>
+                                				@endif
+
+                                				<form action="{{ route('appointment.store') }}" method="POST">
+                                					@csrf
+                                					<div class="columns">
+                                						<!-- Column 1 -->
+                                						<div class="column is-6">
+                                							<!-- Choice Select One:  Appointment Status -->
+                                							<div class="field">
+                                								<div class="control">
+                                									<label class="label" for="appointment_status">Appointment Status</label>
+                                									<div class="select is-fullwidth">
+                                										<select name="appointment_status" id="appointment_status" class="regular-text">
+                                											<option value="Pending">Pending</option>
+                                											<option value="Attended">Attended</option>
+                                											<option value="Missed">Missed</option>
+                                										</select>
+                                									</div>
+                                								</div>
+                                							</div>
+                                							<!-- Input:  Appointment Date -->
+                                							<div class="field">
+                                								<div class="control">
+                                									<label class="label" for="appointment_date">Date of Appointment</label>
+                                									<input class="input bulmaCalendar" type="date" name="appointment_date" id="appointment_date" data-display-mode="dialog">
+                                								</div>
+                                							</div>
+
+                                						</div>
+                                						<div class="column is-6">
+                                						    <!-- Choice Select One:  Service Type -->
+                                                                                            							<div class="field">
+                                                                                            								<div class="control">
+                                                                                            									<label class="label" for="sex">Service Type</label>
+                                                                                            									<div class="select is-fullwidth">
+                                                                                            										<select name="sex" id="sex" class="regular-text">
+                                                                                            											<option value=""></option>
+                                                                                            											<option value="OPD">OPD</option>
+                                                                                            											<option value="IPD">IPD</option>
+                                                                                            											<option value="TB">TB</option>
+                                                                                            											<option value="ART">ART</option>
+                                                                                            											<option value="ART">Pharmacy</option>
+                                                                                            											<option value="Cancer">Cancer</option>
+                                                                                            											<option value="Counselling">Counselling</option>
+                                                                                            										</select>
+                                                                                            									</div>
+                                                                                            								</div>
+                                                                                            							</div>
+                                                                                            							<!-- Input:  Appointment Details -->
+                                                                                            							<div class="field">
+                                                                                            								<div class="control">
+                                                                                            									<label class="label" for="appointment_details">Notes</label>
+                                                                                            									<textarea name="appointment_details" id="appointment_details" class="textarea"></textarea>
+                                                                                            								</div>
+                                                                                            							</div>
+                                						</div>
+                                					</div>
+
+                                					<hr class="content-divider">
+                                					<!-- Events:  Patient registration form action handlers -->
+                                					<div class="card has-background-white-ter">
+                                						<div class="columns">
+                                							<div class="column is-4 mx-2">
+                                								<div class="field has-addons">
+                                									<p class="control">
+                                										<button class="button is-primary submit-button" type="submit">
+                                											Save Appointment&nbsp;&nbsp; <i class="fas fa-paper-plane"></i>
+                                										</button>
+                                									</p>
+                                									<p class="control">
+                                										<a class="button is-warning" href="{{ url('patients') }}" aria-current="page">
+                                											Cancel&nbsp;&nbsp; <i class="fas fa-circle-xmark"></i>
+                                										</a>
+                                									</p>
+
+                                								</div>
+                                							</div>
+                                						</div>
+                                					</div>
+                                				</form>
+                                			</div>
+                                		</div>
+                                	</div>
+                                </div>
+                            </section>
+                            <button class="button is-success">Save changes</button>
+                            <button onclick="closeModal();" class="button">Cancel</button>
+                            </footer>
+                        </div>
+                    </div>
 
 <script>
 // Function to open the modal
