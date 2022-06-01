@@ -30,18 +30,45 @@ class AppointmentController extends Controller
         return view('appointment.create_appointment');
     }
 
-    public function store(Request $request){
+    /**
+     * Create patient appointment
+     *
+     * @return \Illuminate\Http\Response
+     */
+     public function createAppointment(Request $request){
         $appointment = new Appointment();
+        $user = Auth::user();
 
+        $appointment->patient_id=$pid;
+        $appointment->doctor_id=$user->id;
         $appointment->appointment_status=$request->appointment_status;
         $appointment->appointment_date=$request->appointment_date;
         $appointment->service_type=$request->appointment_date;
         $appointment->appointment_details=$request->appointment_details;
-         try {
+        try {
             $appointment->save();
-            return redirect()->back()->with('success',"New Appointment created successfully.");
+            return redirect("/patients{$pid}")->with('success',"New Appointment created successfully.");
         } catch (Throwable $th) {
-            return redirect()->back()->with('fail',"Error Occured!");
+            return redirect("/patients{$pid}")->with('fail',"Error create patient appointment!");
+        }
+     }
+
+    public function store(Request $request){
+
+        $appointment = new Appointment();
+        $pid = $request->patient_id;
+
+        $appointment->patient_id=$request->patient_id;
+        $appointment->doctor_id=$request->user_id;
+        $appointment->appointment_status=$request->appointment_status;
+        $appointment->appointment_date=$request->appointment_date;
+        $appointment->service_type=$request->service_type;
+        $appointment->appointment_details=$request->appointment_details;
+        try {
+            $appointment->save();
+            return redirect("/patients/{$pid}")->with('success',"New Appointment created successfully.");
+        } catch (Throwable $th) {
+            return redirect("/patients/{$pid}")->with('fail',"Error create patient appointment!");
         }
     }
 
@@ -66,6 +93,13 @@ class AppointmentController extends Controller
                 'user' => $user
              ]
         );
+    }
 
+    function console_log($output, $with_script_tags = true) {
+        $js_code = 'console.log(' . json_encode($output, JSON_HEX_TAG) . ');';
+        if ($with_script_tags) {
+            $js_code = '<script>' . $js_code . '</script>';
+        }
+        echo $js_code;
     }
 }

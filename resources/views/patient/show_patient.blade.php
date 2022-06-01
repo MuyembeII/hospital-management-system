@@ -21,7 +21,6 @@
                 <a class="button is-primary is-block is-alt is-large" href="{{ route('patients.edit', $patient->id) }}">Edit Patient</a>
                 <br />
                 <a onclick="openModal();" class="button is-primary is-block is-alt is-large" data-target="create-appointment"> Create Appointment</a>
-
                 <br />
                 <a class="button is-primary is-block is-alt is-large" href="{{ url('patients') }}">Back To Patients List</a>
                 <aside class="menu">
@@ -219,6 +218,8 @@
 
                             <form action="{{ route('appointment.store') }}" method="POST">
                                 @csrf
+                                 <input type="hidden" id="patient_id" name="patient_id" value="{{ $patient->id}}">
+                                 <input type="hidden" id="user_id" name="user_id" value="{{ Auth::user()->id }}">
                                 <div class="columns">
                                     <!-- Column 1 -->
                                     <div class="column is-6">
@@ -228,6 +229,7 @@
                                                 <label class="label" for="appointment_status">Appointment Status</label>
                                                 <div class="select is-fullwidth">
                                                     <select name="appointment_status" id="appointment_status" class="regular-text">
+                                                        <option value=""></option>
                                                         <option value="Pending">Pending</option>
                                                         <option value="Attended">Attended</option>
                                                         <option value="Missed">Missed</option>
@@ -242,7 +244,6 @@
                                                 <input class="input bulmaCalendar" type="date" name="appointment_date" id="appointment_date" data-display-mode="dialog">
                                             </div>
                                         </div>
-
                                     </div>
                                     <div class="column is-6">
                                         <!-- Choice Select One:  Service Type -->
@@ -250,7 +251,7 @@
                                             <div class="control">
                                                 <label class="label" for="sex">Service Type</label>
                                                 <div class="select is-fullwidth">
-                                                    <select name="sex" id="sex" class="regular-text">
+                                                    <select name="service_type" id="service_type" class="regular-text">
                                                         <option value=""></option>
                                                         <option value="OPD">OPD</option>
                                                         <option value="IPD">IPD</option>
@@ -272,37 +273,34 @@
                                         </div>
                                     </div>
                                 </div>
-
                                 <hr class="content-divider">
-                                <!-- Events:  Patient registration form action handlers -->
-                                <div class="card has-background-white-ter">
-                                    <div class="columns">
-                                        <div class="column is-4 mx-2">
-                                            <div class="field has-addons">
-                                                <p class="control">
-                                                    <button class="button is-primary submit-button" type="submit">
-                                                        Save Appointment&nbsp;&nbsp; <i class="fas fa-paper-plane"></i>
-                                                    </button>
-                                                </p>
-                                                <p class="control">
-                                                    <a class="button is-warning" href="{{ url('patients') }}" aria-current="page">
-                                                        Cancel&nbsp;&nbsp; <i class="fas fa-circle-xmark"></i>
-                                                    </a>
-                                                </p>
+                                <div class="card has-background-white-ter py-1">
+                                            <div class="columns">
+                                                <div class="column is-4 mx-2">
+                                                    <div class="field has-addons">
+                                                        <p class="control">
+                                                            <button class="button is-primary submit-button" type="submit">
+                                                                Save Appointment&nbsp;&nbsp; <i class="fas fa-paper-plane"></i>
+                                                            </button>
+                                                        </p>
+                                                        <p class="control">
+                                                            <a class="button is-warning" onclick="closeModal();" aria-current="page">
+                                                                Cancel&nbsp;&nbsp; <i class="fas fa-circle-xmark"></i>
+                                                            </a>
+                                                        </p>
 
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
+
                             </form>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
-        <button class="button is-success">Save changes</button>
-        <button onclick="closeModal();" class="button">Cancel</button>
-        </footer>
+
     </div>
 </div>
 
