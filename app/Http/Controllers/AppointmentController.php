@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use DB;
 use App\Models\Patient;
 use App\Models\Appointment;
 use Illuminate\Http\Request;
@@ -93,6 +94,15 @@ class AppointmentController extends Controller
                 'user' => $user
              ]
         );
+    }
+
+    public function edit($id)
+    {
+       $appointment = Appointment::find($id);
+       $pid = $appointment->patient_id;
+       $patient = Patient::find($pid);
+       $appointment_list = DB::table('appointments')->where('patient_id', $pid)->get();
+       return view('appointment.edit_appointment', ['patient' => $patient, 'appointment' => $appointment, 'appointments' => $appointment_list]);
     }
 
     function console_log($output, $with_script_tags = true) {
