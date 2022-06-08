@@ -29,7 +29,7 @@ return new class extends Migration
             $table->string('guardian', 32)->nullable();
             $table->string('guardian_contact', 32)->nullable();
             $table->mediumText('guardian_address')->nullable();
-            $table->string('occupation', 16)->nullable();
+            $table->string('occupation', 32)->nullable();
             $table->string('nrc',11)->nullable()->unique();
             $table->string('image')->default('dist/img/avatar.png')->nullable();
             $table->timestamps();
