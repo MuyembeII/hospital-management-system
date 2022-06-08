@@ -5,7 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
-        <title>Hospital Management System | | @yield('title')</title>
+        <title>Hospital Management System | @yield('title')</title>
         <link rel="stylesheet" href="{{asset('fontawesome-free-6.1.1-web/css/all.css')}}">
         <link rel="stylesheet" href="{{asset('css/patient_search.css')}}">
         <link rel="stylesheet" href="{{asset('css/patient_create.css')}}">
@@ -19,10 +19,12 @@
         <link rel="stylesheet" href="{{asset('bulma/css/bulma.css')}}">
         <link rel="stylesheet" href="{{asset('bulma-calendar/dist/css/bulma-calendar.css')}}">
         <link rel="stylesheet" href="{{asset('bulma-collapsible/css/bulma-collapsible.min.css')}}">
+        <link rel="stylesheet" href="{{asset('bulma-modal-fx/css/modal-fx.css')}}">
         {{-- bulma scripts start --}}
         <script src="{{asset('js/bulma.js')}}"></script>
         <script src="{{asset('bulma-calendar/dist/js/bulma-calendar.js')}}"></script>
         <script src="{{asset('bulma-collapsible/js/bulma-collapsible.min.js')}}"></script>
+        <script src="{{asset('bulma-modal-fx/js/modal-fx.js')}}"></script>
         {{-- bulma scripts end --}}
 
         <!-- Scripts -->

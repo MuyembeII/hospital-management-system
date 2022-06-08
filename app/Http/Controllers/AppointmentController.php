@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use DB;
 use App\Models\Patient;
 use App\Models\Appointment;
 use Illuminate\Http\Request;
@@ -15,9 +16,9 @@ class AppointmentController extends Controller
      */
     public function index()
     {
-       $appointments = Appointment::orderBy('id')->get();
+        $appointments = Appointment::orderBy("id")->get();
 
-       return view('appointment.appointment_list', compact('patients'));
+        return view("appointment.appointment_list", compact("patients"));
     }
 
     /**
@@ -27,30 +28,70 @@ class AppointmentController extends Controller
      */
     public function create()
     {
-        return view('appointment.create_appointment');
+        return view("appointment.create_appointment");
     }
 
-    public function store(Request $request){
+    /**
+     * Create patient appointment
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function createAppointment(Request $request)
+    {
         $appointment = new Appointment();
+        $user = Auth::user();
 
-        $appointment->appointment_status=$request->appointment_status;
-        $appointment->appointment_date=$request->appointment_date;
-        $appointment->service_type=$request->appointment_date;
-        $appointment->appointment_details=$request->appointment_details;
-         try {
+        $appointment->patient_id = $pid;
+        $appointment->doctor_id = $user->id;
+        $appointment->appointment_status = $request->appointment_status;
+        $appointment->appointment_date = $request->appointment_date;
+        $appointment->service_type = $request->appointment_date;
+        $appointment->appointment_details = $request->appointment_details;
+        try {
             $appointment->save();
-            return redirect()->back()->with('success',"New Appointment created successfully.");
+            return redirect("/patients{$pid}")->with(
+                "success",
+                "New Appointment created successfully."
+            );
         } catch (Throwable $th) {
-            return redirect()->back()->with('fail',"Error Occured!");
+            return redirect("/patients{$pid}")->with(
+                "fail",
+                "Error create patient appointment!"
+            );
+        }
+    }
+
+    public function store(Request $request)
+    {
+        $appointment = new Appointment();
+        $pid = $request->patient_id;
+
+        $appointment->patient_id = $request->patient_id;
+        $appointment->doctor_id = $request->user_id;
+        $appointment->appointment_status = $request->appointment_status;
+        $appointment->appointment_date = $request->appointment_date;
+        $appointment->service_type = $request->service_type;
+        $appointment->appointment_details = $request->appointment_details;
+        try {
+            $appointment->save();
+            return redirect("/patients/{$pid}")->with(
+                "success",
+                "New Appointment created successfully."
+            );
+        } catch (Throwable $th) {
+            return redirect("/patients/{$pid}")->with(
+                "fail",
+                "Error create patient appointment!"
+            );
         }
     }
 
     /**
-    * Display the specified resource.
-    *
-    * @param  \App\Models\Appointment  $appointment
-    * @return \Illuminate\Http\Response
-    */
+     * Display the specified resource.
+     *
+     * @param  \App\Models\Appointment  $appointment
+     * @return \Illuminate\Http\Response
+     */
     public function show(Appointment $appointment)
     {
         $pid = $appointment->patient_id;
@@ -58,14 +99,53 @@ class AppointmentController extends Controller
         $patient = Patient::find($pid);
         $user = User::find($did);
 
-        return view(
-            'patient.show_appointment',
-             [
-                'appointment' => $appointment,
-                'patient' => $patient,
-                'user' => $user
-             ]
-        );
+        return view("appointment.show_appointment", [
+            "appointment" => $appointment,
+            "patient" => $patient,
+            "user" => $user,
+        ]);
+    }
 
+    public function edit($id)
+    {
+        $appointment = Appointment::find($id);
+        $pid = $appointment->patient_id;
+        $patient = Patient::find($pid);
+        $appointment_list = DB::table("appointments")->where("patient_id", $pid)->get();
+        return view("appointment.edit_appointment", [
+            "patient" => $patient,
+            "appointment" => $appointment,
+            "appointments" => $appointment_list
+        ]);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'appointment_status' => 'required',
+            'appointment_date' => 'required',
+        ]);
+        $appointment = Appointment::find($id);
+        $pid = $appointment->patient_id;
+        $did = $appointment->doctor_id;
+        $patient = Patient::find($pid);
+
+        $appointment->patient_id = $pid;
+        $appointment->doctor_id = $did;
+        $appointment->appointment_status = $request->get('appointment_status');
+        $appointment->appointment_date = $request->get('appointment_date');
+        $appointment->service_type = $request->get('service_type');
+        $appointment->appointment_details = $request->get('appointment_details');
+        $appointment->save();
+        return redirect("/patients/{$pid}")->with('success', 'Appointment updated!');
+    }
+
+    function console_log($output, $with_script_tags = true)
+    {
+        $js_code = "console.log(" . json_encode($output, JSON_HEX_TAG) . ");";
+        if ($with_script_tags) {
+            $js_code = "<script>" . $js_code . "</script>";
+        }
+        echo $js_code;
     }
 }
