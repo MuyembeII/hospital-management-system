@@ -2,6 +2,7 @@
 
 @extends('template')
 
+@section('content_title',__("Patient Details"))
 @section('content')
 <section class="hero is-info is-small">
     <div class="hero-body">
@@ -155,7 +156,7 @@
                                                                 href="{{ route('patients.show', $patient -> id) }}">
                                                                 <i class="fa fa-eye"></i>
                                                             </a>
-                                                            <a onclick="populateAppointmentEditForm({{$appointments}}, {{$appointment -> id}});" class="button is-small is-info has-text-link" >
+                                                            <a href="{{ route('appointment.edit', $appointment -> id) }}" class="button is-small is-info has-text-link">
                                                                 <i class="fa fa-pen-to-square"></i>
                                                             </a>
                                                             <a class="button is-small is-danger"><i class="fa fa-trash"></i></a>
@@ -303,13 +304,14 @@
 
     </div>
 </div>
+
 {{-- update appointment modal  --}}
-<div id="edit-appointment" class="modal">
+<div id="edit-appointment" class="modal modal-fx-3dSlit">
     <div class="modal-background"></div>
     <div class="modal-card">
         <header class="modal-card-head">
             <div class="container has-text-centered">
-                <p class="title">Patient Appointment - {{ $patient->first_name }}&nbsp;{{ $patient->last_name }}</p>
+                <p class="title">{{ __('Patient Appointment - ') }} {{ $patient->first_name }}&nbsp;{{ $patient->last_name }}</p>
                 <p class="subtitle">Update appointment details.</p>
             </div>
             <button onclick="closeEditAppointmentModal();" class="delete" aria-label="close"></button>
@@ -391,7 +393,7 @@
                                         <div class="field">
                                             <div class="control">
                                                 <label class="label" for="appointment_details">Notes</label>
-                                                <textarea name="appointment_details" id="appointment_details" class="textarea"></textarea>
+                                                <textarea class="textarea" id="appointment_details" name="appointment_details" value="" ></textarea>
                                             </div>
                                         </div>
                                     </div>
@@ -428,13 +430,13 @@
 </div>
 
 <script>
-    // Function to open the modal
+    // Function to open the Create-Appointment modal
     function openModal() {
         // Add is-active class on the modal
         document.getElementById("create-appointment").classList.add("is-active");
     }
 
-    // Function to close the modal
+    // Function to close the Create-Appointment modal
     function closeModal() {
         document.getElementById("create-appointment").classList.remove("is-active");
     }
@@ -483,19 +485,35 @@
     var appointmentDateCalendar = document.getElementById('appointment_date');
     var appointmentDetailsTextArea = document.getElementById('appointment_details');
 
-    const populateAppointmentEditForm = (appointments, appointmentId) => {
-        console.log("Appointments payload -> \n", appointments)
-        var appointment = appointments.find((appointment) => appointment.id == appointmentId);
-        console.log("Appointment single payload -> \n", appointment)
-        console.log("Appointment status value 1 -> \n", appointment.appointment_status)
-        $("#appointment_status").val(appointment.appointment_status);
-        //appointmentStatusSelect.value = appointment.appointment_status;
-        serviceTypeSelect.value = appointment.service_type;
-        appointmentDateCalendar.value = appointment.appointment_date;
-        appointmentDetailsTextArea.value = appointment.appointment_details;
-        $("#appointment_details").val(appointment.appointment_details);
-
-        openEditAppointmentModal();
-    }
-
 </script>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+<script>
+    $(document).ready(function(){
+        $(document).on('click', '#appointment-update', function(event){
+            event.preventDefault();
+
+            var appointmentId = $(this).data('id');
+            console.log("Appointment ID", appointmentId)
+            var route = "{{ route('appointment.show', " + appointmentId + ") }}"
+            const uri = `http://127.0.0.1:8000/appointment/${appointmentId}/edit`;
+            const getAppointmentUri = `/appointment/${appointmentId}/edit`;
+            $.ajax({
+                type: 'GET',
+                url: route,
+                dataType: 'json',
+                success: function(data){
+                    console.log(`Appointment details -> ${data}`)
+                },
+                error: function(data){
+                    console.log(`Error fetching appointment: ${data}`)
+                }
+            })
+
+            openEditAppointmentModal();
+        })
+    })
+</script>
+

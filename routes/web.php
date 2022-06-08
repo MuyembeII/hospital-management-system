@@ -34,11 +34,6 @@ Route::middleware([
         return view('main');
     })->name('main');
 
-    Route::post('/create-appointment', [
-        'as' => 'create-appointment',
-        'uses' => 'PatientController@createAppointment'
-    ]);
-
     Route::resource('patients', PatientController::class);
     Route::resource('appointment', AppointmentController::class);
     Route::resource('outpatient', OutpatientController::class);

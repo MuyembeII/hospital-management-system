@@ -56,7 +56,7 @@
                     <tbody>
                         @forelse ($patients as $patient)
                         <tr>
-                            <th>{{ $loop->index + 1 }}</th>
+                            <th>{{ $patient->id }}</th>
                             <td>
                                 <p>{{ $patient->first_name }}&nbsp;{{ $patient->last_name }}</p>
                             </td>

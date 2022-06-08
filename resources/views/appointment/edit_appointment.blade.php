@@ -22,7 +22,7 @@
 					<p class="has-text-danger">Appointment create failed!</p>
 					<article class="message is-danger">
 						<span class="icon has-text-warning">
-							<i class="fab fa-triangle-exclamation"></i>
+							<i class="fas fa-triangle-exclamation"></i>
 						</span>
 						<div class="message-body">
 							<ul>
@@ -35,7 +35,7 @@
 				</div>
 				@endif
 
-				<form action="{{ route('appointment.store') }}" method="POST">
+				<form action="{{ route('appointment.update', $appointment->id) }}" method="POST">
 					@csrf
 					<div class="columns">
 						<!-- Column 1 -->
@@ -46,9 +46,9 @@
 									<label class="label" for="appointment_status">Appointment Status</label>
 									<div class="select is-fullwidth">
 										<select name="appointment_status" id="appointment_status" class="regular-text">
-											<option value="Pending">Pending</option>
-											<option value="Attended">Attended</option>
-											<option value="Missed">Missed</option>
+											<option value="Pending" {{ $appointment->appointment_status == 'Pending' ? 'selected' : '' }} >Pending</option>
+											<option value="Attended" {{ $appointment->appointment_status == 'Attended' ? 'selected' : '' }} >Attended</option>
+											<option value="Missed" {{ $appointment->appointment_status == 'Missed' ? 'selected' : '' }} >Missed</option>
 										</select>
 									</div>
 								</div>
@@ -57,7 +57,7 @@
 							<div class="field">
 								<div class="control">
 									<label class="label" for="appointment_date">Date of Appointment</label>
-									<input class="input bulmaCalendar" type="date" name="appointment_date" id="appointment_date" data-display-mode="dialog">
+									<input class="input bulmaCalendar" type="date" name="appointment_date" id="appointment_date" value={{ $appointment->appointment_date }} data-display-mode="dialog">
 								</div>
 							</div>
 							<!-- Choice Select One:  Service Type -->
@@ -65,15 +65,14 @@
 								<div class="control">
 									<label class="label" for="sex">Service Type</label>
 									<div class="select is-fullwidth">
-										<select name="sex" id="sex" class="regular-text">
-											<option value=""></option>
-											<option value="OPD">OPD</option>
-											<option value="IPD">IPD</option>
-											<option value="TB">TB</option>
-											<option value="ART">ART</option>
-											<option value="ART">Pharmacy</option>
-											<option value="Cancer">Cancer</option>
-											<option value="Counselling">Counselling</option>
+										<select name="service_type" id="service_type" class="regular-text">
+											<option value="OPD" {{ $appointment->service_type == 'OPD' ? 'selected' : '' }} >OPD</option>
+											<option value="IPD" {{ $appointment->service_type == 'IPD' ? 'selected' : '' }} >IPD</option>
+											<option value="TB" {{ $appointment->service_type == 'TB' ? 'selected' : '' }} >TB</option>
+											<option value="ART" {{ $appointment->service_type == 'OPD' ? 'selected' : '' }} >ART</option>
+											<option value="Pharmacy" {{ $appointment->service_type == 'Pharmacy' ? 'selected' : '' }} >Pharmacy</option>
+											<option value="Cancer" {{ $appointment->service_type == 'Cancer' ? 'selected' : '' }} >Cancer</option>
+											<option value="Counselling" {{ $appointment->service_type == 'Counselling' ? 'selected' : '' }} >Counselling</option>
 										</select>
 									</div>
 								</div>
@@ -82,7 +81,7 @@
 							<div class="field">
 								<div class="control">
 									<label class="label" for="appointment_details">Notes</label>
-									<textarea name="appointment_details" id="appointment_details" class="textarea"></textarea>
+									<textarea value={{ $appointment->appointment_details }} class="textarea" name="appointment_details" id="appointment_details" > </textarea>
 								</div>
 							</div>
 						</div>
