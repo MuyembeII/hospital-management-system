@@ -81,7 +81,7 @@
 							<div class="field">
 								<div class="control">
 									<label class="label" for="appointment_details">Notes</label>
-									<textarea value={{ $appointment->appointment_details }} class="textarea" name="appointment_details" id="appointment_details" > </textarea>
+									<textarea class="textarea" name="appointment_details" id="appointment_details" > {{ $appointment->appointment_details }} </textarea>
 								</div>
 							</div>
 						</div>
