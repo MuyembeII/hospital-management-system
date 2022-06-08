@@ -16,9 +16,9 @@ class PatientController extends Controller
      */
     public function index()
     {
-       $patients = Patient::orderBy('id')->get();
+        $patients = Patient::orderBy('id')->get();
 
-       return view('patient.patients_list', compact('patients'));
+        return view('patient.patients_list', compact('patients'));
     }
 
     /**
@@ -49,7 +49,7 @@ class PatientController extends Controller
             'dob' => 'required'
         ]);
 
-         $patient = new Patient([
+        $patient = new Patient([
             'first_name' => $request->get('first_name'),
             'last_name' => $request->get('last_name'),
             'email' => $request->get('email'),
@@ -74,26 +74,27 @@ class PatientController extends Controller
     }
 
     /**
-    * Display the specified resource.
-    *
-    * @param  \App\Models\Patient  patient
-    * @return \Illuminate\Http\Response
-    */
+     * Display the specified resource.
+     *
+     * @param  \App\Models\Patient  patient
+     * @return \Illuminate\Http\Response
+     */
     public function show(Patient $patient)
     {
         $patient_id = $patient->id;
         $appointment = DB::table('appointments')->where('patient_id', $patient_id)->get();
         $outpatient = DB::table('outpatients')->where('patient_id', $patient_id)->get();
 
-        return view('patient.show_patient',
+        return view(
+            'patient.show_patient',
             ['patient' => $patient, 'appointments' => $appointment, 'outpatients' => $outpatient]
         );
     }
 
     public function edit($id)
     {
-       $patient = Patient::find($id);
-       return view('patient.edit_patient', compact('patient'));
+        $patient = Patient::find($id);
+        return view('patient.edit_patient', compact('patient'));
     }
 
     public function update(Request $request, $id)
@@ -108,26 +109,24 @@ class PatientController extends Controller
             'dob' => 'required'
         ]);
         $patient = Patient::find($id);
-        $patient -> first_name = $request->get('first_name');
-        $patient -> last_name = $request->get('last_name');
-        $patient -> email = $request->get('email');
-        $patient -> contactnumber = $request->get('contactnumber');
-        $patient -> address = $request->get('address');
-        $patient -> sex = $request->get('sex');
-        $patient -> dob = $request->get('dob');
-        $patient -> birthdate = $request->get('birth_place');
-        $patient -> nationality = $request->get('nationality');
-        $patient -> religion = $request->get('religion');
-        $patient -> language = $request->get('language');
-        $patient -> guardian = $request->get('guardian');
-        $patient -> guardian_address = $request->get('guardian_address');
-        $patient -> guardian_contact = $request->get('guardian_contact');
-        $patient -> occupation = $request->get('occupation');
-        $patient -> nrc = $request->get('nrc');
-        $patient -> image = $request->get('image');
+        $patient->first_name = $request->get('first_name');
+        $patient->last_name = $request->get('last_name');
+        $patient->email = $request->get('email');
+        $patient->contactnumber = $request->get('contactnumber');
+        $patient->address = $request->get('address');
+        $patient->sex = $request->get('sex');
+        $patient->dob = $request->get('dob');
+        $patient->birthdate = $request->get('birth_place');
+        $patient->nationality = $request->get('nationality');
+        $patient->religion = $request->get('religion');
+        $patient->language = $request->get('language');
+        $patient->guardian = $request->get('guardian');
+        $patient->guardian_address = $request->get('guardian_address');
+        $patient->guardian_contact = $request->get('guardian_contact');
+        $patient->occupation = $request->get('occupation');
+        $patient->nrc = $request->get('nrc');
+        $patient->image = $request->get('image');
         $patient->save();
         return redirect('/patients')->with('success', 'Patient updated successfully.');
-
     }
-
 }

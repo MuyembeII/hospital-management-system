@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use DB;
@@ -118,22 +119,23 @@ class AppointmentController extends Controller
         ]);
     }
 
-    public function update(Request $request, $id){
+    public function update(Request $request, $id)
+    {
         $request->validate([
-            'appointment_status'=>'required',
-            'appointment_date'=>'required',
+            'appointment_status' => 'required',
+            'appointment_date' => 'required',
         ]);
         $appointment = Appointment::find($id);
         $pid = $appointment->patient_id;
         $did = $appointment->doctor_id;
         $patient = Patient::find($pid);
 
-        $appointment->patient_id=$pid;
-        $appointment->doctor_id=$did;
-        $appointment->appointment_status=$request->get('appointment_status');
-        $appointment->appointment_date=$request->get('appointment_date');
-        $appointment->service_type=$request->get('service_type');
-        $appointment->appointment_details=$request->get('appointment_details');
+        $appointment->patient_id = $pid;
+        $appointment->doctor_id = $did;
+        $appointment->appointment_status = $request->get('appointment_status');
+        $appointment->appointment_date = $request->get('appointment_date');
+        $appointment->service_type = $request->get('service_type');
+        $appointment->appointment_details = $request->get('appointment_details');
         $appointment->save();
         return redirect("/patients/{$pid}")->with('success', 'Appointment updated!');
     }

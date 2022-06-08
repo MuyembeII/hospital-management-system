@@ -152,8 +152,7 @@
                                                 <form method="POST">
                                                     <div class="action-buttons">
                                                         <div class="control is-grouped">
-                                                            <a class="button is-small has-text-warning has-text-link"
-                                                                href="{{ route('patients.show', $patient -> id) }}">
+                                                            <a class="button is-small has-text-warning has-text-link" href="{{ route('patients.show', $patient -> id) }}">
                                                                 <i class="fa fa-eye"></i>
                                                             </a>
                                                             <a href="{{ route('appointment.edit', $appointment -> id) }}" class="button is-small is-info has-text-link">
@@ -176,53 +175,52 @@
                             <hr class="content-divider">
                             <!-- Outpatient Services -->
                             <h3 class="title is-4">Outpatient Services</h1>
-                            <div class="box content">
-                                <table class="table">
-                                    <thead>
-                                        <tr class="has-text-bold">
-                                            <th>Blood Pressure</th>
-                                            <th>Weight</th>
-                                            <th>Height</th>
-                                            <th>Temperature</th>
-                                            <th>Diagnosis</th>
-                                            <th class="px-3">Options</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @forelse ($outpatients as $outpatient)
-                                        <tr>
-                                            <td>{{ $outpatient->blood_pressure }}</td>
-                                            <td>{{ $outpatient->weight }}</td>
-                                            <td>{{ $outpatient->height }}</td>
-                                            <td>{{ $outpatient->temperature }}</td>
-                                            <td>{{ $outpatient->diagnosis }}</td>
-                                            <td>
-                                                <form method="POST">
-                                                    <div class="action-buttons">
-                                                        <div class="control is-grouped">
-                                                            <a class="button is-small has-text-warning has-text-link"
-                                                                href="{{ route('patients.show', $patient -> id) }}">
-                                                                <i class="fa fa-eye"></i>
-                                                            </a>
-                                                            <a href="{{ route('appointment.edit', $appointment -> id) }}" class="button is-small is-info has-text-link">
-                                                                <i class="fa fa-pen-to-square"></i>
-                                                            </a>
-                                                            <a class="button is-small is-danger"><i class="fa fa-trash"></i></a>
+                                <div class="box content">
+                                    <table class="table">
+                                        <thead>
+                                            <tr class="has-text-bold">
+                                                <th>Blood Pressure</th>
+                                                <th>Weight</th>
+                                                <th>Height</th>
+                                                <th>Temperature</th>
+                                                <th>Diagnosis</th>
+                                                <th class="px-3">Options</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @forelse ($outpatients as $outpatient)
+                                            <tr>
+                                                <td>{{ $outpatient->blood_pressure }}</td>
+                                                <td>{{ $outpatient->weight }}</td>
+                                                <td>{{ $outpatient->height }}</td>
+                                                <td>{{ $outpatient->temperature }}</td>
+                                                <td>{{ $outpatient->diagnosis }}</td>
+                                                <td>
+                                                    <form method="POST">
+                                                        <div class="action-buttons">
+                                                            <div class="control is-grouped">
+                                                                <a class="button is-small has-text-warning has-text-link" href="{{ route('patients.show', $patient -> id) }}">
+                                                                    <i class="fa fa-eye"></i>
+                                                                </a>
+                                                                <a href="{{ route('appointment.edit', $appointment -> id) }}" class="button is-small is-info has-text-link">
+                                                                    <i class="fa fa-pen-to-square"></i>
+                                                                </a>
+                                                                <a class="button is-small is-danger"><i class="fa fa-trash"></i></a>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                </form>
-                                            </td>
-                                        </tr>
-                                        @empty
-                                        <tr>
-                                            <td colspan="4" class="text-center">No outpatient services found.</td>
-                                        </tr>
-                                        @endforelse
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
+                                                    </form>
+                                                </td>
+                                            </tr>
+                                            @empty
+                                            <tr>
+                                                <td colspan="4" class="text-center">No outpatient services found.</td>
+                                            </tr>
+                                            @endforelse
+                                        </tbody>
+                                    </table>
+                                </div>
                     </div>
+                </div>
                 <div>
                 </div>
             </div>
@@ -267,8 +265,8 @@
 
                             <form action="{{ route('appointment.store') }}" method="POST">
                                 @csrf
-                                 <input type="hidden" id="patient_id" name="patient_id" value="{{ $patient->id}}">
-                                 <input type="hidden" id="user_id" name="user_id" value="{{ Auth::user()->id }}">
+                                <input type="hidden" id="patient_id" name="patient_id" value="{{ $patient->id}}">
+                                <input type="hidden" id="user_id" name="user_id" value="{{ Auth::user()->id }}">
                                 <div class="columns">
                                     <!-- Column 1 -->
                                     <div class="column is-6">
@@ -324,24 +322,24 @@
                                 </div>
                                 <hr class="content-divider">
                                 <div class="card has-background-white-ter py-1">
-                                            <div class="columns">
-                                                <div class="column is-4 mx-2">
-                                                    <div class="field has-addons">
-                                                        <p class="control">
-                                                            <button class="button is-primary submit-button" type="submit">
-                                                                Save Appointment&nbsp;&nbsp; <i class="fas fa-paper-plane"></i>
-                                                            </button>
-                                                        </p>
-                                                        <p class="control">
-                                                            <a class="button is-warning" onclick="closeModal();" aria-current="page">
-                                                                Cancel&nbsp;&nbsp; <i class="fas fa-circle-xmark"></i>
-                                                            </a>
-                                                        </p>
+                                    <div class="columns">
+                                        <div class="column is-4 mx-2">
+                                            <div class="field has-addons">
+                                                <p class="control">
+                                                    <button class="button is-primary submit-button" type="submit">
+                                                        Save Appointment&nbsp;&nbsp; <i class="fas fa-paper-plane"></i>
+                                                    </button>
+                                                </p>
+                                                <p class="control">
+                                                    <a class="button is-warning" onclick="closeModal();" aria-current="page">
+                                                        Cancel&nbsp;&nbsp; <i class="fas fa-circle-xmark"></i>
+                                                    </a>
+                                                </p>
 
-                                                    </div>
-                                                </div>
                                             </div>
                                         </div>
+                                    </div>
+                                </div>
 
                             </form>
                         </div>
@@ -391,8 +389,8 @@
 
                             <form action="{{ route('appointment.store') }}" method="POST">
                                 @csrf
-                                 <input type="hidden" id="patient_id" name="patient_id" value="{{ $patient->id}}">
-                                 <input type="hidden" id="user_id" name="user_id" value="{{ Auth::user()->id }}">
+                                <input type="hidden" id="patient_id" name="patient_id" value="{{ $patient->id}}">
+                                <input type="hidden" id="user_id" name="user_id" value="{{ Auth::user()->id }}">
                                 <div class="columns">
                                     <!-- Column 1 -->
                                     <div class="column is-6">
@@ -441,31 +439,31 @@
                                         <div class="field">
                                             <div class="control">
                                                 <label class="label" for="appointment_details">Notes</label>
-                                                <textarea class="textarea" id="appointment_details" name="appointment_details" value="" ></textarea>
+                                                <textarea class="textarea" id="appointment_details" name="appointment_details" value=""></textarea>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <hr class="content-divider">
                                 <div class="card has-background-white-ter py-1">
-                                            <div class="columns">
-                                                <div class="column is-4 mx-2">
-                                                    <div class="field has-addons">
-                                                        <p class="control">
-                                                            <button class="button is-primary submit-button" type="submit">
-                                                                Update Appointment&nbsp;&nbsp; <i class="fas fa-paper-plane"></i>
-                                                            </button>
-                                                        </p>
-                                                        <p class="control">
-                                                            <a class="button is-warning" onclick="closeModal();" aria-current="page">
-                                                                Cancel&nbsp;&nbsp; <i class="fas fa-circle-xmark"></i>
-                                                            </a>
-                                                        </p>
+                                    <div class="columns">
+                                        <div class="column is-4 mx-2">
+                                            <div class="field has-addons">
+                                                <p class="control">
+                                                    <button class="button is-primary submit-button" type="submit">
+                                                        Update Appointment&nbsp;&nbsp; <i class="fas fa-paper-plane"></i>
+                                                    </button>
+                                                </p>
+                                                <p class="control">
+                                                    <a class="button is-warning" onclick="closeModal();" aria-current="page">
+                                                        Cancel&nbsp;&nbsp; <i class="fas fa-circle-xmark"></i>
+                                                    </a>
+                                                </p>
 
-                                                    </div>
-                                                </div>
                                             </div>
                                         </div>
+                                    </div>
+                                </div>
 
                             </form>
                         </div>
@@ -489,7 +487,7 @@
         document.getElementById("create-appointment").classList.remove("is-active");
     }
 
-    function openEditAppointmentModal(){
+    function openEditAppointmentModal() {
         document.getElementById("edit-appointment").classList.add("is-active");
     }
 
@@ -501,15 +499,15 @@
     // whenever user click outside modal
     (document.querySelectorAll(
         '.modal-background, .modal-close, .modal-card-head .delete, .modal-card-foot .button'
-        ) || []).forEach(($trigger) => {
+    ) || []).forEach(($trigger) => {
         const modal = $trigger.dataset.target;
         const $target = document.getElementById(modal);
 
         $trigger.addEventListener('click', () => {
-            if(modal === 'create-appointment'){
+            if (modal === 'create-appointment') {
                 openModal($target);
             }
-            if(modal === 'edit-appointment'){
+            if (modal === 'edit-appointment') {
                 openEditAppointmentModal($target);
             }
 
@@ -532,15 +530,14 @@
     var serviceTypeSelect = document.getElementById('service_type');
     var appointmentDateCalendar = document.getElementById('appointment_date');
     var appointmentDetailsTextArea = document.getElementById('appointment_details');
-
 </script>
 
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <script>
-    $(document).ready(function(){
-        $(document).on('click', '#appointment-update', function(event){
+    $(document).ready(function() {
+        $(document).on('click', '#appointment-update', function(event) {
             event.preventDefault();
 
             var appointmentId = $(this).data('id');
@@ -552,10 +549,10 @@
                 type: 'GET',
                 url: route,
                 dataType: 'json',
-                success: function(data){
+                success: function(data) {
                     console.log(`Appointment details -> ${data}`)
                 },
-                error: function(data){
+                error: function(data) {
                     console.log(`Error fetching appointment: ${data}`)
                 }
             })
@@ -564,4 +561,3 @@
         })
     })
 </script>
-
