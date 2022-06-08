@@ -80,7 +80,10 @@
                         </tr>
                         @empty
                         <tr>
-                            <td colspan="4" class="text-center">No patients found.</td>
+                            <td colspan="4" class="text-center">
+                                <div>
+                                </div>
+                            </td>
                         </tr>
                         @endforelse
                     </tbody>

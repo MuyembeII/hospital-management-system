@@ -6,7 +6,7 @@
 <section class="hero is-info is-small">
 	<div class="hero-body">
 		<div class="container has-text-centered">
-			<p class="title">Edit Appointment</p>
+			<p class="title">{{ __('Edit Appointment') }} - {{ $patient->first_name }}&nbsp;{{ $patient->last_name }}</p>
 			<p class="subtitle">Create a new appointment for clinical services</p>
 		</div>
 	</div>
@@ -99,7 +99,7 @@
 										</button>
 									</p>
 									<p class="control">
-										<a class="button is-warning" href="{{ url('patients') }}" aria-current="page">
+										<a class="button is-warning" href="{{ route('patients.show', $patient -> id) }}" aria-current="page">
 											Cancel&nbsp;&nbsp; <i class="fas fa-circle-xmark"></i>
 										</a>
 									</p>

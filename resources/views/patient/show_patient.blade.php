@@ -7,7 +7,7 @@
 <section class="hero is-info is-small">
     <div class="hero-body">
         <div class="container has-text-centered">
-            <p class="title">Patient Details</p>
+            <p class="title">Patient Details - {{ $patient->first_name }}&nbsp;{{ $patient->last_name }}</p>
             <p class="subtitle">Patient management services for appointments, OPD, IPD and pharmacy.</p>
         </div>
     </div>
@@ -131,7 +131,7 @@
 
                         <hr class="content-divider">
                         <!-- Patient Appointments -->
-                        <h3 class="title is-6">Patient Appointments</h1>
+                        <h3 class="title is-4">Patient Appointments</h1>
                             <div class="box content">
                                 <table class="table">
                                     <thead>
