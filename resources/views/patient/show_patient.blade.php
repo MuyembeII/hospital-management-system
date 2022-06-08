@@ -173,8 +173,56 @@
                                     </tbody>
                                 </table>
                             </div>
+                            <hr class="content-divider">
+                            <!-- Outpatient Services -->
+                            <h3 class="title is-4">Outpatient Services</h1>
+                            <div class="box content">
+                                <table class="table">
+                                    <thead>
+                                        <tr class="has-text-bold">
+                                            <th>Blood Pressure</th>
+                                            <th>Weight</th>
+                                            <th>Height</th>
+                                            <th>Temperature</th>
+                                            <th>Diagnosis</th>
+                                            <th class="px-3">Options</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @forelse ($outpatients as $outpatient)
+                                        <tr>
+                                            <td>{{ $outpatient->blood_pressure }}</td>
+                                            <td>{{ $outpatient->weight }}</td>
+                                            <td>{{ $outpatient->height }}</td>
+                                            <td>{{ $outpatient->temperature }}</td>
+                                            <td>{{ $outpatient->diagnosis }}</td>
+                                            <td>
+                                                <form method="POST">
+                                                    <div class="action-buttons">
+                                                        <div class="control is-grouped">
+                                                            <a class="button is-small has-text-warning has-text-link"
+                                                                href="{{ route('patients.show', $patient -> id) }}">
+                                                                <i class="fa fa-eye"></i>
+                                                            </a>
+                                                            <a href="{{ route('appointment.edit', $appointment -> id) }}" class="button is-small is-info has-text-link">
+                                                                <i class="fa fa-pen-to-square"></i>
+                                                            </a>
+                                                            <a class="button is-small is-danger"><i class="fa fa-trash"></i></a>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                        @empty
+                                        <tr>
+                                            <td colspan="4" class="text-center">No outpatient services found.</td>
+                                        </tr>
+                                        @endforelse
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
                     </div>
-                </div>
                 <div>
                 </div>
             </div>

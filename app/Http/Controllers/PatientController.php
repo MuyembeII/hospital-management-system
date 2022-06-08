@@ -83,8 +83,11 @@ class PatientController extends Controller
     {
         $patient_id = $patient->id;
         $appointment = DB::table('appointments')->where('patient_id', $patient_id)->get();
+        $outpatient = DB::table('outpatients')->where('patient_id', $patient_id)->get();
 
-        return view('patient.show_patient', ['patient' => $patient, 'appointments' => $appointment]);
+        return view('patient.show_patient',
+            ['patient' => $patient, 'appointments' => $appointment, 'outpatients' => $outpatient]
+        );
     }
 
     public function edit($id)

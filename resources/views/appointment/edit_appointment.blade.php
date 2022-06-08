@@ -36,6 +36,7 @@
 				@endif
 
 				<form action="{{ route('appointment.update', $appointment->id) }}" method="POST">
+					@method('PATCH')
 					@csrf
 					<div class="columns">
 						<!-- Column 1 -->

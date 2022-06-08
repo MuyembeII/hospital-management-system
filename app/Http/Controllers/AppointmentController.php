@@ -120,20 +120,22 @@ class AppointmentController extends Controller
 
     public function update(Request $request, $id){
         $request->validate([
-            'appointment_id'=>'required',
-            'patient_id'=>'required',
             'appointment_status'=>'required',
             'appointment_date'=>'required',
         ]);
         $appointment = Appointment::find($id);
-        $appointment->patient_id=$request->get('patient_id');
-        $appointment->doctor_id=$request->get('doctor_id');
+        $pid = $appointment->patient_id;
+        $did = $appointment->doctor_id;
+        $patient = Patient::find($pid);
+
+        $appointment->patient_id=$pid;
+        $appointment->doctor_id=$did;
         $appointment->appointment_status=$request->get('appointment_status');
         $appointment->appointment_date=$request->get('appointment_date');
         $appointment->service_type=$request->get('service_type');
         $appointment->appointment_details=$request->get('appointment_details');
         $appointment->save();
-        return redirect('/appointment/{$id}')->with('success', 'Appointment updated!');
+        return redirect("/patients/{$pid}")->with('success', 'Appointment updated!');
     }
 
     function console_log($output, $with_script_tags = true)
