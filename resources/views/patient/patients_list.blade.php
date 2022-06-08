@@ -44,19 +44,17 @@
                 <table class="table">
                     <thead>
                         <tr class="has-text-centered">
-                            <th><abbr title="Client Number">Client No</abbr></th>
                             <th>Name</th>
                             <th>Address</th>
                             <th>Phone</th>
                             <th>Gender</th>
                             <th>D.O.B</th>
-                            <th>action</th>
+                            <th>options</th>
                         </tr>
                     </thead>
                     <tbody>
                         @forelse ($patients as $patient)
                         <tr>
-                            <th>{{ $patient->id }}</th>
                             <td>
                                 <p>{{ $patient->first_name }}&nbsp;{{ $patient->last_name }}</p>
                             </td>
