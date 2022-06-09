@@ -17,8 +17,38 @@ class AppointmentController extends Controller
     public function index()
     {
         $appointments = Appointment::orderBy("id")->get();
+        $patients = Patient::orderBy('id')->get();
+        $appointments = DB::table('appointments')
+                            ->join('patients', 'appointments.patient_id', '=', 'patients.id')
+                            ->join('users', 'appointments.doctor_id', '=', 'users.id')
+                            ->select(
+                                'appointments.*',
+                                'patients.first_name',
+                                'patients.last_name',
+                                'patients.sex',
+                                'patients.dob',
+                                'users.name'
+                            )
+                            ->groupBy('patient_id')
+                            ->orderBy('appointment_date', 'DESC')
+                            ->get();
 
-        return view("appointment.appointment_list", compact("patients"));
+        return response()->json([
+            'name' => $patient->name,
+            'sex' => $patient->sex,
+            'age' => $patient->address,
+            'appointment_status' => $patient->occupation,
+            'appointment_date' => $patient->telephone,
+            'appointment_details' => $patient->nic,
+            'service_type' => $patient->getAge(),
+            'Provider' => $patient->id,
+            'appNum' => $num,
+        ]);
+
+        return view(
+            'appointment.appointment_list',
+            ['patients' => $patients, 'appointments' => $appointments]
+        );
     }
 
     /**

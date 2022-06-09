@@ -304,7 +304,7 @@
                                                         <option value="IPD">IPD</option>
                                                         <option value="TB">TB</option>
                                                         <option value="ART">ART</option>
-                                                        <option value="ART">Pharmacy</option>
+                                                        <option value="Pharmacy">Pharmacy</option>
                                                         <option value="Cancer">Cancer</option>
                                                         <option value="Counselling">Counselling</option>
                                                     </select>
@@ -327,7 +327,7 @@
                                             <div class="field has-addons">
                                                 <p class="control">
                                                     <button class="button is-primary submit-button" type="submit">
-                                                        Save Appointment&nbsp;&nbsp; <i class="fas fa-paper-plane"></i>
+                                                        Update Appointment&nbsp;&nbsp; <i class="fas fa-paper-plane"></i>
                                                     </button>
                                                 </p>
                                                 <p class="control">

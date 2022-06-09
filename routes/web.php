@@ -35,7 +35,7 @@ Route::middleware([
     })->name('main');
 
     Route::resource('patients', PatientController::class);
-    Route::resource('appointment', AppointmentController::class);
+    Route::resource('appointments', AppointmentController::class);
     Route::resource('outpatient', OutpatientController::class);
     Route::resource('inpatient', InpatientController::class);
     Route::resource('pharmacy', PharmacyController::class);

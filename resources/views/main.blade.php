@@ -52,7 +52,7 @@
                     <a class="navbar-item" href="{{ url('patients') }}">
                         Patients
                     </a>
-                    <a class="navbar-item" href="admin.html">
+                    <a class="navbar-item" href="{{ url('appointments') }}">
                         Appointments
                     </a>
                     <a class="navbar-item" href="admin.html">
