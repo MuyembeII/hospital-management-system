@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('height');
             $table->string('temperature');
             $table->string('diagnosis');
-            $table->integer('reason_for_visit');
+            $table->string('reason_for_visit');
             $table->timestamps();
 
             $table->foreign('patient_id')->references('id')->on('patients')->onDelete('cascade');

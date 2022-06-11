@@ -126,9 +126,10 @@ article.post:last-child {
   color: #AAAAAA;
   text-decoration: none;
 }
+/*
 .is-grouped .button {
   background-image: linear-gradient(#F8F8F8, #F1F1F1);
-}
+}*/
 .is-grouped .button .fa {
   font-size: 15px;
   color: #AAAAAA;

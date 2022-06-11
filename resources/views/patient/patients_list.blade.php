@@ -66,11 +66,15 @@
                                 <form action="{{ url($patient -> id) }}" method="POST">
                                     <div class="action-buttons">
                                         <div class="control is-grouped">
-                                            <a class="button is-small has-text-warning has-text-link" href="{{ route('patients.show', $patient -> id) }}">
-                                                <i class="fa fa-eye"></i>
+                                            <a class="button is-small is-outlined" href="{{ route('patients.show', $patient -> id) }}">
+                                                <i class="fa fa-eye has-text-warning"></i>
                                             </a>
-                                            <a class="button is-small is-info"><i class="fa fa-pen-to-square"></i></a>
-                                            <a class="button is-small is-danger"><i class="fa fa-trash"></i></a>
+                                            <a class="button is-small has-text-link">
+                                                <i class="fa fa-pen-to-square has-text-link"></i>
+                                            </a>
+                                            <a class="button is-small is-outlined">
+                                                <i class="fa fa-trash has-text-danger"></i>
+                                            </a>
                                         </div>
                                     </div>
                                 </form>

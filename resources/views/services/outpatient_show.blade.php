@@ -1,4 +1,4 @@
-{{-- patient appointment view: the component to capture patient details  --}}
+{{-- outpatient service view: the component to view patient details  --}}
 
 @extends('template')
 
@@ -6,8 +6,8 @@
 <section class="hero is-info is-small">
 	<div class="hero-body">
 		<div class="container has-text-centered">
-			<p class="title">Patient Appointment - {{ $patient->first_name }}&nbsp;{{ $patient->last_name }}</p>
-			<p class="subtitle">Appointment details</p>
+			<p class="title">Out Patient Department - {{ $patient->first_name }}&nbsp;{{ $patient->last_name }}</p>
+			<p class="subtitle">OPD Visit Details</p>
 		</div>
 	</div>
 </section>
@@ -27,7 +27,7 @@
                 </div>
 		    </div>
 			<div class="column is-10 is-offset-1">
-                <!-- Patient Appointment Details -->
+                <!-- OPD Details -->
                 <div class="card">
                     <div class="card-content">
                         <div class="section">
@@ -37,16 +37,28 @@
                                     <th colspan="2"></th>
                                 </tr>
                                 <tr>
-                                    <td>Appointment Status:&nbsp;&nbsp;</td>
-                                    <td>{{ $appointment->appointment_status }}</td>
+                                    <td>Blood Pressure:&nbsp;&nbsp;</td>
+                                    <td>{{ $outpatient->blood_pressure }}</td>
                                 </tr>
                                 <tr>
-                                    <td>Appointment Date:&nbsp;&nbsp;</td>
-                                    <td>{{ $appointment->appointment_date }}</td>
+                                    <td>Weight:&nbsp;&nbsp;</td>
+                                    <td>{{ $outpatient->weight }}</td>
                                 </tr>
                                 <tr>
-                                    <td>Service Type:&nbsp;&nbsp;</td>
-                                    <td>{{ $appointment->service_type }}</td>
+                                    <td>Height:&nbsp;&nbsp;</td>
+                                    <td>{{ $outpatient->height }}</td>
+                                </tr>
+																<tr>
+                                    <td>Temperature:&nbsp;&nbsp;</td>
+                                    <td>{{ $outpatient->temperature }}</td>
+                                </tr>
+																<tr>
+                                    <td>Diagnosis:&nbsp;&nbsp;</td>
+                                    <td>{{ $outpatient->diagnosis }}</td>
+                                </tr>
+																<tr>
+                                    <td>Reason for Visit:&nbsp;&nbsp;</td>
+                                    <td>{{ $outpatient->reason_for_visit }}</td>
                                 </tr>
                             </table>
                         </div>

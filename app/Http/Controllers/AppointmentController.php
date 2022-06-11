@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use DB;
 use App\Models\Patient;
+use App\Models\User;
 use App\Models\Appointment;
 use Illuminate\Http\Request;
 
@@ -16,8 +17,7 @@ class AppointmentController extends Controller
      */
     public function index()
     {
-        $appointments = Appointment::orderBy("id")->get();
-        $patients = Patient::orderBy('id')->get();
+        $appointment_list = Appointment::orderBy('appointment_date', 'DESC')->get();
         $appointments = DB::table('appointments')
                             ->join('patients', 'appointments.patient_id', '=', 'patients.id')
                             ->join('users', 'appointments.doctor_id', '=', 'users.id')
@@ -27,27 +27,15 @@ class AppointmentController extends Controller
                                 'patients.last_name',
                                 'patients.sex',
                                 'patients.dob',
+                                DB::raw('TIMESTAMPDIFF(YEAR, patients.dob, CURDATE()) as age'),
                                 'users.name'
                             )
-                            ->groupBy('patient_id')
-                            ->orderBy('appointment_date', 'DESC')
+                            ->orderBy('appointments.appointment_date', 'DESC')
                             ->get();
-
-        return response()->json([
-            'name' => $patient->name,
-            'sex' => $patient->sex,
-            'age' => $patient->address,
-            'appointment_status' => $patient->occupation,
-            'appointment_date' => $patient->telephone,
-            'appointment_details' => $patient->nic,
-            'service_type' => $patient->getAge(),
-            'Provider' => $patient->id,
-            'appNum' => $num,
-        ]);
 
         return view(
             'appointment.appointment_list',
-            ['patients' => $patients, 'appointments' => $appointments]
+            ['appointment_list' => $appointment_list, 'appointments' => $appointments]
         );
     }
 
@@ -168,6 +156,19 @@ class AppointmentController extends Controller
         $appointment->appointment_details = $request->get('appointment_details');
         $appointment->save();
         return redirect("/patients/{$pid}")->with('success', 'Appointment updated!');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        $appointment = Appointment::find($id);
+        $appointment->delete();
+        return redirect('/appointments')->with('success', 'Appointment deleted!');
     }
 
     function console_log($output, $with_script_tags = true)

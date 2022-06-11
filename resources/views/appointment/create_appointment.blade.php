@@ -35,7 +35,7 @@
 				</div>
 				@endif
 
-				<form action="{{ route('appointment.store') }}" method="POST">
+				<form action="{{ route('appointments.store') }}" method="POST">
 					@csrf
 					<div class="columns">
 						<!-- Column 1 -->

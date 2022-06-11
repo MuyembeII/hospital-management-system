@@ -35,7 +35,7 @@
 				</div>
 				@endif
 
-				<form action="{{ route('appointment.update', $appointment->id) }}" method="POST">
+				<form action="{{ route('appointments.update', $appointment->id) }}" method="POST">
 					@method('PATCH')
 					@csrf
 					<div class="columns">
@@ -100,7 +100,7 @@
 										</button>
 									</p>
 									<p class="control">
-										<a class="button is-warning" href="{{ route('patients.show', $patient -> id) }}" aria-current="page">
+										<a class="button is-warning" href="{{ route('appointments.show', $appointment->id) }}" aria-current="page">
 											Cancel&nbsp;&nbsp; <i class="fas fa-circle-xmark"></i>
 										</a>
 									</p>

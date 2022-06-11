@@ -152,13 +152,15 @@
                                                 <form method="POST">
                                                     <div class="action-buttons">
                                                         <div class="control is-grouped">
-                                                            <a class="button is-small has-text-warning has-text-link" href="{{ route('patients.show', $patient -> id) }}">
-                                                                <i class="fa fa-eye"></i>
+                                                            <a class="button is-small is-outlined" href="{{ route('patients.show', $patient -> id) }}">
+                                                                <i class="fa fa-eye has-text-warning"></i>
                                                             </a>
-                                                            <a href="{{ route('appointment.edit', $appointment -> id) }}" class="button is-small is-info has-text-link">
-                                                                <i class="fa fa-pen-to-square"></i>
+                                                            <a href="{{ route('appointments.edit', $appointment -> id) }}" class="button is-small is-outlined">
+                                                                <i class="fa fa-pen-to-square has-text-link"></i>
                                                             </a>
-                                                            <a class="button is-small is-danger"><i class="fa fa-trash"></i></a>
+                                                            <a class="button is-small is-outlined">
+                                                                <i class="fa fa-trash has-text-danger"></i>
+                                                            </a>
                                                         </div>
                                                     </div>
                                                 </form>
@@ -199,13 +201,15 @@
                                                     <form method="POST">
                                                         <div class="action-buttons">
                                                             <div class="control is-grouped">
-                                                                <a class="button is-small has-text-warning has-text-link" href="{{ route('patients.show', $patient -> id) }}">
-                                                                    <i class="fa fa-eye"></i>
+                                                                <a class="button is-small is-outlined" href="{{ route('outpatient.show', $outpatient -> id) }}">
+                                                                    <i class="fa fa-eye has-text-warning"></i>
                                                                 </a>
-                                                                <a href="{{ route('appointment.edit', $appointment -> id) }}" class="button is-small is-info has-text-link">
-                                                                    <i class="fa fa-pen-to-square"></i>
+                                                                <a class="button is-small is-outlined" href="{{ route('appointments.edit', $appointment -> id) }}" >
+                                                                    <i class="fa fa-pen-to-square has-text-link"></i>
                                                                 </a>
-                                                                <a class="button is-small is-danger"><i class="fa fa-trash"></i></a>
+                                                                <a class="button is-small is-outlined">
+                                                                    <i class="fa fa-trash has-text-danger"></i>
+                                                                </a>
                                                             </div>
                                                         </div>
                                                     </form>
@@ -263,7 +267,7 @@
                             </div>
                             @endif
 
-                            <form action="{{ route('appointment.store') }}" method="POST">
+                            <form action="{{ route('appointments.store') }}" method="POST">
                                 @csrf
                                 <input type="hidden" id="patient_id" name="patient_id" value="{{ $patient->id}}">
                                 <input type="hidden" id="user_id" name="user_id" value="{{ Auth::user()->id }}">
@@ -418,7 +422,7 @@
 
             var appointmentId = $(this).data('id');
             console.log("Appointment ID", appointmentId)
-            var route = "{{ route('appointment.show', " + appointmentId + ") }}"
+            var route = "{{ route('appointments.show', " + appointmentId + ") }}"
             const uri = `http://127.0.0.1:8000/appointment/${appointmentId}/edit`;
             const getAppointmentUri = `/appointment/${appointmentId}/edit`;
             $.ajax({
