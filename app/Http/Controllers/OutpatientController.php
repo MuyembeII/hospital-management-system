@@ -19,9 +19,25 @@ class OutpatientController extends Controller
     */
    public function index()
    {
-       $outpatient = Outpatient::orderBy("id")->get();
+     $outpatients = DB::table('outpatients')
+                         ->join('medicines', 'outpatients.prescription_id', '=', 'medicines.id')
+                         ->join('patients', 'outpatients.patient_id', '=', 'patients.id')
+                         ->join('users', 'outpatients.doctor_id', '=', 'users.id')
+                         ->select(
+                             'outpatients.*',
+                             'patients.first_name',
+                             'patients.last_name',
+                             'patients.sex',
+                             'patients.dob',
+                             DB::raw('TIMESTAMPDIFF(YEAR, patients.dob, CURDATE()) as age'),
+                             'users.name',
+                             'medicines.name',
+                             'medicines.quantity',
+                         )
+                         ->orderBy('outpatients.created_at', 'DESC')
+                         ->get();
 
-       return view("appointment.appointment_list", compact("patients"));
+       return view("services.outpatient_list", compact("outpatients"));
    }
 
    /**
@@ -55,5 +71,33 @@ class OutpatientController extends Controller
    public function create()
    {
       return view('services.outpatient_start');
+   }
+
+   public function store(Request $request)
+   {
+       $outpatient = new Outpatient();
+       $pid = $request->patient_id;
+
+       $outpatient->patient_id = $request->patient_id;
+       $outpatient->doctor_id = $request->user_id;
+       $outpatient->prescription_id = $request->prescription_id;
+       $outpatient->temperature = $request->temperature;
+       $outpatient->weight = $request->weight;
+       $outpatient->height = $request->height;
+       $outpatient->diagnosis = $request->diagnosis;
+       $outpatient->blood_pressure = $request->blood_pressure;
+       $outpatient->reason_for_visit = $request->reason_for_visit;
+       try {
+           $outpatient->save();
+           return redirect("/patients/{$pid}")->with(
+               "success",
+               "New Appointment created successfully."
+           );
+       } catch (Throwable $th) {
+           return redirect("/patients/{$pid}")->with(
+               "fail",
+               "Error create patient appointment!"
+           );
+       }
    }
 }

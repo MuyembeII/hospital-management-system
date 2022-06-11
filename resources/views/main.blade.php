@@ -103,11 +103,11 @@
                         <li><a>Other</a></li>
                     </ul>
                     <p class="menu-label">
-                        Administration
+                        Services
                     </p>
                     <ul class="menu-list">
-                        <li><a>User Management</a></li>
-                        <li><a>Clinic Management</a></li>
+                        <li><a href="{{ url('outpatient') }}">Outpatient</a></li>
+                        <li><a>Inpatient</a></li>
                     </ul>
                     <p class="menu-label">
                         Past Medical History
