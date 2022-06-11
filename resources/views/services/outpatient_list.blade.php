@@ -42,17 +42,21 @@
                     <table class="table">
                         <thead>
                             <tr class="has-text-bold">
-                                <th>Blood Pressure</th>
+															  <th>Patient</th>
+                                <th>Sex</th>
+                                <th><abbr title="Blood Pressure">BP</abbr></th>
                                 <th>Weight</th>
                                 <th>Height</th>
                                 <th>Temperature</th>
                                 <th>Diagnosis</th>
-                                <th class="px-3">Options</th>
+                                <th class="px-3"><i class="fa fa-ellipsis ml-6 has-text-primary"></i></th>
                             </tr>
                         </thead>
                         <tbody>
                             @forelse ($outpatients as $outpatient)
                             <tr>
+																<td>{{ $outpatient->first_name }}&nbsp;{{ $outpatient->last_name }}</td>
+																<td>{{ $outpatient->sex }}</td>
                                 <td>{{ $outpatient->blood_pressure }}</td>
                                 <td>{{ $outpatient->weight }}</td>
                                 <td>{{ $outpatient->height }}</td>

@@ -37,6 +37,7 @@ class OutpatientController extends Controller
                          ->orderBy('outpatients.created_at', 'DESC')
                          ->get();
 
+      
        return view("services.outpatient_list", compact("outpatients"));
    }
 
