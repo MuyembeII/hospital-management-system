@@ -37,7 +37,7 @@ class OutpatientController extends Controller
                          ->orderBy('outpatients.created_at', 'DESC')
                          ->get();
 
-      
+
        return view("services.outpatient_list", compact("outpatients"));
    }
 
@@ -52,15 +52,27 @@ class OutpatientController extends Controller
       $pid = $outpatient->patient_id;
       $did = $outpatient->doctor_id;
       $mid = $outpatient->prescription_id;
+
       $patient = Patient::find($pid);
       $medicine = Medicine::find($pid);
       $user = User::find($did);
+
+      $age = DB::table('patients')
+                  ->selectRaw(
+                      'CONCAT(
+                        FLOOR((TIMESTAMPDIFF(MONTH, patients.dob, CURDATE()) / 12)), \' year(s) \',
+                        MOD(TIMESTAMPDIFF(MONTH, patients.dob, CURDATE()), 12) , \' month(s)\'
+                      ) AS age'
+                    )
+                  ->where('id', $pid)
+                  ->value('age');
 
       return view("services.outpatient_show", [
           "outpatient" => $outpatient,
           "patient" => $patient,
           "medicine" => $medicine,
           "user" => $user,
+          "verbose_age" => $age,
       ]);
   }
 
@@ -71,7 +83,11 @@ class OutpatientController extends Controller
     */
    public function create()
    {
-      return view('services.outpatient_start');
+      $medicines = DB::table('medicines')->pluck('name', 'id');
+      return view(
+        'services.outpatient_start',
+        ["medicines", $medicines]
+      );
    }
 
    public function store(Request $request)

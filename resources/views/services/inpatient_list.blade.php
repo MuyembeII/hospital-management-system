@@ -1,4 +1,4 @@
-{{-- OPD list view: the component to list outpatient department services  --}}
+{{-- IPD list view: the component to list inpatient department services  --}}
 
 @extends('template')
 
@@ -6,8 +6,8 @@
 <section class="hero is-info is-small">
 	<div class="hero-body">
 		<div class="container has-text-centered">
-			<p class="title">OPD services</p>
-			<p class="subtitle">List of all outpatient department services</p>
+			<p class="title">IPD services</p>
+			<p class="subtitle">List of all inpatient department services</p>
 		</div>
 	</div>
 </section>
@@ -49,24 +49,26 @@
                                 <th>Height</th>
                                 <th>Temperature</th>
                                 <th>Diagnosis</th>
+                                <th>Ward</th>
                                 <th class="px-3"><i class="fa fa-ellipsis ml-6 has-text-primary"></i></th>
                             </tr>
                         </thead>
                         <tbody>
-                            @forelse ($outpatients as $outpatient)
+                            @forelse ($inpatients as $inpatient)
                             <tr>
-																<td>{{ $outpatient->first_name }}&nbsp;{{ $outpatient->last_name }}</td>
-																<td>{{ $outpatient->sex }}</td>
-                                <td>{{ $outpatient->blood_pressure }}</td>
-                                <td>{{ $outpatient->weight }}</td>
-                                <td>{{ $outpatient->height }}</td>
-                                <td>{{ $outpatient->temperature }}</td>
-                                <td>{{ $outpatient->diagnosis }}</td>
+																<td>{{ $inpatient->first_name }}&nbsp;{{ $inpatient->last_name }}</td>
+																<td>{{ $inpatient->sex }}</td>
+                                <td>{{ $inpatient->blood_pressure }}</td>
+                                <td>{{ $inpatient->weight }}</td>
+                                <td>{{ $inpatient->height }}</td>
+                                <td>{{ $inpatient->temperature }}</td>
+                                <td>{{ $inpatient->diagnosis }}</td>
+                                <td>{{ $inpatient->ward }}</td>
                                 <td>
                                     <form method="POST">
                                         <div class="action-buttons">
                                             <div class="control is-grouped">
-                                                <a class="button is-small is-outlined" href="{{ route('outpatient.show', $outpatient -> id) }}">
+                                                <a class="button is-small is-outlined" href="{{ route('outpatient.show', $inpatient -> id) }}">
                                                     <i class="fa fa-eye has-text-warning"></i>
                                                 </a>
                                                 <a class="button is-small is-outlined" >
@@ -82,7 +84,7 @@
                             </tr>
                             @empty
                             <tr>
-                                <td colspan="4" class="text-center">No outpatient services found.</td>
+                                <td colspan="4" class="text-center">No inpatient services found.</td>
                             </tr>
                             @endforelse
                         </tbody>

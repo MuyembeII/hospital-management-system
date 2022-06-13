@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string('weight');
             $table->string('height');
             $table->string('temperature');
+            $table->string('visit_summary');
             $table->integer('duration');
             $table->boolean('discharged');
             $table->date('discharged_date')->nullable();
