@@ -53,6 +53,7 @@ class OutpatientController extends Controller
       $did = $outpatient->doctor_id;
       $mid = $outpatient->prescription_id;
 
+      $opd = DB::table('outpatients')->where('patient_id', $pid)->get();
       $patient = Patient::find($pid);
       $medicine = Medicine::find($pid);
       $user = User::find($did);
@@ -69,11 +70,35 @@ class OutpatientController extends Controller
 
       return view("services.outpatient_show", [
           "outpatient" => $outpatient,
+          "opd" => $opd,
           "patient" => $patient,
           "medicine" => $medicine,
           "user" => $user,
           "verbose_age" => $age,
       ]);
+  }
+
+  // Get a Patients OPD Services
+  public function getOutPatientServices($id)
+  {
+
+    $opd = DB::table('outpatients')->where('patient_id', $id)->get();
+    $patient = DB::table('patients')->where('id', $id)->get();
+    $age = DB::table('patients')
+                ->selectRaw(
+                    'CONCAT(
+                      FLOOR((TIMESTAMPDIFF(MONTH, patients.dob, CURDATE()) / 12)), \' year(s) \',
+                      MOD(TIMESTAMPDIFF(MONTH, patients.dob, CURDATE()), 12) , \' month(s)\'
+                    ) AS age'
+                  )
+                ->where('id', $id)
+                ->value('age');
+
+    return view("patient.show_opd", [
+        "opd" => $opd,
+        "patient" => $patient,
+        "verbose_age" => $age,
+    ]);
   }
 
    /**

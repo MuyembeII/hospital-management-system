@@ -105,7 +105,7 @@
 									</header>
 									<div class="card-content">
 										<div class="content">
-											<!-- Prescription informatics -->
+											<!-- Dispensation informatics -->
 											<i class="fa fa-prescription-bottle-medical has-text-primary is-6">
 												&nbsp;Dispensation:
 											</i>

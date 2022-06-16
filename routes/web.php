@@ -34,6 +34,8 @@ Route::middleware([
         return view('main');
     })->name('main');
 
+    Route::get('/patientopd/{id}', ['as' => 'getpatientopd', 'uses' => 'OutpatientController@getOutPatientServices']);
+
     Route::resource('patients', PatientController::class);
     Route::resource('appointments', AppointmentController::class);
     Route::resource('outpatient', OutpatientController::class);

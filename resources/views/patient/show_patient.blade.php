@@ -30,13 +30,13 @@
                     </p>
                     <ul class="menu-list has-text-centered">
                         <li class="is-right is-link">
-                            <a class="patient-service" href="{{ route('outpatient.create') }}">Out patient/OPD</a>
+                            <a class="patient-service" onclick="openOPDModal();" data-target="show-opd">Out patient/OPD</a>
                         </li>
                         <li class="is-right is-link">
-                            <a class="patient-service" href="{{ route('inpatient.create') }}">In patient/IPD</a>
+                            <a class="patient-service" onclick="openIPDModal();" data-target="show-ipd">In patient/IPD</a>
                         </li>
                         <li class="is-right">
-                            <a class="patient-service" href="{{ route('pharmacy.create') }}">Pharmacy</a>
+                            <a class="patient-service" onclick="openPharmacyModal();" data-target="show-pharmacy">Pharmacy</a>
                         </li>
                     </ul>
                 </aside>
@@ -174,55 +174,6 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <hr class="content-divider">
-                            <!-- Outpatient Services -->
-                            <h3 class="title is-4">Outpatient Services</h1>
-                                <div class="box content">
-                                    <table class="table">
-                                        <thead>
-                                            <tr class="has-text-bold">
-                                                <th>Blood Pressure</th>
-                                                <th>Weight</th>
-                                                <th>Height</th>
-                                                <th>Temperature</th>
-                                                <th>Diagnosis</th>
-                                                <th class="px-3">Options</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @forelse ($outpatients as $outpatient)
-                                            <tr>
-                                                <td>{{ $outpatient->blood_pressure }}</td>
-                                                <td>{{ $outpatient->weight }}</td>
-                                                <td>{{ $outpatient->height }}</td>
-                                                <td>{{ $outpatient->temperature }}</td>
-                                                <td>{{ $outpatient->diagnosis }}</td>
-                                                <td>
-                                                    <form method="POST">
-                                                        <div class="action-buttons">
-                                                            <div class="control is-grouped">
-                                                                <a class="button is-small is-outlined" href="{{ route('outpatient.show', $outpatient -> id) }}">
-                                                                    <i class="fa fa-eye has-text-warning"></i>
-                                                                </a>
-                                                                <a class="button is-small is-outlined" href="{{ route('appointments.edit', $appointment -> id) }}" >
-                                                                    <i class="fa fa-pen-to-square has-text-link"></i>
-                                                                </a>
-                                                                <a class="button is-small is-outlined">
-                                                                    <i class="fa fa-trash has-text-danger"></i>
-                                                                </a>
-                                                            </div>
-                                                        </div>
-                                                    </form>
-                                                </td>
-                                            </tr>
-                                            @empty
-                                            <tr>
-                                                <td colspan="4" class="text-center">No outpatient services found.</td>
-                                            </tr>
-                                            @endforelse
-                                        </tbody>
-                                    </table>
-                                </div>
                     </div>
                 </div>
                 <div>
@@ -355,6 +306,209 @@
     </div>
 </div>
 
+@section('content')
+{{-- show OPD modal  --}}
+<div id="show-opd" class="modal">
+    <div class="modal-background"></div>
+    <div class="modal-card card-size">
+        <header class="modal-card-head">
+            <div class="container has-text-centered">
+                <p class="title">Patient OPD Servcies</p>
+                <p class="subtitle">List of the patient outpatient services.</p>
+            </div>
+            <button onclick="closeOPDModal();" class="delete" aria-label="close"></button>
+        </header>
+        <section class="modal-card-body">
+            <div class="section-light has-background-link-light">
+                <div class="container has-background-white-bis">
+                  <div class="box content">
+                      <table class="table">
+                          <thead>
+                              <tr class="has-text-bold">
+                                  <th>Blood Pressure</th>
+                                  <th>Weight</th>
+                                  <th>Height</th>
+                                  <th>Temperature</th>
+                                  <th>Diagnosis</th>
+                                  <th class="px-3">Options</th>
+                              </tr>
+                          </thead>
+                          <tbody>
+                              @forelse ($outpatients as $outpatient)
+                              <tr>
+                                  <td>{{ $outpatient->blood_pressure }}</td>
+                                  <td>{{ $outpatient->weight }}</td>
+                                  <td>{{ $outpatient->height }}</td>
+                                  <td>{{ $outpatient->temperature }}</td>
+                                  <td>{{ $outpatient->diagnosis }}</td>
+                                  <td>
+                                      <form method="POST">
+                                          <div class="action-buttons">
+                                              <div class="control is-grouped">
+                                                  <a class="button is-small is-outlined" href="{{ route('outpatient.show', $outpatient -> id) }}">
+                                                      <i class="fa fa-eye has-text-warning"></i>
+                                                  </a>
+                                                  <a class="button is-small is-outlined" href="{{ route('appointments.edit', $appointment -> id) }}" >
+                                                      <i class="fa fa-pen-to-square has-text-link"></i>
+                                                  </a>
+                                                  <a class="button is-small is-outlined">
+                                                      <i class="fa fa-trash has-text-danger"></i>
+                                                  </a>
+                                              </div>
+                                          </div>
+                                      </form>
+                                  </td>
+                              </tr>
+                              @empty
+                              <tr>
+                                  <td colspan="4" class="text-center">No outpatient services found.</td>
+                              </tr>
+                              @endforelse
+                          </tbody>
+                      </table>
+                  </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+</div>
+
+{{-- show IPD modal  --}}
+<div id="show-ipd" class="modal">
+    <div class="modal-background"></div>
+    <div class="modal-card card-size">
+        <header class="modal-card-head">
+            <div class="container has-text-centered">
+                <p class="title">Patient IPD Servcies</p>
+                <p class="subtitle">List of the patient inpatient services.</p>
+            </div>
+            <button onclick="closeIPDModal();" class="delete" aria-label="close"></button>
+        </header>
+        <section class="modal-card-body">
+            <div class="section-light has-background-link-light">
+                <div class="container has-background-white-bis">
+                  <div class="box content">
+                      <table class="table">
+                          <thead>
+                              <tr class="has-text-bold">
+                                  <th>Blood Pressure</th>
+                                  <th>Weight</th>
+                                  <th>Height</th>
+                                  <th>Temperature</th>
+                                  <th>Diagnosis</th>
+                                  <th>Ward</th>
+                                  <th>Duration</th>
+                                  <th class="px-3">Options</th>
+                              </tr>
+                          </thead>
+                          <tbody>
+                              @forelse ($inpatients as $inpatient)
+                              <tr>
+                                  <td>{{ $inpatient->blood_pressure }}</td>
+                                  <td>{{ $inpatient->weight }}</td>
+                                  <td>{{ $inpatient->height }}</td>
+                                  <td>{{ $inpatient->temperature }}</td>
+                                  <td>{{ $inpatient->diagnosis }}</td>
+                                  <td>{{ $inpatient->ward }}</td>
+                                  <td>{{ $inpatient->duration }}&nbsp;days</td>
+                                  <td>
+                                      <form method="POST">
+                                          <div class="action-buttons">
+                                              <div class="control is-grouped">
+                                                  <a class="button is-small is-outlined" href="{{ route('inpatient.show', $inpatient -> id) }}">
+                                                      <i class="fa fa-eye has-text-warning"></i>
+                                                  </a>
+                                                  <a class="button is-small is-outlined" href="{{ route('appointments.edit', $appointment -> id) }}" >
+                                                      <i class="fa fa-pen-to-square has-text-link"></i>
+                                                  </a>
+                                                  <a class="button is-small is-outlined">
+                                                      <i class="fa fa-trash has-text-danger"></i>
+                                                  </a>
+                                              </div>
+                                          </div>
+                                      </form>
+                                  </td>
+                              </tr>
+                              @empty
+                              <tr>
+                                  <td colspan="4" class="text-center">No inpatient services found.</td>
+                              </tr>
+                              @endforelse
+                          </tbody>
+                      </table>
+                  </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+</div>
+
+@section('content')
+{{-- show Pharmacy modal  --}}
+<div id="show-pharmacy" class="modal">
+    <div class="modal-background"></div>
+    <div class="modal-card card-size">
+        <header class="modal-card-head">
+            <div class="container has-text-centered">
+                <p class="title">Patient Pharmacy Servcies</p>
+                <p class="subtitle">List of the patient pharmacy services.</p>
+            </div>
+            <button onclick="closePharmacyModal();" class="delete" aria-label="close"></button>
+        </header>
+        <section class="modal-card-body">
+            <div class="section-light has-background-link-light">
+                <div class="container has-background-white-bis">
+                  <div class="box content">
+                      <table class="table">
+                          <thead>
+                              <tr class="has-text-bold">
+                                  <th>Dispensation</th>
+                                  <th>Quantity</th>
+                                  <th>Description</th>
+                                  <th class="px-3">Options</th>
+                              </tr>
+                          </thead>
+                          <tbody>
+                              @forelse ($pharmacies as $pharmacy)
+                              <tr>
+                                  <td>{{ $pharmacy->name }}</td>
+                                  <td>{{ $pharmacy->quantity }}</td>
+                                  <td>{{ $pharmacy->dispensation_description }}</td>
+                                  <td>
+                                      <form method="POST">
+                                          <div class="action-buttons">
+                                              <div class="control is-grouped">
+                                                  <a class="button is-small is-outlined" href="{{ route('pharmacy.show', $pharmacy -> id) }}">
+                                                      <i class="fa fa-eye has-text-warning"></i>
+                                                  </a>
+                                                  <a class="button is-small is-outlined" href="{{ route('appointments.edit', $appointment -> id) }}" >
+                                                      <i class="fa fa-pen-to-square has-text-link"></i>
+                                                  </a>
+                                                  <a class="button is-small is-outlined">
+                                                      <i class="fa fa-trash has-text-danger"></i>
+                                                  </a>
+                                              </div>
+                                          </div>
+                                      </form>
+                                  </td>
+                              </tr>
+                              @empty
+                              <tr>
+                                  <td colspan="4" class="text-center">No pharmacy services found.</td>
+                              </tr>
+                              @endforelse
+                          </tbody>
+                      </table>
+                  </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+</div>
+
 <script>
     // Function to open the Create-Appointment modal
     function openModal() {
@@ -367,12 +521,28 @@
         document.getElementById("create-appointment").classList.remove("is-active");
     }
 
-    function openEditAppointmentModal() {
-        document.getElementById("edit-appointment").classList.add("is-active");
+    function openOPDModal() {
+        document.getElementById("show-opd").classList.add("is-active");
     }
 
-    function closeEditAppointmentModal() {
-        document.getElementById("edit-appointment").classList.remove("is-active");
+    function closeOPDModal() {
+        document.getElementById("show-opd").classList.remove("is-active");
+    }
+
+    function openIPDModal() {
+        document.getElementById("show-ipd").classList.add("is-active");
+    }
+
+    function closeIPDModal() {
+        document.getElementById("show-ipd").classList.remove("is-active");
+    }
+
+    function openPharmacyModal() {
+        document.getElementById("show-pharmacy").classList.add("is-active");
+    }
+
+    function closePharmacyModal() {
+        document.getElementById("show-pharmacy").classList.remove("is-active");
     }
 
     // Add event listeners to close the modal
@@ -387,10 +557,15 @@
             if (modal === 'create-appointment') {
                 openModal($target);
             }
-            if (modal === 'edit-appointment') {
-                openEditAppointmentModal($target);
+            if (modal === 'show-opd') {
+                openOPDModal($target);
             }
-
+            if (modal === 'show-ipd') {
+                openIPDModal($target);
+            }
+            if (modal === 'show-pharmacy') {
+                openPharmacyModal($target);
+            }
         });
     });
 
@@ -401,9 +576,12 @@
 
             // Using escape key
             closeModal();
-            closeEditAppointmentModal();
+            closeOPDModal();
+            closeIPDModal();
+            closePharmacyModal();
         }
     });
+
     /*--------------------------------------------------------------------------------------------------------------*/
     //Appointment controls
     var appointmentStatusSelect = document.getElementById('appointment_status');
@@ -437,7 +615,7 @@
                 }
             })
 
-            openEditAppointmentModal();
+
         })
     })
 </script>

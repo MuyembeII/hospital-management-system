@@ -84,10 +84,25 @@ class PatientController extends Controller
         $patient_id = $patient->id;
         $appointment = DB::table('appointments')->where('patient_id', $patient_id)->get();
         $outpatient = DB::table('outpatients')->where('patient_id', $patient_id)->get();
+        $inpatient = DB::table('inpatients')->where('patient_id', $patient_id)->get();
+        $pharmacy = DB::table('pharmacies')
+                            ->join('medicines', 'pharmacies.dispensation_id', '=', 'medicines.id')
+                            ->select(
+                                'pharmacies.*',
+                                'medicines.name',
+                                'medicines.quantity',
+                            )
+                            ->orderBy('pharmacies.created_at', 'DESC')
+                            ->get();
 
         return view(
-            'patient.show_patient',
-            ['patient' => $patient, 'appointments' => $appointment, 'outpatients' => $outpatient]
+            'patient.show_patient',[
+              'patient' => $patient,
+              'appointments' => $appointment,
+              'outpatients' => $outpatient,
+              'inpatients' => $inpatient,
+              'pharmacies' => $pharmacy
+            ]
         );
     }
 

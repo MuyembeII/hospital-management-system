@@ -1,4 +1,4 @@
-{{-- OPD list view: the component to list outpatient department services  --}}
+{{-- Single OPD list view: the component to list a patients outpatient department services  --}}
 
 @extends('template')
 
@@ -6,8 +6,8 @@
 <section class="hero is-info is-small">
 	<div class="hero-body">
 		<div class="container has-text-centered">
-			<p class="title">OPD Services</p>
-			<p class="subtitle">List of all outpatient department services</p>
+			<p class="title">OPD Service - {{ $patient->first_name }}&nbsp;{{ $patient->last_name }}</p>
+			<p class="subtitle">List of patient outpatient department services</p>
 		</div>
 	</div>
 </section>
@@ -15,13 +15,13 @@
 	<div class="container has-background-white-bis">
 		<div class="columns is-multiline" data-aos="fade-in-up" data-aos-easing="linear">
 		    <div class="column is-full">
-		        <div class="field has-addons ml-4 my-2">
-                                <p class="control">
-                                    <a class="button is-success submit-button" href="{{ route('main') }}">
-                                        Back To Main&nbsp;&nbsp; <i class="fas fa-rotate-left"></i>
-                                    </a>
-                                </p>
-                            </div>
+          <div class="field has-addons ml-4 my-2">
+            <p class="control">
+              <a class="button is-success submit-button" href="{{ route('main') }}">
+                Back To Main&nbsp;&nbsp; <i class="fas fa-rotate-left"></i>
+              </a>
+            </p>
+          </div>
 		    </div>
 			<div class="column is-10 is-offset-1">
                 <div class="box content">
@@ -53,7 +53,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @forelse ($outpatients as $outpatient)
+                            @forelse ($opd as $outpatient)
                             <tr>
 																<td>{{ $outpatient->first_name }}&nbsp;{{ $outpatient->last_name }}</td>
 																<td>{{ $outpatient->sex }}</td>
