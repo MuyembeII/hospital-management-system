@@ -25,7 +25,7 @@ class Inpatient extends Model
        'weight',
        'height',
        'temperature',
-       'visit_summary'
+       'visit_summary',
        'duration',
        'discharged',
        'discharged_date'

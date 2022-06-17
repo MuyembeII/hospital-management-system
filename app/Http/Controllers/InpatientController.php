@@ -48,4 +48,41 @@ class InpatientController extends Controller
    {
       return view('services.inpatient');
    }
+
+   public function store(Request $request)
+   {
+       $inpatient = new Inpatient();
+       $pid = $request->patient_id;
+       $dis_flag = $request->discharged;
+       $discharge = 0;
+       if($dis_flag){
+         $discharge = 1;
+       }
+
+       $inpatient->patient_id = $request->patient_id;
+       $inpatient->doctor_id = $request->user_id;
+       $inpatient->prescription_id = $request->prescription_id;
+       $inpatient->temperature = $request->temperature;
+       $inpatient->weight = $request->weight;
+       $inpatient->height = $request->height;
+       $inpatient->diagnosis = $request->diagnosis;
+       $inpatient->blood_pressure = $request->blood_pressure;
+       $inpatient->visit_summary = $request->visit_summary;
+       $inpatient->discharged = $discharge;
+       $inpatient->discharged_date = $request->discharged_date;
+       $inpatient->duration = $request->duration;
+       $inpatient->ward = $request->ward;
+       try {
+           $inpatient->save();
+           return redirect("/patients/{$pid}")->with(
+               "success",
+               "New IPD service created successfully."
+           );
+       } catch (Throwable $th) {
+           return redirect("/patients/{$pid}")->with(
+               "fail",
+               "Error create IPD service!"
+           );
+       }
+   }
 }

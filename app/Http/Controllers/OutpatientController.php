@@ -133,12 +133,12 @@ class OutpatientController extends Controller
            $outpatient->save();
            return redirect("/patients/{$pid}")->with(
                "success",
-               "New Appointment created successfully."
+               "New OPD service created successfully."
            );
        } catch (Throwable $th) {
            return redirect("/patients/{$pid}")->with(
                "fail",
-               "Error create patient appointment!"
+               "Error create OPD service!"
            );
        }
    }
