@@ -15,13 +15,13 @@
 	<div class="container has-background-white-bis">
 		<div class="columns is-multiline" data-aos="fade-in-up" data-aos-easing="linear">
 		    <div class="column is-full">
-		        <div class="field has-addons ml-4 my-2">
-                                <p class="control">
-                                    <a class="button is-success submit-button" href="{{ route('main') }}">
-                                        Back To Main&nbsp;&nbsp; <i class="fas fa-rotate-left"></i>
-                                    </a>
-                                </p>
-                            </div>
+					<div class="field has-addons ml-4 my-2">
+						<p class="control">
+							<a class="button is-success submit-button" href="{{ route('main') }}">
+								Back To Main&nbsp;&nbsp; <i class="fas fa-rotate-left"></i>
+							</a>
+						</p>
+					</div>
 		    </div>
 			<div class="column is-10 is-offset-1">
                 <div class="box content">

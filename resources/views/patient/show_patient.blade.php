@@ -25,11 +25,11 @@
                 <br />
                 <a onclick="openCreatePharmacyModal();" class="button is-primary is-block is-alt is-large" data-target="create-pharmacy"> Create Pharmacy&nbsp; <i class="fas fa-wand-magic"></i></a>
                 <br/>
-                <a onclick="openCreateOPDModal();" class="button is-primary is-block is-alt is-large" data-target="create-opd"> Start OPD&nbsp; <i class="fas fa-play"></i></a>
+                <a onclick="openCreateOPDModal();" class="button is-link is-block is-alt is-medium" data-target="create-opd"> Start OPD&nbsp; <i class="fas fa-play"></i></a>
                 <br/>
-                <a onclick="openCreateIPDModal();" class="button is-primary is-block is-alt is-large" data-target="create-ipd"> Start IPD&nbsp; <i class="fas fa-play"></i></a>
+                <a onclick="openCreateIPDModal();" class="button is-link is-block is-alt is-medium" data-target="create-ipd"> Start IPD&nbsp; <i class="fas fa-play"></i></a>
                 <br/>
-                <a class="button is-primary is-block is-alt is-large" href="{{ url('patients') }}">Back To Patients List</a>
+                <a class="button is-success is-block is-alt is-medium" href="{{ url('patients') }}">Back To Patients List</a>
                 <aside class="menu">
                     <p class="menu-label">
                         Services
