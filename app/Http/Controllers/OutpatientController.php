@@ -55,7 +55,7 @@ class OutpatientController extends Controller
 
       $opd = DB::table('outpatients')->where('patient_id', $pid)->get();
       $patient = Patient::find($pid);
-      $medicine = Medicine::find($pid);
+      $medicine = Medicine::find($mid);
       $user = User::find($did);
 
       $age = DB::table('patients')

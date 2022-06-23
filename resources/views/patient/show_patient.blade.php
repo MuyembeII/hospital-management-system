@@ -13,6 +13,7 @@
     </div>
 </section>
 
+
 @section('content')
 <section class="container">
     <div>
@@ -23,7 +24,7 @@
                 <br />
                 <a onclick="openModal();" class="button is-primary is-block is-alt is-large" data-target="create-appointment"> Create Appointment&nbsp; <i class="fas fa-wand-magic"></i></a>
                 <br />
-                <a onclick="openCreatePharmacyModal();" class="button is-primary is-block is-alt is-large" data-target="create-pharmacy"> Create Pharmacy&nbsp; <i class="fas fa-wand-magic"></i></a>
+                <a onclick="openDispensationModal();" class="button is-primary is-block is-alt is-large" data-target="create-pharmacy"> Create Pharmacy&nbsp; <i class="fas fa-wand-magic"></i></a>
                 <br/>
                 <a onclick="openCreateOPDModal();" class="button is-link is-block is-alt is-medium" data-target="create-opd"> Start OPD&nbsp; <i class="fas fa-play"></i></a>
                 <br/>
@@ -137,7 +138,7 @@
 
                         <hr class="content-divider">
                         <!-- Patient Appointments -->
-                        <h3 class="title is-4">Patient Appointments</h1>
+                        <h3 class="title is-4">Patient Appointments</h3>
                             <div class="box content">
                                 <table class="table">
                                     <thead>
@@ -180,11 +181,11 @@
                                     </tbody>
                                 </table>
                             </div>
+                        </div>
                     </div>
-                </div>
-                <div>
-                </div>
             </div>
+        </div>
+    </div>
 </section>
 
 @section('content')
@@ -257,7 +258,7 @@
                                         <!-- Choice Select One:  Service Type -->
                                         <div class="field">
                                             <div class="control">
-                                                <label class="label" for="sex">Service Type</label>
+                                                <label class="label" for="service_type">Service Type</label>
                                                 <div class="select is-fullwidth">
                                                     <select name="service_type" id="service_type" class="regular-text">
                                                         <option value=""></option>
@@ -319,7 +320,7 @@
     <div class="modal-card card-size">
         <header class="modal-card-head">
             <div class="container has-text-centered">
-                <p class="title">Patient OPD Servcies</p>
+                <p class="title">Patient OPD Services</p>
                 <p class="subtitle">List of the patient outpatient services.</p>
             </div>
             <button onclick="closeOPDModal();" class="delete" aria-label="close"></button>
@@ -386,7 +387,7 @@
     <div class="modal-card card-size">
         <header class="modal-card-head">
             <div class="container has-text-centered">
-                <p class="title">Patient IPD Servcies</p>
+                <p class="title">Patient IPD Services</p>
                 <p class="subtitle">List of the patient inpatient services.</p>
             </div>
             <button onclick="closeIPDModal();" class="delete" aria-label="close"></button>
@@ -458,8 +459,8 @@
     <div class="modal-card card-size">
         <header class="modal-card-head">
             <div class="container has-text-centered">
-                <p class="title">Patient Pharmacy Servcies</p>
-                <p class="subtitle">List of the patient pharmacy services.</p>
+                <p class="title">Pharmacy Services</p>
+                <p class="subtitle">List of the patient drug dispensations.</p>
             </div>
             <button onclick="closePharmacyModal();" class="delete" aria-label="close"></button>
         </header>
@@ -472,6 +473,7 @@
                               <tr class="has-text-bold">
                                   <th>Dispensation</th>
                                   <th>Quantity</th>
+                                  <th>Dispensation Date</th>
                                   <th>Description</th>
                                   <th class="px-3">Options</th>
                               </tr>
@@ -481,6 +483,7 @@
                               <tr>
                                   <td>{{ $pharmacy->name }}</td>
                                   <td>{{ $pharmacy->quantity }}</td>
+                                  <td>{{ $pharmacy->dispensation_date }}</td>
                                   <td>{{ $pharmacy->dispensation_description }}</td>
                                   <td>
                                       <form method="POST">
@@ -523,7 +526,7 @@
     <div class="modal-card card-size">
         <header class="modal-card-head">
             <div class="container has-text-centered">
-                <p class="title">Patient OPD Servcies</p>
+                <p class="title">Patient OPD Services</p>
                 <p class="subtitle">Start new outpatient service.</p>
             </div>
             <button onclick="closeCreateOPDModal();" class="delete" aria-label="close"></button>
@@ -556,7 +559,7 @@
                   <form action="{{ route('outpatient.store') }}" method="POST">
                     @csrf
                     <input type="hidden" id="patient_id" name="patient_id" value="{{ $patient->id}}">
-                    <input type="hidden" id="user_id" name="user_id" value="{{ Auth::user()->id }}">
+                    <input type="hidden" id="doctor_id" name="doctor_id" value="{{ Auth::user()->id }}">
                     <div class="columns">
                       <!-- Column 1 -->
                       <div class="column is-4">
@@ -577,7 +580,7 @@
                         <!-- Choice Select One:  Prescription -->
                         <div class="field">
                           <div class="control">
-                            <label class="label" for="sex">Prescription</label>
+                            <label class="label" for="prescription_id">Prescription</label>
                             <div class="select is-fullwidth">
                               <select name="prescription_id" id="prescription_id" class="regular-text">
                                 <option value="1">Panado</option>
@@ -602,7 +605,7 @@
                         <div class="field">
                           <div class="control">
                             <label class="label" for="height">Height <small>(meters)</small></label>
-                            <input class="input" type="input" name="height" id="height">
+                            <input class="input" type="text" name="height" id="height">
                           </div>
                         </div>
                         <!-- Input:  Blood Pressure -->
@@ -627,7 +630,7 @@
                         <!-- Text:  Reason for Visit -->
                         <div class="field">
                           <div class="control mb-1">
-                            <label class="label" for="diagnosis">Notes</label>
+                            <label class="label" for="reason_for_visit">Notes</label>
                             <textarea name="reason_for_visit" id="reason_for_visit" class="textarea"></textarea>
                           </div>
                         </div>
@@ -672,7 +675,7 @@
     <div class="modal-card card-size">
         <header class="modal-card-head">
             <div class="container has-text-centered">
-                <p class="title">Patient IPD Servcies</p>
+                <p class="title">Patient IPD Services</p>
                 <p class="subtitle">Start new outpatient service.</p>
             </div>
             <button onclick="closeCreateIPDModal();" class="delete" aria-label="close"></button>
@@ -704,8 +707,8 @@
 
           				<form action="{{ route('inpatient.store') }}" method="POST">
           					@csrf
-                    <input type="hidden" id="patient_id" name="patient_id" value="{{ $patient->id}}">
-                    <input type="hidden" id="user_id" name="user_id" value="{{ Auth::user()->id }}">
+                            <input type="hidden" id="patient_id" name="patient_id" value="{{ $patient->id}}">
+                            <input type="hidden" id="doctor_id" name="doctor_id" value="{{ Auth::user()->id }}">
           					<!-- Columns - Vitals, Physical Exam and Pharmacy -->
           					<div class="columns">
           						<!-- Column 1 -->
@@ -752,7 +755,7 @@
           							<div class="field">
           								<div class="control">
           									<label class="label" for="height">Height <small>(meters)</small></label>
-          									<input class="input" type="input" name="height" id="height">
+          									<input class="input" type="text" name="height" id="height">
           								</div>
           							</div>
           							<!-- Input:  Blood Pressure -->
@@ -762,7 +765,7 @@
           									<input class="input" type="text" name="blood_pressure" id="blood_pressure" placeholder="E.g 120/65">
           								</div>
           							</div>
-          							<!-- Input:  Ward/Servicr Area -->
+          							<!-- Input:  Ward/Service Area -->
           							<div class="field">
           								<div class="control">
           									<label class="label" for="ward">Ward</label>
@@ -784,11 +787,11 @@
           							<!-- Input:  Date of Discharge -->
                                       <div class="field">
                                       	<div class="control">
-                                      		<label class="label" for="blood_pressure"> Discharged? </label>
+                                      		<label class="label" for="discharged"> Discharged? </label>
                                       		<input type="checkbox" name="discharged" id="discharged">
                                       	</div>
                                       	<div class="control">
-                                      		<label class="label" for="dob">Date of Discharge</label>
+                                      		<label class="label" for="discharged_date">Date of Discharge</label>
                                       		<input class="input bulmaCalendar" type="date" name="discharged_date" id="discharged_date" data-display-mode="dialog">
                                       	</div>
                                       </div>
@@ -812,7 +815,7 @@
                                       <!-- Text:  Reason for Visit -->
                                       <div class="field">
                                       	<div class="control mb-1">
-                                      		<label class="label" for="diagnosis">Notes</label>
+                                      		<label class="label" for="visit_summary">Notes</label>
                                       		<textarea name="visit_summary" id="visit_summary" class="textarea"></textarea>
                                       	</div>
                                       </div>
@@ -848,6 +851,125 @@
         </section>
     </div>
 </div>
+
+@section('content')
+    {{-- Start Pharmacy Visit  --}}
+    <div id="create-pharmacy" class="modal">
+        <div class="modal-background"></div>
+        <div class="modal-card card-size">
+            <header class="modal-card-head">
+                <div class="container has-text-centered">
+                    <p class="title">Pharmacy Service</p>
+                    <p class="subtitle">Patient drug dispensations and medicine management.</p>
+                </div>
+                <button onclick="closeDispensationModal();" class="delete" aria-label="close"></button>
+            </header>
+            <section class="modal-card-body">
+                <div class="section-light has-background-link-light">
+                    <div class="container has-background-white-bis">
+                        <div class="columns is-multiline" data-aos="fade-in-up" data-aos-easing="linear">
+                            <div class="column is-8 is-offset-2">
+
+                                <!-- Form validation message box -->
+                                @if ($errors->any())
+                                    <div class="box">
+                                        <p class="has-text-danger">Pharmacy drug dispensation failed!</p>
+                                        <article class="message is-danger">
+                                          <span class="icon has-text-warning">
+                                            <i class="fab fa-triangle-exclamation"></i>
+                                          </span>
+                                            <div class="message-body">
+                                                <ul>
+                                                    @foreach ($errors->all() as $error)
+                                                        <li>{{ $error }}</li>
+                                                    @endforeach
+                                                </ul>
+                                            </div>
+                                        </article>
+                                    </div>
+                                @endif
+                                <p class="subtitle">Patient NRC: {{ $patient->nrc }}</p>
+                                <form action="{{ route('pharmacy.store') }}" method="POST">
+                                    @csrf
+                                    <input type="hidden" id="patient_id" name="patient_id" value="{{ $patient->id}}">
+                                    <input type="hidden" id="doctor_id" name="doctor_id" value="{{ Auth::user()->id }}">
+                                    <div class="columns">
+                                        <!-- Column 1 -->
+                                        <div class="column is-8">
+                                            <!-- Choice Select One:  Drug Name -->
+                                            <div class="field">
+                                                <div class="control">
+                                                    <label class="label" for="dispensation_id">Drug Name</label>
+                                                    <div class="select is-fullwidth">
+                                                        <select name="dispensation_id" id="dispensation_id" class="regular-text">
+                                                            <option value="1">Panado</option>
+                                                            <option value="2">Bruffen</option>
+                                                            <option value="3">Paracetamol</option>
+                                                            <option value="4">ORS</option>
+                                                            <option value="5">ARVs</option>
+                                                            <option value="6">Cough Syrup</option>
+                                                            <option value="7">Coartem</option>
+                                                            <option value="8">Penincilin</option>
+                                                            <option value="9">Amoxyle</option>
+                                                            <option value="10">Pen V</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- Input:  Appointment Date -->
+                                            <div class="field">
+                                                <div class="control">
+                                                    <label class="label" for="dispensation_date">Date of Dispensation</label>
+                                                    <input class="input bulmaCalendar" type="date" name="dispensation_date" id="dispensation_date" data-display-mode="dialog">
+                                                </div>
+                                            </div>
+                                            <!-- Input:  Drug Quantification -->
+                                            <div class="field">
+                                                <div class="control">
+                                                    <label class="label" for="quantity">Quantity</label>
+                                                    <input class="input" type="number" name="quantity" id="quantity">
+                                                </div>
+                                            </div>
+                                            <!-- Input:  Appointment Details -->
+                                            <div class="field">
+                                                <div class="control">
+                                                    <label class="label" for="dispensation_description">Dispensation Remarks</label>
+                                                    <textarea name="dispensation_description" id="dispensation_description" class="textarea"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <hr class="content-divider">
+                                    <!-- Events:  Patient registration form action handlers -->
+                                    <div class="card has-background-white-ter">
+                                        <div class="columns">
+                                            <div class="column is-4 mx-2">
+                                                <div class="field has-addons">
+                                                    <p class="control">
+                                                        <button class="button is-primary submit-button" type="submit">
+                                                            Dispense&nbsp;&nbsp; <i class="fas fa-paper-plane"></i>
+                                                        </button>
+                                                    </p>
+                                                    <p class="control">
+                                                        <a class="button is-warning" href="{{ url('patients') }}" aria-current="page">
+                                                            Cancel&nbsp;&nbsp; <i class="fas fa-circle-xmark"></i>
+                                                        </a>
+                                                    </p>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
 
 
 <script>
@@ -902,6 +1024,14 @@
         document.getElementById("create-ipd").classList.remove("is-active");
     }
 
+    function openDispensationModal(){
+        document.getElementById("create-pharmacy").classList.add("is-active");
+    }
+
+    function closeDispensationModal() {
+        document.getElementById("create-pharmacy").classList.remove("is-active");
+    }
+
     // Add event listeners to close the modal
     // whenever user click outside modal
     (document.querySelectorAll(
@@ -929,6 +1059,9 @@
             if (modal === 'create-ipd') {
                 openCreateIPDModal($target);
             }
+            if (modal === 'create-pharmacy') {
+                openDispensationModal($target);
+            }
         });
     });
 
@@ -944,43 +1077,8 @@
             closePharmacyModal();
             closeCreateOPDModal();
             closeCreateIPDModal();
+            closeDispensationModal();
         }
     });
 
-    /*--------------------------------------------------------------------------------------------------------------*/
-    //Appointment controls
-    var appointmentStatusSelect = document.getElementById('appointment_status');
-    var serviceTypeSelect = document.getElementById('service_type');
-    var appointmentDateCalendar = document.getElementById('appointment_date');
-    var appointmentDetailsTextArea = document.getElementById('appointment_details');
-</script>
-
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
-<script>
-    $(document).ready(function() {
-        $(document).on('click', '#appointment-update', function(event) {
-            event.preventDefault();
-
-            var appointmentId = $(this).data('id');
-            console.log("Appointment ID", appointmentId)
-            var route = "{{ route('appointments.show', " + appointmentId + ") }}"
-            const uri = `http://127.0.0.1:8000/appointment/${appointmentId}/edit`;
-            const getAppointmentUri = `/appointment/${appointmentId}/edit`;
-            $.ajax({
-                type: 'GET',
-                url: route,
-                dataType: 'json',
-                success: function(data) {
-                    console.log(`Appointment details -> ${data}`)
-                },
-                error: function(data) {
-                    console.log(`Error fetching appointment: ${data}`)
-                }
-            })
-
-
-        })
-    })
 </script>

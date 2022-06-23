@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use DB;
 use Illuminate\Http\Request;
 use App\Models\Pharmacy;
-use App\Models\Outpatient;
 use App\Models\Patient;
 use App\Models\Medicine;
 
@@ -49,7 +48,7 @@ class PharmacyController extends Controller
      $mid = $pharmacy->dispensation_id;
 
      $patient = Patient::find($pid);
-     $medicine = Medicine::find($pid);
+     $medicine = Medicine::find($mid);
 
      $age = DB::table('patients')
                  ->selectRaw(
@@ -77,5 +76,30 @@ class PharmacyController extends Controller
    public function create()
    {
       return view('services.pharmacy');
+   }
+
+   public function store(Request $request){
+       $pharmacy = new Pharmacy();
+       $pid = $request->patient_id;
+
+       $pharmacy->patient_id = $request->patient_id;
+       $pharmacy->doctor_id = $request->doctor_id;
+       $pharmacy->dispensation_id = $request->dispensation_id;
+       $pharmacy->dispensation_date = $request->dispensation_date;
+       $pharmacy->quantity = $request->quantity;
+       $pharmacy->dispensation_description = $request->dispensation_description;
+
+       try {
+           $pharmacy->save();
+           return redirect("/patients/{$pid}")->with(
+               "success",
+               "Pharmacy drug dispensed successfully."
+           );
+       } catch (Throwable $th) {
+           return redirect("/patients/{$pid}")->with(
+               "fail",
+               "Error dispensing drug!"
+           );
+       }
    }
 }
