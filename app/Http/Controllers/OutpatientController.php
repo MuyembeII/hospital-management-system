@@ -121,7 +121,7 @@ class OutpatientController extends Controller
        $pid = $request->patient_id;
 
        $outpatient->patient_id = $request->patient_id;
-       $outpatient->doctor_id = $request->user_id;
+       $outpatient->doctor_id = $request->doctor_id;
        $outpatient->prescription_id = $request->prescription_id;
        $outpatient->temperature = $request->temperature;
        $outpatient->weight = $request->weight;
