@@ -29,6 +29,7 @@ return new class extends Migration
             $table->boolean('discharged');
             $table->date('discharged_date')->nullable();
             $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('patient_id')->references('id')->on('patients')->onDelete('cascade');
             $table->foreign('doctor_id')->references('id')->on('users')->onDelete('cascade');

@@ -11,14 +11,15 @@ return new class extends Migration
      *
      * @return void
      */
-    public function up()
+    public function up(): void
     {
         Schema::create('patients', function (Blueprint $table) {
             $table->bigIncrements('id')->index('patient_id');
-            $table->string('first_name');
-            $table->string('last_name');
-            $table->string('email');
-            $table->string('contactnumber');
+            $table->string('first_name', 32);
+            $table->string('last_name', 32);
+            $table->string('email', 32);
+            $table->string('contactnumber', 13);
+            $table->string('registration_id', 15)->nullable()->unique();
             $table->string('address');
             $table->char('sex', 1);//Mapping Guide ([sex(F) F -> Female, sex(M) M -> Male, sex(U) U -> Unknown])
             $table->date('dob');
@@ -42,7 +43,7 @@ return new class extends Migration
      *
      * @return void
      */
-    public function down()
+    public function down(): void
     {
         Schema::dropIfExists('patients');
     }

@@ -23,6 +23,7 @@ return new class extends Migration
             $table->date('dispensation_date');
             $table->date('dispensation_description');
             $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('patient_id')->references('id')->on('patients')->onDelete('cascade');
             $table->foreign('patient_nrc')->references('nrc')->on('patients')->onDelete('cascade');
