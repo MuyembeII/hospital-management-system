@@ -45,7 +45,7 @@ class OutpatientController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param \App\Models\Appointment $appointment
+     * @param \App\Models\Outpatient $outpatient
      * @return \Illuminate\Http\Response
      */
     public function show(Outpatient $outpatient)
@@ -99,7 +99,8 @@ class OutpatientController extends Controller
             'patient_id' => 'required',
             'prescription_id' => 'required',
             'doctor_id' => 'required',
-            'blood_pressure' => 'required',
+            'bp_systolic' => 'required',
+            'bp_diastolic' => 'required',
             'weight' => 'required',
             'temperature' => 'required',
             'diagnosis' => 'required'
@@ -115,18 +116,19 @@ class OutpatientController extends Controller
         $outpatient->weight = $request->weight;
         $outpatient->height = $request->height;
         $outpatient->diagnosis = $request->diagnosis;
-        $outpatient->blood_pressure = $request->blood_pressure;
+        $outpatient->bp_systolic = $request->bp_systolic;
+        $outpatient->bp_diastolic = $request->bp_diastolic;
         $outpatient->reason_for_visit = $request->reason_for_visit;
         try {
             $outpatient->save();
             return redirect("/patients/{$pid}")->with(
-                "success",
+                "storeOpdSuccess",
                 "New OPD visit created successfully."
             );
         } catch (\Throwable $th) {
             Log::error($th);
             return redirect("/patients/{$pid}")->withError(
-                "Error creating OPD service. Details ${th}"
+                "Error creating OPD service! Details ${th}."
             )->withInput();
         }
     }
@@ -140,7 +142,7 @@ class OutpatientController extends Controller
     public function edit($id)
     {
         $outpatient = Outpatient::find($id);
-        return view('services.outpatient_edit', compact('$outpatient'));
+        return view('services.outpatient_edit', compact('outpatient'));
     }
 
     /**
@@ -203,8 +205,8 @@ class OutpatientController extends Controller
      */
     public function destroy($id)
     {
-        $patient = Patient::find($id);
-        $patient->delete();
-        return redirect('/outpatient')->with('deleteOpdSuccess', 'Patient deleted!');
+        $outpatient = Outpatient::find($id);
+        $outpatient->delete();
+        return redirect('/outpatient')->with('deleteOpdSuccess', 'OPD Visit Deleted!');
     }
 }
