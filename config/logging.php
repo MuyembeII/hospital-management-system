@@ -53,6 +53,7 @@ return [
     'channels' => [
         'stack' => [
             'driver' => 'stack',
+            'name' => 'hms-local',
             'channels' => ['single'],
             'ignore_exceptions' => false,
         ],
