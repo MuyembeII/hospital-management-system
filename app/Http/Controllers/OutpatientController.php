@@ -36,6 +36,7 @@ class OutpatientController extends Controller
                 'medicines.quantity',
             )
             ->orderBy('outpatients.created_at', 'DESC')
+            ->whereNull('outpatients.deleted_at')
             ->get();
 
 
@@ -142,7 +143,12 @@ class OutpatientController extends Controller
     public function edit($id)
     {
         $outpatient = Outpatient::find($id);
-        return view('services.outpatient_edit', compact('outpatient'));
+        $pid = $outpatient->patient_id;
+        $patient = Patient::find($pid);
+        $medicines = Medicine::all();
+        return view('services.outpatient_edit',
+            ["outpatient" => $outpatient, "patient" => $patient, "medicines" => $medicines]
+        );
     }
 
     /**
@@ -158,7 +164,8 @@ class OutpatientController extends Controller
             'patient_id' => 'required',
             'prescription_id' => 'required',
             'doctor_id' => 'required',
-            'blood_pressure' => 'required',
+            'bp_systolic' => 'required',
+            'bp_diastolic' => 'required',
             'weight' => 'required',
             'temperature' => 'required',
             'diagnosis' => 'required'
@@ -174,7 +181,8 @@ class OutpatientController extends Controller
             $outpatient->weight = $request->weight;
             $outpatient->height = $request->height;
             $outpatient->diagnosis = $request->diagnosis;
-            $outpatient->blood_pressure = $request->blood_pressure;
+            $outpatient->bp_systolic = $request->bp_systolic;
+            $outpatient->bp_diastolic = $request->bp_diastolic;
             $outpatient->reason_for_visit = $request->reason_for_visit;
             $outpatient->save();
         } catch (\Exception $e) {
@@ -205,7 +213,7 @@ class OutpatientController extends Controller
      */
     public function destroy($id)
     {
-        $outpatient = Outpatient::find($id);
+        $outpatient = Outpatient::find($id)->firstOrFail();;
         $outpatient->delete();
         return redirect('/outpatient')->with('deleteOpdSuccess', 'OPD Visit Deleted!');
     }

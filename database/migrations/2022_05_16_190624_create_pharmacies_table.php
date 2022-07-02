@@ -16,7 +16,6 @@ return new class extends Migration
         Schema::create('pharmacies', function (Blueprint $table) {
             $table->bigIncrements('id')->index('pharmacy_id');
             $table->unsignedBigInteger('patient_id');
-            $table->unsignedBigInteger('patient_nrc');
             $table->unsignedBigInteger('doctor_id');
             $table->unsignedBigInteger('dispensation_id')->nullable();
             $table->integer('quantity');

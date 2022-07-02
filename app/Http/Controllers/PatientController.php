@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use DB;
 use App\Models\Patient;
+use App\Models\Medicine;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Log;
@@ -126,8 +127,12 @@ class PatientController extends Controller
     {
         $patient_id = $patient->id;
         $appointment = DB::table('appointments')->where('patient_id', $patient_id)->get();
-        $outpatient = DB::table('outpatients')->where('patient_id', $patient_id)->get();
+        $outpatient = DB::table('outpatients')
+            ->where('patient_id', $patient_id)
+            ->whereNull('deleted_at')
+            ->get();
         $inpatient = DB::table('inpatients')->where('patient_id', $patient_id)->get();
+        $medicines = Medicine::all();
         $pharmacy = DB::table('pharmacies')
             ->join('medicines', 'pharmacies.dispensation_id', '=', 'medicines.id')
             ->select(
@@ -144,7 +149,8 @@ class PatientController extends Controller
                 'appointments' => $appointment,
                 'outpatients' => $outpatient,
                 'inpatients' => $inpatient,
-                'pharmacies' => $pharmacy
+                'pharmacies' => $pharmacy,
+                'medicines' => $medicines
             ]
         );
     }

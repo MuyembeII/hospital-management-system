@@ -10,4 +10,12 @@ class Medicine extends Model
 {
     use HasFactory;
     use SoftDeletes;
+
+    public $fillable = [
+        'drug_type',
+        'manufacturer',
+        'name',
+        'quantity'
+    ];
+
 }

@@ -93,7 +93,12 @@
 												</tr>
 												<tr>
 													<td>Blood Pressure:&nbsp;&nbsp;</td>
-													<td>{{ $outpatient->blood_pressure }}</td>
+													<td>
+                                                        {{ $outpatient->bp_systolic }}/{{ $outpatient->bp_diastolic }}
+                                                        <small class="has-text-link">
+                                                            <i>mmHg</i>
+                                                        </small>
+                                                    </td>
 												</tr>
 												<tr>
 													<td>Weight:&nbsp;&nbsp;</td>

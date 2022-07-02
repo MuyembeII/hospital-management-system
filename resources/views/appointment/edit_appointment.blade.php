@@ -7,7 +7,7 @@
 	<div class="hero-body">
 		<div class="container has-text-centered">
 			<p class="title">{{ __('Edit Appointment') }} - {{ $patient->first_name }}&nbsp;{{ $patient->last_name }}</p>
-			<p class="subtitle">Create a new appointment for clinical services</p>
+			<p class="subtitle">Update appointment for clinical services</p>
 		</div>
 	</div>
 </section>

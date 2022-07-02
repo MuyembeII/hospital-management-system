@@ -54,26 +54,13 @@
 									<input class="input" type="text" name="weight" id="weight">
 								</div>
 							</div>
-							<!-- Choice Select One:  Prescription -->
-							<div class="field">
-								<div class="control">
-									<label class="label" for="sex">Prescription</label>
-									<div class="select is-fullwidth">
-										<select name="prescription_id" id="prescription_id" class="regular-text">
-											<option value="1">Panado</option>
-											<option value="2">Bruffen</option>
-											<option value="3">Paracetamol</option>
-											<option value="4">ORS</option>
-											<option value="5">ARVs</option>
-											<option value="6">Cough Syrup</option>
-											<option value="7">Coartem</option>
-											<option value="8">Penincilin</option>
-											<option value="9">Amoxyle</option>
-											<option value="10">Pen V</option>
-										</select>
-									</div>
-								</div>
-							</div>
+                            <!-- Input:  Blood Pressure -->
+                            <div class="field">
+                                <div class="control">
+                                    <label class="label" for="blood_pressure">BP</label>
+                                    <input class="input" type="text" name="blood_pressure" id="blood_pressure">
+                                </div>
+                            </div>
 						</div>
 
 						<!-- Column 2 -->
@@ -85,13 +72,26 @@
 									<input class="input" type="input" name="height" id="height">
 								</div>
 							</div>
-							<!-- Input:  Blood Pressure -->
-							<div class="field">
-								<div class="control">
-									<label class="label" for="blood_pressure">BP</label>
-									<input class="input" type="text" name="blood_pressure" id="blood_pressure">
-								</div>
-							</div>
+                            <!-- Choice Select One:  Prescription -->
+                            <div class="field">
+                                <div class="control">
+                                    <label class="label" for="sex">Prescription</label>
+                                    <div class="select is-fullwidth">
+                                        <select name="prescription_id" id="prescription_id" class="regular-text">
+                                            <option value="1">Panado</option>
+                                            <option value="2">Bruffen</option>
+                                            <option value="3">Paracetamol</option>
+                                            <option value="4">ORS</option>
+                                            <option value="5">ARVs</option>
+                                            <option value="6">Cough Syrup</option>
+                                            <option value="7">Coartem</option>
+                                            <option value="8">Penincilin</option>
+                                            <option value="9">Amoxyle</option>
+                                            <option value="10">Pen V</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
 
 						</div>
 

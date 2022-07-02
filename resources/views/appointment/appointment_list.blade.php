@@ -36,7 +36,7 @@
                             <div class="message-body">
                                 {{ session()->get('success') }}
                             </div>
-                        <article>
+                        </article>
                     </div>
                     @endif
                     <table class="table">
