@@ -213,8 +213,21 @@ class OutpatientController extends Controller
      */
     public function destroy($id)
     {
-        $outpatient = Outpatient::find($id)->firstOrFail();;
+        $outpatient = Outpatient::find($id)->firstOrFail();
+        $patient_id = $outpatient->patient_id;
         $outpatient->delete();
-        return redirect('/outpatient')->with('deleteOpdSuccess', 'OPD Visit Deleted!');
+        return redirect("/patients/${$patient_id}")->with('deleteOpdSuccess', 'OPD Visit Deleted!');
+    }
+
+    /**
+     * restore specific OPD
+     *
+     * @return void
+     */
+    public function restore($id)
+    {
+        Outpatient::withTrashed()->find($id)->restore();
+
+        return redirect("/outpatient/{$id}")->with('success', 'OPD Visit Restored!');
     }
 }

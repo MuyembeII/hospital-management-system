@@ -163,7 +163,7 @@ class PharmacyController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified pharmacy record from storage.
      *
      * @param int $id
      * @return \Illuminate\Http\Response
@@ -174,5 +174,17 @@ class PharmacyController extends Controller
         $pharmacy = Pharmacy::find($id);
         $pharmacy->delete();
         return redirect('/pharmacy')->with('deletePharmacySuccess', 'Dispensation Deleted!');
+    }
+
+    /**
+     * restore specific pharmacy
+     *
+     * @return void
+     */
+    public function restore($id)
+    {
+        Pharmacy::withTrashed()->find($id)->restore();
+
+        return redirect("/pharmacy/{$id}")->with('success', 'Dispensation Restored!');
     }
 }
