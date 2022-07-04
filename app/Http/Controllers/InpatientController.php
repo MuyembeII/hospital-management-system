@@ -212,8 +212,7 @@ class InpatientController extends Controller
             $message = $e->getMessage();
             $error_response = 'Error occurred attempting IPD Visit edit due to; \n' . $message . '. RESPONSE STATUS=' . $code;
 
-            request()->session()->flash('updateIpdFail', $error_response);
-            return redirect()->back();
+            return redirect("/outpatient/${id}")->with('updateIpdFail', $error_response);
         }
         return redirect("/outpatient/${id}")
             ->with('updateOpdSucces', 'OPD Visit updated successfully.');
