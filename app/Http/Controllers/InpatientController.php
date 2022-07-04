@@ -1,4 +1,4 @@
-<?php /** @noinspection ALL */
+<?php
 
 namespace App\Http\Controllers;
 
@@ -51,10 +51,12 @@ class InpatientController extends Controller
         $pid = $inpatient->patient_id;
         $did = $inpatient->doctor_id;
         $mid = $inpatient->prescription_id;
+        $wid = $inpatient->warden_id;
 
         $patient = Patient::find($pid);
         $medicine = Medicine::find($mid);
         $user = User::find($did);
+        $warden = User::find($wid);
 
         $age = DB::table('patients')
             ->selectRaw(
@@ -71,6 +73,7 @@ class InpatientController extends Controller
             "patient" => $patient,
             "medicine" => $medicine,
             "user" => $user,
+            "warden" => $warden,
             "verbose_age" => $age,
         ]);
 
@@ -92,6 +95,7 @@ class InpatientController extends Controller
             'patient_id' => 'required',
             'prescription_id' => 'required',
             'doctor_id' => 'required',
+            'warden_id' => 'required',
             'ward' => 'ward',
             'bp_systolic' => 'required',
             'bp_diastolic' => 'required',
@@ -113,6 +117,7 @@ class InpatientController extends Controller
         $inpatient->patient_id = $request->patient_id;
         $inpatient->doctor_id = $request->user_id;
         $inpatient->prescription_id = $request->prescription_id;
+        $inpatient->warden_id = $request->warden_id;
         $inpatient->temperature = $request->temperature;
         $inpatient->weight = $request->weight;
         $inpatient->height = $request->height;
@@ -170,6 +175,7 @@ class InpatientController extends Controller
             'patient_id' => 'required',
             'prescription_id' => 'required',
             'doctor_id' => 'required',
+            'warden_id' => 'required',
             'ward' => 'ward',
             'bp_systolic' => 'required',
             'bp_diastolic' => 'required',
@@ -193,6 +199,7 @@ class InpatientController extends Controller
             $inpatient->patient_id = $request->patient_id;
             $inpatient->doctor_id = $request->user_id;
             $inpatient->prescription_id = $request->prescription_id;
+            $inpatient->warden_id = $request->warden_id;
             $inpatient->temperature = $request->temperature;
             $inpatient->weight = $request->weight;
             $inpatient->height = $request->height;
@@ -234,7 +241,7 @@ class InpatientController extends Controller
     public function destroy($id)
     {
         $inpatient = Inpatient::find($id);
-        $inpatient = $outpatient->patient_id;
+        $patient_id = $inpatient->patient_id;
         $inpatient->delete();
         return redirect("/patients/${$patient_id}")->with('deleteIpdSuccess', 'IPD Visit Deleted!');
     }

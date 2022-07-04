@@ -20,6 +20,7 @@ class Inpatient extends Model
         'patient_id',
         'doctor_id',
         'prescription_id',
+        'warden_id',
         'ward',
         'diagnosis',
         'bp_systolic',

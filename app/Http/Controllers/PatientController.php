@@ -142,6 +142,7 @@ class PatientController extends Controller
             )
             ->orderBy('pharmacies.created_at', 'DESC')
             ->get();
+        $wardens = DB::table('users')->where('user_type', 'Nurse')->get();
 
         return view(
             'patient.show_patient', [
@@ -150,7 +151,8 @@ class PatientController extends Controller
                 'outpatients' => $outpatient,
                 'inpatients' => $inpatient,
                 'pharmacies' => $pharmacy,
-                'medicines' => $medicines
+                'medicines' => $medicines,
+                'wardens' => $wardens
             ]
         );
     }

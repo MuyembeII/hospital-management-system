@@ -2,7 +2,7 @@
 
 @extends('template')
 
-@section('content_title',__("Patient Details"))
+
 @section('content')
     <section class="hero is-info is-small">
         <div class="hero-body">
@@ -513,7 +513,7 @@
                 </div>
 
                 @section('content')
-                    {{-- show Pharmacy modal  --}}
+                    {{-- Show Create Pharmacy modal  --}}
                     <div id="show-pharmacy" class="modal">
                         <div class="modal-background"></div>
                         <div class="modal-card card-size">
@@ -546,7 +546,12 @@
                                                         <td>{{ $pharmacy->dispensation_date }}</td>
                                                         <td>{{ $pharmacy->dispensation_description }}</td>
                                                         <td>
-                                                            <form method="POST">
+                                                            <form
+                                                                method="POST"
+                                                                action="{{ route('inpatient.destroy', $inpatient->id) }}"
+                                                            >
+                                                                @csrf
+                                                                @method('DELETE')
                                                                 <div class="action-buttons">
                                                                     <div class="control is-grouped">
                                                                         <a class="button is-small is-outlined"
@@ -554,12 +559,13 @@
                                                                             <i class="fa fa-eye has-text-warning"></i>
                                                                         </a>
                                                                         <a class="button is-small is-outlined"
-                                                                           href="{{ route('appointments.edit', $appointment -> id) }}">
+                                                                           href="{{ route('$pharmacy.edit', $pharmacy -> id) }}">
                                                                             <i class="fa fa-pen-to-square has-text-link"></i>
                                                                         </a>
-                                                                        <a class="button is-small is-outlined">
+                                                                        <button class="button is-small is-outlined"
+                                                                                type="submit">
                                                                             <i class="fa fa-trash has-text-danger"></i>
-                                                                        </a>
+                                                                        </button>
                                                                     </div>
                                                                 </div>
                                                             </form>
@@ -872,7 +878,7 @@
                                                                                 Temperature <small>(celsius)</small>
                                                                             </label>
                                                                             <input
-                                                                                class="input"
+                                                                                class="input h-title"
                                                                                 type="text"
                                                                                 name="temperature"
                                                                                 id="temperature"
@@ -886,7 +892,7 @@
                                                                                 Weight <small>(kg)</small>
                                                                             </label>
                                                                             <input
-                                                                                class="input"
+                                                                                class="input h-title"
                                                                                 type="text"
                                                                                 name="weight"
                                                                                 id="weight"
@@ -902,7 +908,7 @@
                                                                             <div class="select is-fullwidth">
                                                                                 <select name="prescription_id"
                                                                                         id="prescription_id"
-                                                                                        class="regular-text">
+                                                                                        class="regular-text h-title">
                                                                                     <option>Select Drug...</option>
                                                                                     @foreach($medicines as $key => $value)
                                                                                         <option
@@ -930,7 +936,7 @@
                                                                                 <span class="icon checkmark">
                                                                                   <i class="fa fa-check"></i>
                                                                                 </span>
-                                                                                <p class="has-text-black">
+                                                                                <p class="has-text-black h-title">
                                                                                     Discharged?
                                                                                 </p>
                                                                             </label>
@@ -947,7 +953,7 @@
                                                                                 Systolic BP <small>(mmHg)</small>
                                                                             </label>
                                                                             <input
-                                                                                class="input"
+                                                                                class="input h-title"
                                                                                 type="number"
                                                                                 name="bp_systolic"
                                                                                 id="bp_systolic"
@@ -961,7 +967,7 @@
                                                                                 Height <small>(meters)</small>
                                                                             </label>
                                                                             <input
-                                                                                class="input"
+                                                                                class="input h-title"
                                                                                 type="text"
                                                                                 name="height"
                                                                                 id="height"
@@ -973,7 +979,7 @@
                                                                         <div class="control">
                                                                             <label class="label" for="ward">Ward</label>
                                                                             <input
-                                                                                class="input"
+                                                                                class="input h-title"
                                                                                 type="text"
                                                                                 name="ward"
                                                                                 id="ward"
@@ -988,7 +994,7 @@
                                                                                 Date of Discharge
                                                                             </label>
                                                                             <input
-                                                                                class="input bulmaCalendar"
+                                                                                class="input bulmaCalendar h-title"
                                                                                 type="date"
                                                                                 name="discharged_date"
                                                                                 id="discharged_date"
@@ -1008,7 +1014,7 @@
                                                                                 Diastolic BP <small>(mmHg)</small>
                                                                             </label>
                                                                             <input
-                                                                                class="input"
+                                                                                class="input h-title"
                                                                                 type="number"
                                                                                 name="bp_diastolic"
                                                                                 id="bp_diastolic"
@@ -1022,11 +1028,33 @@
                                                                                 Duration <small>(days)</small>
                                                                             </label>
                                                                             <input
-                                                                                class="input"
+                                                                                class="input h-title"
                                                                                 type="number"
                                                                                 name="duration"
                                                                                 id="duration"
                                                                             >
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <!-- Choice Select One:  Warden/Nurse -->
+                                                                    <div class="field">
+                                                                        <div class="control">
+                                                                            <label class="label" for="warden_id">
+                                                                                Warden
+                                                                            </label>
+                                                                            <div class="select is-fullwidth">
+                                                                                <select name="warden_id"
+                                                                                        id="warden_id"
+                                                                                        class="regular-text h-title">
+                                                                                    <option>Select nurse...</option>
+                                                                                    @foreach($wardens as $key => $value)
+                                                                                        <option
+                                                                                            value="{{ $value->id }}">
+                                                                                            {{ $value->name }}
+                                                                                        </option>
+                                                                                    @endforeach
+                                                                                </select>
+                                                                            </div>
                                                                         </div>
                                                                     </div>
 
@@ -1045,7 +1073,7 @@
                                                                             <textarea
                                                                                 name="diagnosis"
                                                                                 id="diagnosis"
-                                                                                class="textarea"
+                                                                                class="textarea h-title"
                                                                             ></textarea>
                                                                         </div>
                                                                     </div>
@@ -1061,7 +1089,7 @@
                                                                             <textarea
                                                                                 name="visit_summary"
                                                                                 id="visit_summary"
-                                                                                class="textarea"
+                                                                                class="textarea h-title"
                                                                             ></textarea>
                                                                         </div>
                                                                     </div>
@@ -1375,5 +1403,12 @@
                                             closeDispensationModal();
                                         }
                                     });
+
+
+                                    $(document).ready(function(){
+                                        $('.discharged_date').attr('disabled', 'disabled');
+                                        document.getElementById("discharged_date").setAttribute("disabled", "");
+                                    });
+
 
                                 </script>
