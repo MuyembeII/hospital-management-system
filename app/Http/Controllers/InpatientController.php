@@ -58,6 +58,7 @@ class InpatientController extends Controller
         $user = User::find($did);
         $warden = User::find($wid);
 
+
         $age = DB::table('patients')
             ->selectRaw(
                 'CONCAT(
@@ -67,9 +68,9 @@ class InpatientController extends Controller
             )
             ->where('id', $pid)
             ->value('age');
-
+        Log::notice("Collecting IPD for .->" . $patient->first_name);
         return view("services.inpatient_show", [
-            "$inpatient" => $inpatient,
+            "inpatient" => $inpatient,
             "patient" => $patient,
             "medicine" => $medicine,
             "user" => $user,
@@ -96,7 +97,7 @@ class InpatientController extends Controller
             'prescription_id' => 'required',
             'doctor_id' => 'required',
             'warden_id' => 'required',
-            'ward' => 'ward',
+            'ward' => 'required',
             'bp_systolic' => 'required',
             'bp_diastolic' => 'required',
             'weight' => 'required',
@@ -110,12 +111,12 @@ class InpatientController extends Controller
         $pid = $request->patient_id;
         $dis_flag = $request->discharged;
         $discharge = 0;
-        if ($dis_flag) {
-            $discharge = $dis_flag;
+        if ($dis_flag == "on") {
+            $discharge = 1;
         }
 
         $inpatient->patient_id = $request->patient_id;
-        $inpatient->doctor_id = $request->user_id;
+        $inpatient->doctor_id = $request->doctor_id;
         $inpatient->prescription_id = $request->prescription_id;
         $inpatient->warden_id = $request->warden_id;
         $inpatient->temperature = $request->temperature;
@@ -131,7 +132,7 @@ class InpatientController extends Controller
         $inpatient->ward = $request->ward;
         try {
             $inpatient->save();
-            Log::notice("New Patient Admission.");
+            Log::notice("New InPatient Admission.");
             return redirect("/patients/{$pid}")->with(
                 "storeIpdSuccess",
                 "New IPD service created successfully."
@@ -157,8 +158,13 @@ class InpatientController extends Controller
         $pid = $inpatient->patient_id;
         $patient = Patient::find($pid);
         $medicines = Medicine::all();
-        return view('services.inpatient_edit',
-            ["inpatient" => $inpatient, "patient" => $patient, "medicines" => $medicines]
+        $wardens = DB::table('users')->where('user_type', 'Nurse')->get();
+        return view('services.inpatient_edit', [
+                "inpatient" => $inpatient,
+                "patient" => $patient,
+                "medicines" => $medicines,
+                "wardens" => $wardens
+            ]
         );
     }
 
@@ -176,7 +182,7 @@ class InpatientController extends Controller
             'prescription_id' => 'required',
             'doctor_id' => 'required',
             'warden_id' => 'required',
-            'ward' => 'ward',
+            'ward' => 'required',
             'bp_systolic' => 'required',
             'bp_diastolic' => 'required',
             'weight' => 'required',
@@ -192,12 +198,12 @@ class InpatientController extends Controller
         try {
             $dis_flag = $request->discharged;
             $discharge = 0;
-            if ($dis_flag) {
-                $discharge = $dis_flag;
+            if ($dis_flag == 'on') {
+                $discharge = 1;
             }
 
             $inpatient->patient_id = $request->patient_id;
-            $inpatient->doctor_id = $request->user_id;
+            $inpatient->doctor_id = $request->doctor_id;
             $inpatient->prescription_id = $request->prescription_id;
             $inpatient->warden_id = $request->warden_id;
             $inpatient->temperature = $request->temperature;
@@ -224,9 +230,9 @@ class InpatientController extends Controller
             $message = $e->getMessage();
             $error_response = 'Error occurred attempting IPD Visit edit due to; \n' . $message . '. RESPONSE STATUS=' . $code;
 
-            return redirect("/outpatient/${id}")->with('updateIpdFail', $error_response);
+            return redirect("/inpatient")->with('updateIpdFail', $error_response);
         }
-        return redirect("/outpatient/${id}")
+        return redirect("/inpatient/${id}")
             ->with('updateOpdSucces', 'OPD Visit updated successfully.');
     }
 

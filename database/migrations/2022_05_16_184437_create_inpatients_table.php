@@ -23,9 +23,9 @@ return new class extends Migration
             $table->string('diagnosis', 64);
             $table->unsignedMediumInteger('bp_systolic'); //Millimetres of mercury (mmHg)
             $table->unsignedMediumInteger('bp_diastolic'); //Millimetres of mercury (mmHg)
-            $table->decimal('weight', 3, 2); //Kilograms
-            $table->decimal('height', 3, 2)->nullable(); //Meters
-            $table->decimal('temperature', 2, 1); //Celsius (˚C)
+            $table->string('weight', 8); //Kilograms
+            $table->string('height', 8)->nullable(); //Meters
+            $table->string('temperature', 8); //Celsius (˚C)
             $table->string('visit_summary', 128);
             $table->unsignedMediumInteger('duration')->nullable();;
             $table->boolean('discharged');
