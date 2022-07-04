@@ -381,8 +381,9 @@
                                             <tbody>
                                             @forelse ($outpatients as $outpatient)
                                                 <tr>
-                                                    <td>{{ $outpatient->bp_systolic }}
-                                                        /{{ $outpatient->bp_diastolic }}</td>
+                                                    <td>
+                                                        {{ $outpatient->bp_systolic }}/{{ $outpatient->bp_diastolic }}
+                                                    </td>
                                                     <td>{{ $outpatient->weight }}</td>
                                                     <td>{{ $outpatient->height }}</td>
                                                     <td>{{ $outpatient->temperature }}</td>
@@ -404,7 +405,8 @@
                                                                        href="{{ route('outpatient.edit', $outpatient -> id) }}">
                                                                         <i class="fa fa-pen-to-square has-text-link"></i>
                                                                     </a>
-                                                                    <button class="button is-small is-outlined" type="submit">
+                                                                    <button class="button is-small is-outlined"
+                                                                            type="submit">
                                                                         <i class="fa fa-trash has-text-danger"></i>
                                                                     </button>
                                                                 </div>
@@ -428,7 +430,7 @@
                     </div>
                 </div>
 
-                {{-- show IPD modal  --}}
+                {{-- Show IPD Modal  --}}
                 <div id="show-ipd" class="modal">
                     <div class="modal-background"></div>
                     <div class="modal-card card-size">
@@ -459,7 +461,9 @@
                                             <tbody>
                                             @forelse ($inpatients as $inpatient)
                                                 <tr>
-                                                    <td>{{ $inpatient->blood_pressure }}</td>
+                                                    <td>
+                                                        {{ $inpatient->bp_systolic }}/{{ $inpatient->bp_diastolic }}
+                                                    </td>
                                                     <td>{{ $inpatient->weight }}</td>
                                                     <td>{{ $inpatient->height }}</td>
                                                     <td>{{ $inpatient->temperature }}</td>
@@ -467,7 +471,11 @@
                                                     <td>{{ $inpatient->ward }}</td>
                                                     <td>{{ $inpatient->duration }}&nbsp;days</td>
                                                     <td>
-                                                        <form method="POST">
+                                                        <form method="POST"
+                                                              action="{{ route('inpatient.destroy', $inpatient->id) }}"
+                                                        >
+                                                            @csrf
+                                                            @method('DELETE')
                                                             <div class="action-buttons">
                                                                 <div class="control is-grouped">
                                                                     <a class="button is-small is-outlined"
@@ -475,12 +483,13 @@
                                                                         <i class="fa fa-eye has-text-warning"></i>
                                                                     </a>
                                                                     <a class="button is-small is-outlined"
-                                                                       href="{{ route('appointments.edit', $appointment -> id) }}">
+                                                                       href="{{ route('inpatient.edit', $inpatient -> id) }}">
                                                                         <i class="fa fa-pen-to-square has-text-link"></i>
                                                                     </a>
-                                                                    <a class="button is-small is-outlined">
+                                                                    <button class="button is-small is-outlined"
+                                                                            type="submit">
                                                                         <i class="fa fa-trash has-text-danger"></i>
-                                                                    </a>
+                                                                    </button>
                                                                 </div>
                                                             </div>
                                                         </form>
@@ -488,7 +497,8 @@
                                                 </tr>
                                             @empty
                                                 <tr>
-                                                    <td colspan="4" class="text-center">No inpatient services found.
+                                                    <td colspan="4" class="text-center">
+                                                        <p>No inpatient services found.</p>
                                                     </td>
                                                 </tr>
                                             @endforelse
@@ -581,15 +591,18 @@
                                 <header class="modal-card-head">
                                     <div class="container has-text-centered">
                                         <p class="title">Patient OPD Services</p>
-                                        <p class="subtitle">Start new outpatient service.</p>
+                                        <p class="subtitle h-title">Start new outpatient service.</p>
                                     </div>
                                     <button onclick="closeCreateOPDModal();" class="delete" aria-label="close"></button>
                                 </header>
                                 <section class="modal-card-body">
                                     <div class="section-light has-background-link-light">
                                         <div class="container has-background-white-bis">
-                                            <div class="columns is-multiline" data-aos="fade-in-up"
-                                                 data-aos-easing="linear">
+                                            <div
+                                                class="columns is-multiline"
+                                                data-aos="fade-in-up"
+                                                data-aos-easing="linear"
+                                            >
                                                 <div class="column is-8 is-offset-2">
 
                                                     <!-- Form validation message box -->
@@ -598,9 +611,9 @@
                                                             <p class="has-text-danger">Outpatient record creation
                                                                 failed!</p>
                                                             <article class="message is-danger">
-                      <span class="icon has-text-warning">
-                        <i class="fas fa-triangle-exclamation"></i>
-                      </span>
+                                                                <span class="icon has-text-warning">
+                                                                    <i class="fas fa-triangle-exclamation"></i>
+                                                                </span>
                                                                 <div class="message-body">
                                                                     <ul>
                                                                         @foreach ($errors->all() as $error)
@@ -614,37 +627,61 @@
 
                                                     <form action="{{ route('outpatient.store') }}" method="POST">
                                                         @csrf
-                                                        <input type="hidden" id="patient_id" name="patient_id"
-                                                               value="{{ $patient->id}}">
-                                                        <input type="hidden" id="doctor_id" name="doctor_id"
-                                                               value="{{ Auth::user()->id }}">
+                                                        <input
+                                                            type="hidden"
+                                                            id="patient_id"
+                                                            name="patient_id"
+                                                            value="{{ $patient->id}}"
+                                                        >
+                                                        <input
+                                                            type="hidden"
+                                                            id="doctor_id"
+                                                            name="doctor_id"
+                                                            value="{{ Auth::user()->id }}"
+                                                        >
                                                         <div class="columns">
                                                             <!-- Column 1 -->
                                                             <div class="column is-4">
                                                                 <!-- Input:  Temperature -->
                                                                 <div class="field">
                                                                     <div class="control">
-                                                                        <label class="label" for="temperature">Temperature
-                                                                            <small>(celsius)</small></label>
-                                                                        <input class="input" type="text"
-                                                                               name="temperature" id="temperature">
+                                                                        <label class="label" for="temperature">
+                                                                            Temperature <small>(celsius)</small>
+                                                                        </label>
+                                                                        <input
+                                                                            class="input"
+                                                                            type="text"
+                                                                            name="temperature"
+                                                                            id="temperature"
+                                                                        >
                                                                     </div>
                                                                 </div>
                                                                 <!-- Input:  Weight -->
                                                                 <div class="field">
                                                                     <div class="control">
-                                                                        <label class="label" for="weight">Weight <small>(kg)</small></label>
-                                                                        <input class="input" type="text" name="weight"
-                                                                               id="weight">
+                                                                        <label class="label" for="weight">
+                                                                            Weight <small>(kg)</small>
+                                                                        </label>
+                                                                        <input
+                                                                            class="input"
+                                                                            type="text"
+                                                                            name="weight"
+                                                                            id="weight"
+                                                                        >
                                                                     </div>
                                                                 </div>
                                                                 <!-- Input: Systolic Blood Pressure -->
                                                                 <div class="field">
                                                                     <div class="control">
-                                                                        <label class="label" for="bp_systolic">Systolic
-                                                                            BP <small>(mmHg)</small></label>
-                                                                        <input class="input" type="number"
-                                                                               name="bp_systolic" id="bp_systolic">
+                                                                        <label class="label" for="bp_systolic">
+                                                                            Systolic BP <small>(mmHg)</small>
+                                                                        </label>
+                                                                        <input
+                                                                            class="input"
+                                                                            type="number"
+                                                                            name="bp_systolic"
+                                                                            id="bp_systolic"
+                                                                        >
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -654,9 +691,15 @@
                                                                 <!-- Input:  Height -->
                                                                 <div class="field">
                                                                     <div class="control">
-                                                                        <label class="label" for="height">Height <small>(meters)</small></label>
-                                                                        <input class="input" type="text" name="height"
-                                                                               id="height">
+                                                                        <label class="label" for="height">
+                                                                            Height <small>(meters)</small>
+                                                                        </label>
+                                                                        <input
+                                                                            class="input"
+                                                                            type="text"
+                                                                            name="height"
+                                                                            id="height"
+                                                                        >
                                                                     </div>
                                                                 </div>
 
@@ -668,6 +711,7 @@
                                                                             <select name="prescription_id"
                                                                                     id="prescription_id"
                                                                                     class="regular-text">
+                                                                                <option>Select Drug...</option>
                                                                                 @foreach($medicines as $key => $value)
                                                                                     <option value="{{ $value->id }}">
                                                                                         {{ $value->name }}
@@ -681,10 +725,15 @@
                                                                 <!-- Input:  Diastolic Blood Pressure -->
                                                                 <div class="field">
                                                                     <div class="control">
-                                                                        <label class="label" for="bp_diastolic">Diastolic
-                                                                            BP <small>(mmHg)</small></label>
-                                                                        <input class="input" type="number"
-                                                                               name="bp_diastolic" id="bp_diastolic">
+                                                                        <label class="label" for="bp_diastolic">
+                                                                            Diastolic BP <small>(mmHg)</small>
+                                                                        </label>
+                                                                        <input
+                                                                            class="input"
+                                                                            type="number"
+                                                                            name="bp_diastolic"
+                                                                            id="bp_diastolic"
+                                                                        >
                                                                     </div>
                                                                 </div>
 
@@ -695,19 +744,26 @@
                                                                 <!-- Text:  Diagnosis Details -->
                                                                 <div class="field">
                                                                     <div class="control mb-1">
-                                                                        <label class="label" for="diagnosis">Diagnosis
-                                                                            Details</label>
-                                                                        <textarea name="diagnosis" id="diagnosis"
-                                                                                  class="textarea"></textarea>
+                                                                        <label class="label" for="diagnosis">
+                                                                            Diagnosis Details
+                                                                        </label>
+                                                                        <textarea
+                                                                            name="diagnosis"
+                                                                            id="diagnosis"
+                                                                            class="textarea"
+                                                                        >
+                                                                        </textarea>
                                                                     </div>
                                                                 </div>
                                                                 <!-- Text:  Reason for Visit -->
                                                                 <div class="field">
                                                                     <div class="control mb-1">
                                                                         <label class="label" for="reason_for_visit">Notes</label>
-                                                                        <textarea name="reason_for_visit"
-                                                                                  id="reason_for_visit"
-                                                                                  class="textarea"></textarea>
+                                                                        <textarea
+                                                                            name="reason_for_visit"
+                                                                            id="reason_for_visit"
+                                                                            class="textarea"
+                                                                        ></textarea>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -722,20 +778,20 @@
                                                                         <p class="control">
                                                                             <button
                                                                                 class="button is-primary submit-button"
-                                                                                type="submit">
-                                                                                Save&nbsp;&nbsp; <i
-                                                                                    class="fas fa-paper-plane"></i>
+                                                                                type="submit"
+                                                                            >
+                                                                                Save&nbsp;&nbsp
+                                                                                <i class="fas fa-paper-plane"></i>
                                                                             </button>
                                                                         </p>
                                                                         <p class="control">
                                                                             <a class="button is-warning"
                                                                                href="{{ url('patients') }}"
                                                                                aria-current="page">
-                                                                                Cancel&nbsp;&nbsp; <i
-                                                                                    class="fas fa-circle-xmark"></i>
+                                                                                Cancel&nbsp;&nbsp;
+                                                                                <i class="fas fa-circle-xmark"></i>
                                                                             </a>
                                                                         </p>
-
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -758,7 +814,7 @@
                                     <header class="modal-card-head">
                                         <div class="container has-text-centered">
                                             <p class="title">Patient IPD Services</p>
-                                            <p class="subtitle">Start new outpatient service.</p>
+                                            <p class="subtitle h-title">Start new inpatient visit.</p>
                                         </div>
                                         <button onclick="closeCreateIPDModal();" class="delete"
                                                 aria-label="close"></button>
@@ -773,8 +829,9 @@
                                                         <!-- Form validation message box -->
                                                         @if ($errors->any())
                                                             <div class="box">
-                                                                <p class="has-text-danger">Inpatient record creation
-                                                                    failed!</p>
+                                                                <p class="has-text-danger">
+                                                                    Inpatient record creation failed!
+                                                                </p>
                                                                 <article class="message is-danger">
                                                                     <span class="icon has-text-warning">
                                                                         <i class="fab fa-triangle-exclamation"></i>
@@ -792,10 +849,18 @@
 
                                                         <form action="{{ route('inpatient.store') }}" method="POST">
                                                             @csrf
-                                                            <input type="hidden" id="patient_id" name="patient_id"
-                                                                   value="{{ $patient->id}}">
-                                                            <input type="hidden" id="doctor_id" name="doctor_id"
-                                                                   value="{{ Auth::user()->id }}">
+                                                            <input
+                                                                type="hidden"
+                                                                id="patient_id"
+                                                                name="patient_id"
+                                                                value="{{ $patient->id}}"
+                                                            >
+                                                            <input
+                                                                type="hidden"
+                                                                id="doctor_id"
+                                                                name="doctor_id"
+                                                                value="{{ Auth::user()->id }}"
+                                                            >
                                                             <!-- Columns - Vitals, Physical Exam and Pharmacy -->
                                                             <div class="columns">
                                                                 <!-- Column 1 -->
@@ -803,77 +868,132 @@
                                                                     <!-- Input:  Temperature -->
                                                                     <div class="field">
                                                                         <div class="control">
-                                                                            <label class="label" for="temperature">Temperature
-                                                                                <small>(celsius)</small></label>
-                                                                            <input class="input" type="text"
-                                                                                   name="temperature" id="temperature">
+                                                                            <label class="label" for="temperature">
+                                                                                Temperature <small>(celsius)</small>
+                                                                            </label>
+                                                                            <input
+                                                                                class="input"
+                                                                                type="text"
+                                                                                name="temperature"
+                                                                                id="temperature"
+                                                                            >
                                                                         </div>
                                                                     </div>
                                                                     <!-- Input:  Weight -->
                                                                     <div class="field">
                                                                         <div class="control">
-                                                                            <label class="label" for="weight">Weight
-                                                                                <small>(kg)</small></label>
-                                                                            <input class="input" type="text"
-                                                                                   name="weight" id="weight">
+                                                                            <label class="label" for="weight">
+                                                                                Weight <small>(kg)</small>
+                                                                            </label>
+                                                                            <input
+                                                                                class="input"
+                                                                                type="text"
+                                                                                name="weight"
+                                                                                id="weight"
+                                                                            >
                                                                         </div>
                                                                     </div>
                                                                     <!-- Choice Select One:  Prescription -->
                                                                     <div class="field">
                                                                         <div class="control">
-                                                                            <label class="label"
-                                                                                   for="sex">Prescription</label>
+                                                                            <label class="label" for="prescription_id">
+                                                                                Prescription
+                                                                            </label>
                                                                             <div class="select is-fullwidth">
                                                                                 <select name="prescription_id"
                                                                                         id="prescription_id"
                                                                                         class="regular-text">
-                                                                                    <option value="1">Panado</option>
-                                                                                    <option value="2">Bruffen</option>
-                                                                                    <option value="3">Paracetamol
-                                                                                    </option>
-                                                                                    <option value="4">ORS</option>
-                                                                                    <option value="5">ARVs</option>
-                                                                                    <option value="6">Cough Syrup
-                                                                                    </option>
-                                                                                    <option value="7">Coartem</option>
-                                                                                    <option value="8">Penincilin
-                                                                                    </option>
-                                                                                    <option value="9">Amoxyle</option>
-                                                                                    <option value="10">Pen V</option>
+                                                                                    <option>Select Drug...</option>
+                                                                                    @foreach($medicines as $key => $value)
+                                                                                        <option
+                                                                                            value="{{ $value->id }}">
+                                                                                            {{ $value->name }}
+                                                                                        </option>
+                                                                                    @endforeach
                                                                                 </select>
                                                                             </div>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <!-- Select Option:  Discharge Status -->
+                                                                    <div class="field">
+                                                                        <div class="control">
+                                                                            <label class="label" for="discharged">
+                                                                                Discharged Status
+                                                                            </label>
+                                                                            <label class="is-checkbox is-static">
+                                                                                <input
+                                                                                    id="discharged"
+                                                                                    name="discharged"
+                                                                                    type="checkbox"
+                                                                                >
+                                                                                <span class="icon checkmark">
+                                                                                  <i class="fa fa-check"></i>
+                                                                                </span>
+                                                                                <p class="has-text-black">
+                                                                                    Discharged?
+                                                                                </p>
+                                                                            </label>
                                                                         </div>
                                                                     </div>
                                                                 </div>
 
                                                                 <!-- Column 2 -->
                                                                 <div class="column is-4">
+                                                                    <!-- Input: Systolic Blood Pressure -->
+                                                                    <div class="field">
+                                                                        <div class="control">
+                                                                            <label class="label" for="bp_systolic">
+                                                                                Systolic BP <small>(mmHg)</small>
+                                                                            </label>
+                                                                            <input
+                                                                                class="input"
+                                                                                type="number"
+                                                                                name="bp_systolic"
+                                                                                id="bp_systolic"
+                                                                            >
+                                                                        </div>
+                                                                    </div>
                                                                     <!-- Input:  Height -->
                                                                     <div class="field">
                                                                         <div class="control">
-                                                                            <label class="label" for="height">Height
-                                                                                <small>(meters)</small></label>
-                                                                            <input class="input" type="text"
-                                                                                   name="height" id="height">
-                                                                        </div>
-                                                                    </div>
-                                                                    <!-- Input:  Blood Pressure -->
-                                                                    <div class="field">
-                                                                        <div class="control">
-                                                                            <label class="label" for="blood_pressure">BP
-                                                                                <small>(mm Hg)</small></label>
-                                                                            <input class="input" type="text"
-                                                                                   name="blood_pressure"
-                                                                                   id="blood_pressure"
-                                                                                   placeholder="E.g 120/65">
+                                                                            <label class="label" for="height">
+                                                                                Height <small>(meters)</small>
+                                                                            </label>
+                                                                            <input
+                                                                                class="input"
+                                                                                type="text"
+                                                                                name="height"
+                                                                                id="height"
+                                                                            >
                                                                         </div>
                                                                     </div>
                                                                     <!-- Input:  Ward/Service Area -->
                                                                     <div class="field">
                                                                         <div class="control">
                                                                             <label class="label" for="ward">Ward</label>
-                                                                            <input class="input" type="text" name="ward"
-                                                                                   id="ward">
+                                                                            <input
+                                                                                class="input"
+                                                                                type="text"
+                                                                                name="ward"
+                                                                                id="ward"
+                                                                            >
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <!-- Date :  Date of Discharge -->
+                                                                    <div class="field">
+                                                                        <div class="control">
+                                                                            <label class="label" for="discharged_date">
+                                                                                Date of Discharge
+                                                                            </label>
+                                                                            <input
+                                                                                class="input bulmaCalendar"
+                                                                                type="date"
+                                                                                name="discharged_date"
+                                                                                id="discharged_date"
+                                                                                data-display-mode="dialog"
+                                                                            >
                                                                         </div>
                                                                     </div>
 
@@ -881,30 +1001,32 @@
 
                                                                 <!-- Column 3 -->
                                                                 <div class="column is-4">
+                                                                    <!-- Input:  Diastolic Blood Pressure -->
+                                                                    <div class="field">
+                                                                        <div class="control">
+                                                                            <label class="label" for="bp_diastolic">
+                                                                                Diastolic BP <small>(mmHg)</small>
+                                                                            </label>
+                                                                            <input
+                                                                                class="input"
+                                                                                type="number"
+                                                                                name="bp_diastolic"
+                                                                                id="bp_diastolic"
+                                                                            >
+                                                                        </div>
+                                                                    </div>
                                                                     <!-- Input:  Duration -->
                                                                     <div class="field">
                                                                         <div class="control">
-                                                                            <label class="label" for="duration">Duration
-                                                                                <small>(days)</small></label>
-                                                                            <input class="input" type="number"
-                                                                                   name="duration" id="duration">
-                                                                        </div>
-                                                                    </div>
-                                                                    <!-- Input:  Date of Discharge -->
-                                                                    <div class="field">
-                                                                        <div class="control">
-                                                                            <label class="label" for="discharged">
-                                                                                Discharged? </label>
-                                                                            <input type="checkbox" name="discharged"
-                                                                                   id="discharged">
-                                                                        </div>
-                                                                        <div class="control">
-                                                                            <label class="label" for="discharged_date">Date
-                                                                                of Discharge</label>
-                                                                            <input class="input bulmaCalendar"
-                                                                                   type="date" name="discharged_date"
-                                                                                   id="discharged_date"
-                                                                                   data-display-mode="dialog">
+                                                                            <label class="label" for="duration">
+                                                                                Duration <small>(days)</small>
+                                                                            </label>
+                                                                            <input
+                                                                                class="input"
+                                                                                type="number"
+                                                                                name="duration"
+                                                                                id="duration"
+                                                                            >
                                                                         </div>
                                                                     </div>
 
@@ -917,10 +1039,14 @@
                                                                     <!-- Text:  Diagnosis Details -->
                                                                     <div class="field">
                                                                         <div class="control mb-1">
-                                                                            <label class="label" for="diagnosis">Diagnosis
-                                                                                Details</label>
-                                                                            <textarea name="diagnosis" id="diagnosis"
-                                                                                      class="textarea"></textarea>
+                                                                            <label class="label" for="diagnosis">
+                                                                                Diagnosis Details
+                                                                            </label>
+                                                                            <textarea
+                                                                                name="diagnosis"
+                                                                                id="diagnosis"
+                                                                                class="textarea"
+                                                                            ></textarea>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -929,10 +1055,14 @@
                                                                     <!-- Text:  Reason for Visit -->
                                                                     <div class="field">
                                                                         <div class="control mb-1">
-                                                                            <label class="label" for="visit_summary">Notes</label>
-                                                                            <textarea name="visit_summary"
-                                                                                      id="visit_summary"
-                                                                                      class="textarea"></textarea>
+                                                                            <label class="label" for="visit_summary">
+                                                                                Visit Summary
+                                                                            </label>
+                                                                            <textarea
+                                                                                name="visit_summary"
+                                                                                id="visit_summary"
+                                                                                class="textarea"
+                                                                            ></textarea>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -946,21 +1076,24 @@
                                                                         <div class="field has-addons">
                                                                             <p class="control">
                                                                                 <button
-                                                                                    class="button is-primary submit-button"
-                                                                                    type="submit">
-                                                                                    Save&nbsp;&nbsp; <i
-                                                                                        class="fas fa-paper-plane"></i>
+                                                                                    class="button h-title is-primary submit-button"
+                                                                                    type="submit"
+                                                                                    aria-hidden="true"
+                                                                                >
+                                                                                    Save&nbsp;&nbsp;
+                                                                                    <i class="fas fa-paper-plane"></i>
                                                                                 </button>
                                                                             </p>
                                                                             <p class="control">
-                                                                                <a class="button is-warning"
+                                                                                <a class="button h-title is-warning"
                                                                                    href="{{ url('patients') }}"
-                                                                                   aria-current="page">
-                                                                                    Cancel&nbsp;&nbsp; <i
-                                                                                        class="fas fa-circle-xmark"></i>
+                                                                                   aria-current="page"
+                                                                                   aria-hidden="true"
+                                                                                >
+                                                                                    Cancel&nbsp;&nbsp;
+                                                                                    <i class="fas fa-circle-xmark"></i>
                                                                                 </a>
                                                                             </p>
-
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -982,11 +1115,15 @@
                                         <header class="modal-card-head">
                                             <div class="container has-text-centered">
                                                 <p class="title">Pharmacy Service</p>
-                                                <p class="subtitle">Patient drug dispensations and medicine
-                                                    management.</p>
+                                                <p class="subtitle">
+                                                    Patient drug dispensations and medicine management.
+                                                </p>
                                             </div>
-                                            <button onclick="closeDispensationModal();" class="delete"
-                                                    aria-label="close"></button>
+                                            <button
+                                                onclick="closeDispensationModal();"
+                                                class="delete"
+                                                aria-label="close"
+                                            ></button>
                                         </header>
                                         <section class="modal-card-body">
                                             <div class="section-light has-background-link-light">
@@ -1001,9 +1138,9 @@
                                                                     <p class="has-text-danger">Pharmacy drug
                                                                         dispensation failed!</p>
                                                                     <article class="message is-danger">
-                                          <span class="icon has-text-warning">
-                                            <i class="fab fa-triangle-exclamation"></i>
-                                          </span>
+                                                                        <span class="icon has-text-warning">
+                                                                            <i class="fab fa-triangle-exclamation"></i>
+                                                                        </span>
                                                                         <div class="message-body">
                                                                             <ul>
                                                                                 @foreach ($errors->all() as $error)

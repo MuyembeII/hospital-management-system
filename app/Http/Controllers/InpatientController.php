@@ -149,7 +149,12 @@ class InpatientController extends Controller
     public function edit($id)
     {
         $inpatient = Inpatient::find($id);
-        return view('services.inpatient_edit', compact('inpatient'));
+        $pid = $inpatient->patient_id;
+        $patient = Patient::find($pid);
+        $medicines = Medicine::all();
+        return view('services.inpatient_edit',
+            ["inpatient" => $inpatient, "patient" => $patient, "medicines" => $medicines]
+        );
     }
 
     /**
@@ -228,7 +233,32 @@ class InpatientController extends Controller
     public function destroy($id)
     {
         $inpatient = Inpatient::find($id);
+        $inpatient = $outpatient->patient_id;
         $inpatient->delete();
-        return redirect('/inpatient')->with('deleteIpdSuccess', 'IPD Visit Deleted!');
+        return redirect("/patients/${$patient_id}")->with('deleteIpdSuccess', 'IPD Visit Deleted!');
+    }
+
+    /**
+     * restore specific IPD
+     *
+     * @return void
+     */
+    public function restore($id)
+    {
+        Inpatient::withTrashed()->find($id)->restore();
+
+        return redirect("/inpatient/{$id}")->with('success', 'IPD Visit Restored!');
+    }
+
+    /**
+     * restore all IPD Visits
+     *
+     * @return response()
+     */
+    public function restoreAll()
+    {
+        Inpatient::onlyTrashed()->restore();
+
+        return redirect("/inpatient");
     }
 }

@@ -10,6 +10,7 @@
         <link rel="stylesheet" href="{{asset('css/patient_search.css')}}">
         <link rel="stylesheet" href="{{asset('css/patient_create.css')}}">
         <link rel="stylesheet" href="{{asset('css/patient_details.css')}}">
+        <link rel="stylesheet" href="{{asset('css/misc.css')}}">
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
