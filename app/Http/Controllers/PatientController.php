@@ -126,20 +126,26 @@ class PatientController extends Controller
     public function show(Patient $patient)
     {
         $patient_id = $patient->id;
-        $appointment = DB::table('appointments')->where('patient_id', $patient_id)->get();
+        $appointment = DB::table('appointments')
+            ->where('patient_id', $patient_id)
+            ->whereNull('deleted_at')
+            ->get();
         $outpatient = DB::table('outpatients')
             ->where('patient_id', $patient_id)
             ->whereNull('deleted_at')
             ->get();
-        $inpatient = DB::table('inpatients')->where('patient_id', $patient_id)->get();
+        $inpatient = DB::table('inpatients')
+            ->where('patient_id', $patient_id)
+            ->whereNull('deleted_at')
+            ->get();
         $medicines = Medicine::all();
         $pharmacy = DB::table('pharmacies')
             ->join('medicines', 'pharmacies.dispensation_id', '=', 'medicines.id')
             ->select(
                 'pharmacies.*',
                 'medicines.name',
-                'medicines.quantity',
             )
+            ->whereNull('pharmacies.deleted_at')
             ->orderBy('pharmacies.created_at', 'DESC')
             ->get();
         $wardens = DB::table('users')->where('user_type', 'Nurse')->get();

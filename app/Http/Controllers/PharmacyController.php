@@ -1,4 +1,4 @@
-<?php /** @noinspection ALL */
+<?php
 
 namespace App\Http\Controllers;
 
@@ -99,7 +99,7 @@ class PharmacyController extends Controller
             );
         } catch (Throwable $th) {
             return redirect("/patients/{$pid}")->with(
-                "fail",
+                "error",
                 "Error dispensing drug!"
             );
         }
@@ -114,7 +114,15 @@ class PharmacyController extends Controller
     public function edit($id)
     {
         $pharmacy = Pharmacy::find($id);
-        return view('services.pharmacy_edit', compact('pharmacy'));
+        $pid = $pharmacy->patient_id;
+        $patient = Patient::find($pid);
+        $medicines = Medicine::all();
+        return view('services.pharmacy_edit', [
+                "pharmacy" => $pharmacy,
+                "patient" => $patient,
+                "medicines" => $medicines
+            ]
+        );
     }
 
     /**
@@ -138,7 +146,7 @@ class PharmacyController extends Controller
         $pid = $request['patient_id'];
 
         try {
-            $pharmacy->patient_id = pid;
+            $pharmacy->patient_id = $pid;
             $pharmacy->doctor_id = $request->doctor_id;
             $pharmacy->dispensation_id = $request->doctor_id;
             $pharmacy->quantity = $request->quantity;
@@ -156,10 +164,9 @@ class PharmacyController extends Controller
             $code = $e->getCode();
             $message = $e->getMessage();
             $error_response = 'Error occurred attempting dispensation edit due to; \n' . $message . '. RESPONSE STATUS=' . $code;
-
-            request()->session()->flash('updatePharmacyFail', $error_response);
-            return redirect()->back();
+            return redirect()->back()->with('error', $error_response);
         }
+        return redirect("/pharmacy/{$id}")->with('success', 'Dispensation Updated!');
     }
 
     /**
@@ -172,8 +179,9 @@ class PharmacyController extends Controller
     public function destroy($id)
     {
         $pharmacy = Pharmacy::find($id);
+        $pid = $pharmacy->patient_id;
         $pharmacy->delete();
-        return redirect('/pharmacy')->with('deletePharmacySuccess', 'Dispensation Deleted!');
+        return redirect("/patients/{$pid}")->with('success', 'Dispensation Deleted!');
     }
 
     /**

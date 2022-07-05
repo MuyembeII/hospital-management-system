@@ -7,12 +7,33 @@
     <div class="hero-body">
         <div class="container has-text-centered">
             <p class="title">Patient Details - {{ $patient->first_name }}&nbsp;{{ $patient->last_name }}</p>
-            <p class="subtitle">Patient management services for appointments, OPD, IPD and pharmacy.</p>
+            <p class="subtitle h-title">Patient management services for appointments, OPD, IPD and pharmacy.</p>
         </div>
     </div>
 </section>
-
-
+@if(session()->get('success'))
+    <div class="box">
+        <article class="message is-success">
+            <span class="icon has-text-link">
+                <i class="fas fa-circle-check"></i>
+            </span>
+            <div class="message-body">
+                {{ session()->get('success') }}
+            </div>
+        </article>
+    </div>
+@elseif (session()->get('error'))
+    <div class="box">
+        <article class="message is-error">
+            <span class="icon has-text-link">
+                <i class="fas fa-circle-check"></i>
+            </span>
+            <div class="message-body">
+                {{ session()->get('success') }}
+            </div>
+        </article>
+    </div>
+@endif
 <section class="container">
     <div>
         <div class="columns features">
@@ -24,13 +45,13 @@
                 <a onclick="openModal();" class="button is-primary is-block is-alt is-large"
                    data-target="create-appointment"> Create Appointment&nbsp; <i class="fas fa-wand-magic"></i></a>
                 <br/>
-                <a onclick="openDispensationModal();" class="button is-primary is-block is-alt is-large"
+                <a onclick="openDispensationModal();" class="button is-primary is-block is-alt is-large h-title"
                    data-target="create-pharmacy"> Create Pharmacy&nbsp; <i class="fas fa-wand-magic"></i></a>
                 <br/>
-                <a onclick="openCreateOPDModal();" class="button is-link is-block is-alt is-medium"
+                <a onclick="openCreateOPDModal();" class="button is-link is-block is-alt is-medium h-title"
                    data-target="create-opd"> Start OPD&nbsp; <i class="fas fa-play"></i></a>
                 <br/>
-                <a onclick="openCreateIPDModal();" class="button is-link is-block is-alt is-medium"
+                <a onclick="openCreateIPDModal();" class="button is-link is-block is-alt is-medium h-title"
                    data-target="create-ipd"> Start IPD&nbsp; <i class="fas fa-play"></i></a>
                 <br/>
                 <a class="button is-success is-block is-alt is-medium" href="{{ url('patients') }}">Back To
@@ -70,31 +91,40 @@
                                         </tr>
                                         <tr>
                                             <td>Name:</td>
-                                            <td>{{ $patient->first_name }}&nbsp;{{ $patient->last_name }}</td>
+                                            <td class="h-title">{{ $patient->first_name }}
+                                                &nbsp;{{ $patient->last_name }}</td>
                                         </tr>
                                         <tr>
                                             <td>Gender :</td>
-                                            <td>{{ $patient->sex }}</td>
+                                            <td class="h-title">
+                                                @if (($patient->sex) === 'M')
+                                                    Male
+                                                @elseif (($patient->sex) === 'F')
+                                                    Female
+                                                @else
+                                                    Unknown
+                                                @endif
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td>Date of Birth :</td>
-                                            <td>{{ $patient->dob }}</td>
+                                            <td class="h-title">{{ $patient->dob }}</td>
                                         </tr>
                                         <tr>
                                             <td>Address:</td>
-                                            <td>{{ $patient->address }}</td>
+                                            <td class="h-title">{{ $patient->address }}</td>
                                         </tr>
                                         <tr>
                                             <td>Contact Number:</td>
-                                            <td>{{ $patient->contactnumber }}</td>
+                                            <td class="h-title">{{ $patient->contactnumber }}</td>
                                         </tr>
                                         <tr>
                                             <td>Email:</td>
-                                            <td>{{ $patient->email }}</td>
+                                            <td class="h-title">{{ $patient->email }}</td>
                                         </tr>
                                         <tr>
                                             <td>NRC Number:</td>
-                                            <td>{{ $patient->nrc }}</td>
+                                            <td class="h-title">{{ $patient->nrc }}</td>
                                         </tr>
                                     </table>
                                 </div>
@@ -108,35 +138,35 @@
                                         </tr>
                                         <tr>
                                             <td>Occupation:</td>
-                                            <td>{{ $patient->occupation }}</td>
+                                            <td class="h-title">{{ $patient->occupation }}</td>
                                         </tr>
                                         <tr>
                                             <td>Birth Place:</td>
-                                            <td>{{ $patient->birth_place }}</td>
+                                            <td class="h-title">{{ $patient->birth_place }}</td>
                                         </tr>
                                         <tr>
                                             <td>Nationality:</td>
-                                            <td>{{ $patient->nationality }}</td>
+                                            <td class="h-title">{{ $patient->nationality }}</td>
                                         </tr>
                                         <tr>
                                             <td>Language:</td>
-                                            <td>Bemba</td>
+                                            <td class="h-title">{{ $patient->langauge }}</td>
                                         </tr>
                                         <tr>
                                             <td>Religion:</td>
-                                            <td>{{ $patient->religion }}</td>
+                                            <td class="h-title">{{ $patient->religion }}</td>
                                         </tr>
                                         <tr>
                                             <td>Guardian:</td>
-                                            <td>{{ $patient->guardian }}</td>
+                                            <td class="h-title">{{ $patient->guardian }}</td>
                                         </tr>
                                         <tr>
                                             <td>Guardian Address:</td>
-                                            <td>{{ $patient->guardian_address }}</td>
+                                            <td class="h-title">{{ $patient->guardian_address }}</td>
                                         </tr>
                                         <tr>
                                             <td>Guardian Contact:</td>
-                                            <td>{{ $patient->guardian_contact }}</td>
+                                            <td class="h-title">{{ $patient->guardian_contact }}</td>
                                         </tr>
                                     </table>
                                 </div>
@@ -156,7 +186,7 @@
                                     <th class="px-3">Options</th>
                                 </tr>
                                 </thead>
-                                <tbody>
+                                <tbody class="h-title">
                                 @forelse ($appointments as $appointment)
                                     <tr>
                                         <td>{{ $appointment->appointment_status }}</td>
@@ -205,7 +235,7 @@
         <header class="modal-card-head">
             <div class="container has-text-centered">
                 <p class="title">Patient Appointment</p>
-                <p class="subtitle">Create a new appointment for clinical services</p>
+                <p class="subtitleclass h-title">Create a new appointment for clinical services</p>
             </div>
             <button onclick="closeModal();" class="delete" aria-label="close"></button>
         </header>
@@ -236,21 +266,32 @@
 
                             <form action="{{ route('appointments.store') }}" method="POST">
                                 @csrf
-                                <input type="hidden" id="patient_id" name="patient_id"
-                                       value="{{ $patient->id}}">
-                                <input type="hidden" id="user_id" name="user_id"
-                                       value="{{ Auth::user()->id }}">
+                                <input
+                                    class="h-title"
+                                    type="hidden"
+                                    id="patient_id"
+                                    name="patient_id"
+                                    value="{{ $patient->id}}"
+                                >
+                                <input
+                                    class="h-title"
+                                    type="hidden"
+                                    id="user_id"
+                                    name="user_id"
+                                    value="{{ Auth::user()->id }}">
                                 <div class="columns">
                                     <!-- Column 1 -->
                                     <div class="column is-6">
                                         <!-- Choice Select One:  Appointment Status -->
                                         <div class="field">
                                             <div class="control">
-                                                <label class="label" for="appointment_status">Appointment
-                                                    Status</label>
+                                                <label class="label" for="appointment_status">Appointment Status</label>
                                                 <div class="select is-fullwidth">
-                                                    <select name="appointment_status"
-                                                            id="appointment_status" class="regular-text">
+                                                    <select
+                                                        name="appointment_status"
+                                                        id="appointment_status"
+                                                        class="regular-text h-title"
+                                                    >
                                                         <option value=""></option>
                                                         <option value="Pending">Pending</option>
                                                         <option value="Attended">Attended</option>
@@ -262,9 +303,8 @@
                                         <!-- Input:  Appointment Date -->
                                         <div class="field">
                                             <div class="control">
-                                                <label class="label" for="appointment_date">Date of
-                                                    Appointment</label>
-                                                <input class="input bulmaCalendar" type="date"
+                                                <label class="label" for="appointment_date">Date of Appointment</label>
+                                                <input class="input bulmaCalendar h-title" type="date"
                                                        name="appointment_date" id="appointment_date"
                                                        data-display-mode="dialog">
                                             </div>
@@ -277,7 +317,7 @@
                                                 <label class="label" for="service_type">Service Type</label>
                                                 <div class="select is-fullwidth">
                                                     <select name="service_type" id="service_type"
-                                                            class="regular-text">
+                                                            class="regular-text h-title">
                                                         <option value=""></option>
                                                         <option value="OPD">OPD</option>
                                                         <option value="IPD">IPD</option>
@@ -296,7 +336,7 @@
                                                 <label class="label" for="appointment_details">Notes</label>
                                                 <textarea name="appointment_details"
                                                           id="appointment_details"
-                                                          class="textarea"></textarea>
+                                                          class="textarea h-title"></textarea>
                                             </div>
                                         </div>
                                     </div>
@@ -307,17 +347,22 @@
                                         <div class="column is-4 mx-2">
                                             <div class="field has-addons">
                                                 <p class="control">
-                                                    <button class="button is-primary submit-button"
-                                                            type="submit">
-                                                        Update Appointment&nbsp;&nbsp; <i
-                                                            class="fas fa-paper-plane"></i>
+                                                    <button
+                                                        class="button is-primary submit-button"
+                                                        type="submit"
+                                                    >
+                                                        Update Appointment&nbsp;&nbsp;
+                                                        <i class="fas fa-paper-plane"></i>
                                                     </button>
                                                 </p>
                                                 <p class="control">
-                                                    <a class="button is-warning" onclick="closeModal();"
-                                                       aria-current="page">
-                                                        Cancel&nbsp;&nbsp; <i
-                                                            class="fas fa-circle-xmark"></i>
+                                                    <a
+                                                        class="button is-warning"
+                                                        onclick="closeModal();"
+                                                        aria-current="page"
+                                                    >
+                                                        Cancel&nbsp;&nbsp;
+                                                        <i class="fas fa-circle-xmark"></i>
                                                     </a>
                                                 </p>
 
@@ -336,8 +381,8 @@
     </div>
 </div>
 
-
-{{-- show OPD modal  --}}
+{{-- TABLES  --}}
+{{-- Show OPD Modal  --}}
 <div id="show-opd" class="modal">
     <div class="modal-background"></div>
     <div class="modal-card card-size">
@@ -376,7 +421,7 @@
                                 <th class="px-3">Options</th>
                             </tr>
                             </thead>
-                            <tbody>
+                            <tbody class="h-title">
                             @forelse ($outpatients as $outpatient)
                                 <tr>
                                     <td>
@@ -456,7 +501,7 @@
                                 <th class="px-3">Options</th>
                             </tr>
                             </thead>
-                            <tbody>
+                            <tbody class="h-title">
                             @forelse ($inpatients as $inpatient)
                                 <tr>
                                     <td>
@@ -536,7 +581,7 @@
                                 <th class="px-3">Options</th>
                             </tr>
                             </thead>
-                            <tbody>
+                            <tbody class="h-title">
                             @forelse ($pharmacies as $pharmacy)
                                 <tr>
                                     <td>{{ $pharmacy->name }}</td>
@@ -546,7 +591,7 @@
                                     <td>
                                         <form
                                             method="POST"
-                                            action="{{ route('inpatient.destroy', $inpatient->id) }}"
+                                            action="{{ route('pharmacy.destroy', $pharmacy->id) }}"
                                         >
                                             @csrf
                                             @method('DELETE')
@@ -557,7 +602,7 @@
                                                         <i class="fa fa-eye has-text-warning"></i>
                                                     </a>
                                                     <a class="button is-small is-outlined"
-                                                       href="{{ route('$pharmacy.edit', $pharmacy -> id) }}">
+                                                       href="{{ route('pharmacy.edit', $pharmacy -> id) }}">
                                                         <i class="fa fa-pen-to-square has-text-link"></i>
                                                     </a>
                                                     <button class="button is-small is-outlined"
@@ -1138,7 +1183,7 @@
         <header class="modal-card-head">
             <div class="container has-text-centered">
                 <p class="title">Pharmacy Service</p>
-                <p class="subtitle">
+                <p class="subtitle h-title">
                     Patient drug dispensations and medicine management.
                 </p>
             </div>
@@ -1158,12 +1203,11 @@
                             <!-- Form validation message box -->
                             @if ($errors->any())
                                 <div class="box">
-                                    <p class="has-text-danger">Pharmacy drug
-                                        dispensation failed!</p>
+                                    <p class="has-text-danger">Pharmacy drug dispensation failed!</p>
                                     <article class="message is-danger">
-                                                                        <span class="icon has-text-warning">
-                                                                            <i class="fab fa-triangle-exclamation"></i>
-                                                                        </span>
+                                        <span class="icon has-text-warning">
+                                            <i class="fas fa-triangle-exclamation"></i>
+                                        </span>
                                         <div class="message-body">
                                             <ul>
                                                 @foreach ($errors->all() as $error)
@@ -1174,55 +1218,57 @@
                                     </article>
                                 </div>
                             @endif
-                            <p class="subtitle">Patient NRC: {{ $patient->nrc }}</p>
+                            <p class="subtitle">Patient NRC:
+                                <text class="h-title has-text-weight-semibold">{{ $patient->nrc }}</text>
+                            </p>
                             <form action="{{ route('pharmacy.store') }}" method="POST">
                                 @csrf
-                                <input type="hidden" id="patient_id" name="patient_id"
-                                       value="{{ $patient->id}}">
-                                <input type="hidden" id="doctor_id" name="doctor_id"
-                                       value="{{ Auth::user()->id }}">
+                                <input
+                                    class="h-title"
+                                    type="hidden"
+                                    id="patient_id"
+                                    name="patient_id"
+                                    value="{{ $patient->id}}"
+                                >
+                                <input
+                                    class="h-title"
+                                    type="hidden"
+                                    id="doctor_id"
+                                    name="doctor_id"
+                                    value="{{ Auth::user()->id }}"
+                                >
                                 <div class="columns">
                                     <!-- Column 1 -->
                                     <div class="column is-8">
                                         <!-- Choice Select One:  Drug Name -->
                                         <div class="field">
                                             <div class="control">
-                                                <label class="label"
-                                                       for="dispensation_id">Drug
-                                                    Name</label>
-                                                <div class="select is-fullwidth">
+                                                <label class="label" for="dispensation_id">
+                                                    Prescription
+                                                </label>
+                                                <div class="select is-fullwidth h-title">
                                                     <select name="dispensation_id"
                                                             id="dispensation_id"
-                                                            class="regular-text">
-                                                        <option value="1">Panado
-                                                        </option>
-                                                        <option value="2">Bruffen
-                                                        </option>
-                                                        <option value="3">Paracetamol
-                                                        </option>
-                                                        <option value="4">ORS</option>
-                                                        <option value="5">ARVs</option>
-                                                        <option value="6">Cough Syrup
-                                                        </option>
-                                                        <option value="7">Coartem
-                                                        </option>
-                                                        <option value="8">Penincilin
-                                                        </option>
-                                                        <option value="9">Amoxyle
-                                                        </option>
-                                                        <option value="10">Pen V
-                                                        </option>
+                                                            class="regular-text h-title">
+                                                        <option>Select Drug...</option>
+                                                        @foreach($medicines as $key => $value)
+                                                            <option
+                                                                value="{{ $value->id }}">
+                                                                {{ $value->name }}
+                                                            </option>
+                                                        @endforeach
                                                     </select>
                                                 </div>
                                             </div>
                                         </div>
+
                                         <!-- Input:  Appointment Date -->
                                         <div class="field">
                                             <div class="control">
-                                                <label class="label"
-                                                       for="dispensation_date">Date of
-                                                    Dispensation</label>
-                                                <input class="input bulmaCalendar"
+                                                <label class="label" for="dispensation_date">
+                                                    Date of Dispensation
+                                                </label>
+                                                <input class="input bulmaCalendar h-title"
                                                        type="date"
                                                        name="dispensation_date"
                                                        id="dispensation_date"
@@ -1233,20 +1279,21 @@
                                         <div class="field">
                                             <div class="control">
                                                 <label class="label" for="quantity">Quantity</label>
-                                                <input class="input" type="number"
+                                                <input class="input h-title" type="number"
                                                        name="quantity" id="quantity">
                                             </div>
                                         </div>
                                         <!-- Input:  Appointment Details -->
                                         <div class="field">
                                             <div class="control">
-                                                <label class="label"
-                                                       for="dispensation_description">Dispensation
-                                                    Remarks</label>
+                                                <label class="label" for="dispensation_description">
+                                                    Dispensation Remarks
+                                                </label>
                                                 <textarea
                                                     name="dispensation_description"
                                                     id="dispensation_description"
-                                                    class="textarea"></textarea>
+                                                    class="textarea">
+                                                </textarea>
                                             </div>
                                         </div>
                                     </div>
@@ -1262,16 +1309,16 @@
                                                     <button
                                                         class="button is-primary submit-button"
                                                         type="submit">
-                                                        Dispense&nbsp;&nbsp; <i
-                                                            class="fas fa-paper-plane"></i>
+                                                        Dispense&nbsp;&nbsp;
+                                                        <i class="fas fa-paper-plane"></i>
                                                     </button>
                                                 </p>
                                                 <p class="control">
                                                     <a class="button is-warning"
                                                        href="{{ url('patients') }}"
                                                        aria-current="page">
-                                                        Cancel&nbsp;&nbsp; <i
-                                                            class="fas fa-circle-xmark"></i>
+                                                        Cancel&nbsp;&nbsp;
+                                                        <i class="fas fa-circle-xmark"></i>
                                                     </a>
                                                 </p>
 

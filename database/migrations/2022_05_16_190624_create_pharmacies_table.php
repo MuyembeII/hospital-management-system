@@ -20,11 +20,11 @@ return new class extends Migration
             $table->unsignedBigInteger('dispensation_id')->nullable();
             $table->integer('quantity');
             $table->date('dispensation_date');
-            $table->date('dispensation_description');
+            $table->string('dispensation_description', 64);
             $table->timestamps();
             $table->softDeletes();
 
-            $table->foreign('patient_id')->references('id')->on('patients')->onDelete('cascade');  
+            $table->foreign('patient_id')->references('id')->on('patients')->onDelete('cascade');
             $table->foreign('dispensation_id')->references('id')->on('medicines')->onDelete('cascade');
         });
     }

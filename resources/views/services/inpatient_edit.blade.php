@@ -123,7 +123,7 @@
                                             <span class="icon checkmark">
                                                 <i class="fa fa-check"></i>
                                             </span>
-                                            <p class="has-text-black h-title">Discharged?</p>
+                                            <text class="has-text-black h-title">Discharged?</text>
                                     </label>
                                 </div>
                             </div>
