@@ -200,7 +200,7 @@
                                                            href="{{ route('patients.show', $patient -> id) }}">
                                                             <i class="fa fa-eye has-text-warning"></i>
                                                         </a>
-                                                        <a href="{{ route('appointments.edit', $appointment -> id) }}"
+                                                        <a href="{{ route('patients.edit', $appointment -> id) }}"
                                                            class="button is-small is-outlined">
                                                             <i class="fa fa-pen-to-square has-text-link"></i>
                                                         </a>
@@ -351,7 +351,7 @@
                                                         class="button is-primary submit-button"
                                                         type="submit"
                                                     >
-                                                        Update Appointment&nbsp;&nbsp;
+                                                        Create Appointment&nbsp;&nbsp;
                                                         <i class="fas fa-paper-plane"></i>
                                                     </button>
                                                 </p>
