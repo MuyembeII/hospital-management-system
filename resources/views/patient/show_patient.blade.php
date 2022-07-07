@@ -703,20 +703,6 @@
                                                 >
                                             </div>
                                         </div>
-                                        <!-- Input:  Weight -->
-                                        <div class="field">
-                                            <div class="control">
-                                                <label class="label" for="weight">
-                                                    Weight <small>(kg)</small>
-                                                </label>
-                                                <input
-                                                    class="input"
-                                                    type="text"
-                                                    name="weight"
-                                                    id="weight"
-                                                >
-                                            </div>
-                                        </div>
                                         <!-- Input: Systolic Blood Pressure -->
                                         <div class="field">
                                             <div class="control">
@@ -750,6 +736,37 @@
                                             </div>
                                         </div>
 
+                                        <!-- Input:  Diastolic Blood Pressure -->
+                                        <div class="field">
+                                            <div class="control">
+                                                <label class="label" for="bp_diastolic">
+                                                    Diastolic BP <small>(mmHg)</small>
+                                                </label>
+                                                <input
+                                                    class="input"
+                                                    type="number"
+                                                    name="bp_diastolic"
+                                                    id="bp_diastolic"
+                                                >
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="column is-4">
+                                        <!-- Input:  Weight -->
+                                        <div class="field">
+                                            <div class="control">
+                                                <label class="label" for="weight">
+                                                    Weight <small>(kg)</small>
+                                                </label>
+                                                <input
+                                                    class="input"
+                                                    type="text"
+                                                    name="weight"
+                                                    id="weight"
+                                                >
+                                            </div>
+                                        </div>
                                         <!-- Choice Select One:  Prescription -->
                                         <div class="field">
                                             <div class="control">
@@ -769,25 +786,14 @@
                                             </div>
                                         </div>
 
-                                        <!-- Input:  Diastolic Blood Pressure -->
-                                        <div class="field">
-                                            <div class="control">
-                                                <label class="label" for="bp_diastolic">
-                                                    Diastolic BP <small>(mmHg)</small>
-                                                </label>
-                                                <input
-                                                    class="input"
-                                                    type="number"
-                                                    name="bp_diastolic"
-                                                    id="bp_diastolic"
-                                                >
-                                            </div>
-                                        </div>
-
                                     </div>
 
+
+                                </div>
+
+                                <div class="columns">
                                     <!-- Column 3 -->
-                                    <div class="column is-4">
+                                    <div class="column is-6">
                                         <!-- Text:  Diagnosis Details -->
                                         <div class="field">
                                             <div class="control mb-1">
@@ -799,9 +805,11 @@
                                                     id="diagnosis"
                                                     class="textarea"
                                                 >
-                                                                        </textarea>
+                                                    </textarea>
                                             </div>
                                         </div>
+                                    </div>
+                                    <div class="column 6">
                                         <!-- Text:  Reason for Visit -->
                                         <div class="field">
                                             <div class="control mb-1">
