@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\VonageSMSController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -36,6 +37,8 @@ Route::middleware([
     })->name('main');
 
     //Route::get('appointments', [AppointmentController::class, 'index'])->name('appointments.index');
+
+    Route::get('sendSMS', [VonageSMSController::class, 'index']);
 
     Route::resource('home', DashboardController::class);
     Route::resource('patients', PatientController::class);

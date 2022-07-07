@@ -17,7 +17,7 @@ return new class extends Migration
             $table->bigIncrements('id')->index('patient_id');
             $table->string('first_name', 32);
             $table->string('last_name', 32);
-            $table->string('email', 32);
+            $table->string('email', 32)->nullable();
             $table->string('contactnumber', 13);
             $table->string('registration_id', 15)->nullable()->unique();
             $table->string('address');

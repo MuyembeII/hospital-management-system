@@ -61,7 +61,6 @@ class PatientController extends Controller
         $request->validate([
             'first_name' => 'required',
             'last_name' => 'required',
-            'email' => 'required|regex:/^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/ix',
             'contactnumber' => 'required',
             'address' => 'required',
             'sex' => 'required',

@@ -7,6 +7,8 @@ use App\Models\Patient;
 use App\Models\User;
 use App\Models\Appointment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+use Exception;
 
 class AppointmentController extends Controller
 {
@@ -57,27 +59,63 @@ class AppointmentController extends Controller
     public function store(Request $request)
     {
         $appointment = new Appointment();
-        $pid = $request->patient_id;
-
+        $basic = new \Vonage\Client\Credentials\Basic(getenv("VONAGE_KEY"), getenv("VONAGE_SECRET"));
+        $client = new \Vonage\Client($basic);
 
         try {
+            //Appointment details
+            $appointment_status = $request->appointment_status;
+            $appointment_date = $request->appointment_date;
+            $service_type = $request->service_type;
+            $appointment_details = $request->appointment_details;
+
+            //SMS Details
+            $pid = $request->patient_id;
+            $patient = Patient::find($pid);
+            $patientName = "{$patient->first_name} $patient->last_name";
+            $patientNrc = $patient->nrc;
+            $patientAddress = $patient->address;
+
+            $appointment_message = "Hello {$patientName}, NRC: {$patientNrc}."."You have an appointment {$appointment_status} for {$appointment_date}, {$service_type}";
+
             $appointment->patient_id = $request->patient_id;
             $appointment->doctor_id = $request->user_id;
-            $appointment->appointment_status = $request->appointment_status;
-            $appointment->appointment_date = $request->appointment_date;
-            $appointment->service_type = $request->service_type;
-            $appointment->appointment_details = $request->appointment_details;
+            $appointment->appointment_status = $appointment_status;
+            $appointment->appointment_date = $appointment_date;
+            $appointment->service_type = $service_type;
+            $appointment->appointment_details = $appointment_details;
             $appointment->save();
-            return redirect("/patients/{$pid}")->with(
-                "success",
-                "New Appointment created successfully."
-            );
+            if ($appointment->save()) {
+                Log::notice("Appointment saved successfully, sending SMS...");
+                $receiverNumber = getenv("SMS_NUMBER"); //Patient Number
+
+                $response = $client->sms()->send(
+                    new \Vonage\SMS\Message\SMS(
+                        $receiverNumber,
+                        'Chilanga Hospice',
+                        $appointment_message)
+                );
+
+                $message = $response->current();
+
+                if ($message->getStatus() == 0) {
+                    Log::alert('Appointment SMS sent successfully!');
+                } else {
+                    Log::error("The message failed with status: " . $message->getStatus() . "\n");
+                }
+
+            }
+
         } catch (Throwable $th) {
             return redirect("/patients/{$pid}")->with(
                 "fail",
                 "Error create patient appointment!"
             );
         }
+        return redirect("/patients/{$pid}")->with(
+            "success",
+            "New Appointment created successfully."
+        );
     }
 
     /**
