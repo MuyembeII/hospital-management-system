@@ -147,3 +147,11 @@ input:checked + .slider:before {
 .slider.round:before {
     border-radius: 50% !important;
 }
+
+.appointment-details-h {
+  height: 50px !important;
+}
+
+.card-size {
+  width: 950px !important
+}

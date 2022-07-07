@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\PatientController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\OutpatientController;
 use App\Http\Controllers\InpatientController;
@@ -34,8 +35,11 @@ Route::middleware([
         return view('main');
     })->name('main');
 
+    //Route::get('appointments', [AppointmentController::class, 'index'])->name('appointments.index');
+
+    Route::resource('home', DashboardController::class);
     Route::resource('patients', PatientController::class);
-    Route::resource('appointment', AppointmentController::class);
+    Route::resource('appointments', AppointmentController::class);
     Route::resource('outpatient', OutpatientController::class);
     Route::resource('inpatient', InpatientController::class);
     Route::resource('pharmacy', PharmacyController::class);

@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('drug_type');
             $table->integer('quantity');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

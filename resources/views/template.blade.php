@@ -10,9 +10,13 @@
         <link rel="stylesheet" href="{{asset('css/patient_search.css')}}">
         <link rel="stylesheet" href="{{asset('css/patient_create.css')}}">
         <link rel="stylesheet" href="{{asset('css/patient_details.css')}}">
+        <link rel="stylesheet" href="{{asset('css/misc.css')}}">
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+
+        <!-- Styles -->
+        <link rel="stylesheet" href="{{ mix('css/app.css') }}">
 
         <!-- Bulma -->
         <link rel="stylesheet" href="{{asset('bulma/bulma.sass')}}">
@@ -30,6 +34,7 @@
         <!-- Scripts -->
         <script src="{{asset('js/jquery-3.6.0.min.js')}}"></script>
         <script src="{{asset('js/app-page.js')}}"></script>
+        <script src="{{ mix('js/app.js') }}" defer></script>
 
         <!-- Styles -->
         <style>

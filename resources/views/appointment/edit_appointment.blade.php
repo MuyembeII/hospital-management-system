@@ -7,7 +7,7 @@
 	<div class="hero-body">
 		<div class="container has-text-centered">
 			<p class="title">{{ __('Edit Appointment') }} - {{ $patient->first_name }}&nbsp;{{ $patient->last_name }}</p>
-			<p class="subtitle">Create a new appointment for clinical services</p>
+			<p class="subtitle">Update appointment for clinical services</p>
 		</div>
 	</div>
 </section>
@@ -35,7 +35,7 @@
 				</div>
 				@endif
 
-				<form action="{{ route('appointment.update', $appointment->id) }}" method="POST">
+				<form action="{{ route('appointments.update', $appointment->id) }}" method="POST">
 					@method('PATCH')
 					@csrf
 					<div class="columns">
@@ -100,7 +100,7 @@
 										</button>
 									</p>
 									<p class="control">
-										<a class="button is-warning" href="{{ route('patients.show', $patient -> id) }}" aria-current="page">
+										<a class="button is-warning" href="{{ route('appointments.show', $appointment->id) }}" aria-current="page">
 											Cancel&nbsp;&nbsp; <i class="fas fa-circle-xmark"></i>
 										</a>
 									</p>

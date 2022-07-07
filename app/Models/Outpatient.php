@@ -4,10 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Outpatient extends Model
 {
     use HasFactory;
+    use SoftDeletes;
 
     /**
     * The attributes that are mass assignable.
@@ -19,7 +21,8 @@ class Outpatient extends Model
        'patient_id',
        'doctor_id',
        'prescription_id',
-       'blood_pressure',
+       'bp_systolic',
+       'bp_diastolic',
        'weight',
        'height',
        'temperature',

@@ -1,9 +1,10 @@
-<?php
+<?php /** @noinspection ALL */
 
 namespace App\Http\Controllers;
 
 use DB;
 use App\Models\Patient;
+use App\Models\User;
 use App\Models\Appointment;
 use Illuminate\Http\Request;
 
@@ -16,9 +17,26 @@ class AppointmentController extends Controller
      */
     public function index()
     {
-        $appointments = Appointment::orderBy("id")->get();
+        $appointment_list = Appointment::orderBy('appointment_date', 'DESC')->get();
+        $appointments = DB::table('appointments')
+            ->join('patients', 'appointments.patient_id', '=', 'patients.id')
+            ->join('users', 'appointments.doctor_id', '=', 'users.id')
+            ->select(
+                'appointments.*',
+                'patients.first_name',
+                'patients.last_name',
+                'patients.sex',
+                'patients.dob',
+                DB::raw('TIMESTAMPDIFF(YEAR, patients.dob, CURDATE()) as age'),
+                'users.name'
+            )
+            ->orderBy('appointments.appointment_date', 'DESC')
+            ->get();
 
-        return view("appointment.appointment_list", compact("patients"));
+        return view(
+            'appointment.appointment_list',
+            ['appointment_list' => $appointment_list, 'appointments' => $appointments]
+        );
     }
 
     /**
@@ -36,43 +54,19 @@ class AppointmentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function createAppointment(Request $request)
-    {
-        $appointment = new Appointment();
-        $user = Auth::user();
-
-        $appointment->patient_id = $pid;
-        $appointment->doctor_id = $user->id;
-        $appointment->appointment_status = $request->appointment_status;
-        $appointment->appointment_date = $request->appointment_date;
-        $appointment->service_type = $request->appointment_date;
-        $appointment->appointment_details = $request->appointment_details;
-        try {
-            $appointment->save();
-            return redirect("/patients{$pid}")->with(
-                "success",
-                "New Appointment created successfully."
-            );
-        } catch (Throwable $th) {
-            return redirect("/patients{$pid}")->with(
-                "fail",
-                "Error create patient appointment!"
-            );
-        }
-    }
-
     public function store(Request $request)
     {
         $appointment = new Appointment();
         $pid = $request->patient_id;
 
-        $appointment->patient_id = $request->patient_id;
-        $appointment->doctor_id = $request->user_id;
-        $appointment->appointment_status = $request->appointment_status;
-        $appointment->appointment_date = $request->appointment_date;
-        $appointment->service_type = $request->service_type;
-        $appointment->appointment_details = $request->appointment_details;
+
         try {
+            $appointment->patient_id = $request->patient_id;
+            $appointment->doctor_id = $request->user_id;
+            $appointment->appointment_status = $request->appointment_status;
+            $appointment->appointment_date = $request->appointment_date;
+            $appointment->service_type = $request->service_type;
+            $appointment->appointment_details = $request->appointment_details;
             $appointment->save();
             return redirect("/patients/{$pid}")->with(
                 "success",
@@ -89,7 +83,7 @@ class AppointmentController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Appointment  $appointment
+     * @param \App\Models\Appointment $appointment
      * @return \Illuminate\Http\Response
      */
     public function show(Appointment $appointment)
@@ -138,6 +132,19 @@ class AppointmentController extends Controller
         $appointment->appointment_details = $request->get('appointment_details');
         $appointment->save();
         return redirect("/patients/{$pid}")->with('success', 'Appointment updated!');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param int $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        $appointment = Appointment::find($id);
+        $appointment->delete();
+        return redirect('/appointments')->with('success', 'Appointment deleted!');
     }
 
     function console_log($output, $with_script_tags = true)

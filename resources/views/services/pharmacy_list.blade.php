@@ -1,4 +1,4 @@
-{{-- patient appointment list view: the component to capture patient details  --}}
+{{-- Pharmacy list view: the component to list pharmacy visit services  --}}
 
 @extends('template')
 
@@ -6,8 +6,8 @@
 <section class="hero is-info is-small">
 	<div class="hero-body">
 		<div class="container has-text-centered">
-			<p class="title">Patient Appointments</p>
-			<p class="subtitle">List of all patient appointments</p>
+			<p class="title">Pharmacy</p>
+			<p class="subtitle">Summary of all pharmacy visits.</p>
 		</div>
 	</div>
 </section>
@@ -36,49 +36,41 @@
                             <div class="message-body">
                                 {{ session()->get('success') }}
                             </div>
-                        </article>
+                        <article>
                     </div>
                     @endif
                     <table class="table">
                         <thead>
                             <tr class="has-text-bold">
-                                <th>Patient Name</th>
+															  <th>Patient</th>
                                 <th>Sex</th>
-                                <th>Age</th>
-                                <th>Appointment Status</th>
-                                <th>Appointment Date</th>
-                                <th>Service Type</th>
-                                <th class="px-3">&nbsp;&nbsp;&nbsp;&nbsp;Options</th>
+                                <th>Dispensation</th>
+                                <th>Dispensation Date</th>
+                                <th>Description</th>
+                                <th class="px-3"><i class="fa fa-ellipsis ml-6 has-text-primary"></i></th>
                             </tr>
                         </thead>
                         <tbody>
-                            @forelse ($appointments as $appointment)
+                            @forelse ($pharmacies as $pharmacy)
                             <tr>
+																<td>{{ $pharmacy->first_name }}&nbsp;{{ $pharmacy->last_name }}</td>
+																<td>{{ $pharmacy->sex }}</td>
+                                <td>{{ $pharmacy->dispensation }}</td>
+                                <td>{{ $pharmacy->dispensation_date }}</td>
+                                <td>{{ $pharmacy->dispensation_description }}</td>
                                 <td>
-                                    <a class="has-text-link" href="{{ route('patients.show', $appointment -> patient_id) }}">
-                                        {{ $appointment->first_name }}&nbsp;{{ $appointment->last_name }}
-                                    </a>
-                                </td>
-                                <td>{{ $appointment->sex }}</td>
-                                <td>{{ $appointment->age }}</td>
-                                <td>{{ $appointment->appointment_status }}</td>
-                                <td>{{ $appointment->appointment_date }}</td>
-                                <td>{{ $appointment->service_type }}</td>
-                                <td>
-                                    <form action="{{ route('appointments.destroy', $appointment->id)}}" method="POST">
-                                        @csrf
-                                        @method('DELETE')
+                                    <form method="POST">
                                         <div class="action-buttons">
                                             <div class="control is-grouped">
-                                                <a class="button is-small is-outlined" href="{{ route('appointments.show', $appointment -> id) }}">
+                                                <a class="button is-small is-outlined" href="{{ route('pharmacy.show', $pharmacy->id) }}">
                                                     <i class="fa fa-eye has-text-warning"></i>
                                                 </a>
-                                                <a class="button is-small is-outlined" href="{{ route('appointments.edit', $appointment -> id) }}">
+                                                <a class="button is-small is-outlined" >
                                                     <i class="fa fa-pen-to-square has-text-link"></i>
                                                 </a>
-                                                <button class="button is-small is-outlined" type="submit">
+                                                <a class="button is-small is-outlined">
                                                     <i class="fa fa-trash has-text-danger"></i>
-                                                </button>
+                                                </a>
                                             </div>
                                         </div>
                                     </form>
@@ -86,7 +78,7 @@
                             </tr>
                             @empty
                             <tr>
-                                <td colspan="4" class="text-center">No appointments found.</td>
+                                <td colspan="4" class="text-center">No inpatient services found.</td>
                             </tr>
                             @endforelse
                         </tbody>

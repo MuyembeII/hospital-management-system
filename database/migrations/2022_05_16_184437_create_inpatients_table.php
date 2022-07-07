@@ -16,22 +16,27 @@ return new class extends Migration
         Schema::create('inpatients', function (Blueprint $table) {
             $table->bigIncrements('id')->index('inpatient_id');
             $table->unsignedBigInteger('patient_id');
-            $table->unsignedBigInteger('doctor_id')->nullable();
+            $table->unsignedBigInteger('doctor_id');
             $table->unsignedBigInteger('prescription_id');
-            $table->string('ward');
-            $table->string('diagnosis');
-            $table->string('blood_pressure');
-            $table->string('weight');
-            $table->string('height');
-            $table->string('temperature');
-            $table->integer('duration');
+            $table->unsignedBigInteger('warden_id');
+            $table->string('ward', 16);
+            $table->string('diagnosis', 64);
+            $table->unsignedMediumInteger('bp_systolic'); //Millimetres of mercury (mmHg)
+            $table->unsignedMediumInteger('bp_diastolic'); //Millimetres of mercury (mmHg)
+            $table->string('weight', 8); //Kilograms
+            $table->string('height', 8)->nullable(); //Meters
+            $table->string('temperature', 8); //Celsius (˚C)
+            $table->string('visit_summary', 128);
+            $table->unsignedMediumInteger('duration')->nullable();;
             $table->boolean('discharged');
             $table->date('discharged_date')->nullable();
             $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('patient_id')->references('id')->on('patients')->onDelete('cascade');
             $table->foreign('doctor_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('prescription_id')->references('id')->on('medicines')->onDelete('cascade');
+            $table->foreign('warden_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
